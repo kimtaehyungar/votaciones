@@ -1,3 +1,4 @@
+<!-- ... eslint-disable -->
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -126,21 +127,15 @@
     #user-uploaded-img:active {
       cursor: grabbing;
     }
-    /* Estilo refinado Liquid Glass para las tarjetas de votación para apreciar la foto de fondo */
+    /* Estilo refinado Liquid Glass para las tarjetas de votación para apreciar la foto de fondo (sin brillo al pasar el mouse) */
     .tata-card-glass {
       background: rgba(0, 0, 0, 0.25) !important;
       backdrop-filter: blur(6px) !important;
       -webkit-backdrop-filter: blur(6px) !important;
       border: 2px solid rgba(255, 255, 255, 0.65);
       box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
       color: #ffffff;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.85);
-    }
-    .tata-card-glass:hover {
-      background: rgba(0, 0, 0, 0.25) !important;
-      border-color: rgba(59, 130, 246, 0.98);
-      box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.95), 0 0 0 1px rgba(59, 130, 246, 0.85), 0 15px 35px 0 rgba(0, 0, 0, 0.55);
     }
     /* Pestaña inactiva más nítida y sombreada para distinguir claramente la sección activa */
     .filter-tab-inactive {
@@ -197,7 +192,7 @@
     <!-- Contenedor dinámico de imagen personalizada adaptado por completo para Brave, Chrome, Safari y Firefox -->
     <div id="user-image-container" class="hidden">
       <!-- Imagen principal con ajuste inteligente de tamaño según el dispositivo sin desbordarse -->
-      <img id="user-uploaded-img" src="" alt="Custom Kim Taehyung" style="transform: translate(0px, 0px); touch-action: none;" crossorigin="anonymous" />
+      <img id="user-uploaded-img" src="" alt="" style="transform: translate(0px, 0px); touch-action: none;" crossorigin="anonymous" />
     </div>
 
     <!-- Título principal en capa superior (z-50) para que NUNCA sea tapado mientras se mueve la foto -->
@@ -220,7 +215,6 @@
     </div>
 
     <!-- Controles inferiores derechos: Ajuste de posición y cambio de foto (z-50) -->
-    <!-- Controles inferiores derechos apilados uno arriba del otro (z-50) -->
     <div class="relative z-50 w-full flex flex-col items-end justify-end gap-2.5 pb-1 px-1 pointer-events-auto">
       <!-- Botón superior: Ajuste de posición de la foto -->
       <div id="reposition-wrapper" class="flex items-center justify-end">
@@ -259,7 +253,7 @@
           <h1 class="text-xl sm:text-2xl font-black text-white tracking-wider uppercase">VOTACIONES</h1>
         </div>
         <div class="flex items-center gap-3 mt-1">
-          <!-- Botón de Menú Desplegable con tres líneas (estilo Brave) -->
+          <!-- Botón de Menú Desplegable con tres líneas -->
           <button
             type="button"
             id="open-sidebar-btn"
@@ -285,7 +279,7 @@
         </div>
       </header>
 
-    <!-- Controles de búsqueda y filtros (restaurados en su posición original) -->
+    <!-- Controles de búsqueda y filtros -->
     <section class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 mb-6">
       <div class="flex flex-wrap items-center gap-2.5">
         <div class="inline-flex gap-1.5 p-1.5 tata-card-glass rounded-2xl shadow-md w-full sm:w-auto justify-center">
@@ -339,7 +333,7 @@
 
   <!-- Menú Desplegable Lateral (Sidebar) estilo Liquid Glass -->
   <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border border-white/30 hover:border-blue-500 hover:shadow-[0_0_35px_rgba(59,130,246,0.35)] group">
+  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border border-white/30 group">
     <div>
       <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/20">
         <h2 class="text-lg font-black text-white tracking-wide uppercase">Menú</h2>
@@ -350,22 +344,23 @@
         </button>
       </div>
 
-      <nav class="space-y-3 p-1 rounded-3xl transition-all duration-300 hover:border hover:border-blue-500 hover:bg-blue-500/10">
-        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
+      <!-- Contenedor con hover azul -->
+      <nav id="sidebar-nav-container" class="space-y-3 p-2 rounded-3xl transition-all duration-300 hover:border hover:border-blue-500 hover:bg-blue-500/10">
+        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_coraz%C3%B3n_con_cartel_de_Vote" alt="Votaciones" class="max-w-full max-h-full object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight">Votaciones</span>
         </button>
 
-        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
+        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/Coraz%C3%B3n_DJ_con_auriculares_verdes.png" alt="Listas de reproducción" class="max-w-full max-h-full object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight">Listas de reproducción</span>
         </button>
 
-        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
+        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-16 h-16 max-w-none object-contain filter drop-shadow" />
           </div>
@@ -379,7 +374,7 @@
     </div>
   </aside>
 
-  <!-- Sección de Listas de Reproducción (Página dedicada idéntica a votaciones) -->
+  <!-- Sección de Listas de Reproducción -->
   <div id="seccion-playlists" class="hidden min-h-screen relative bg-black px-4 py-8">
     <div id="playlists-custom-photo-bg" class="fixed top-0 left-0 w-screen h-[100lvh] pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black" style="transform: translateZ(0); will-change: transform;">
       <img id="playlists-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02] select-none" />
@@ -434,7 +429,7 @@
         </div>
       </main>
 
-      <!-- Botones de navegación (Menú e Inicio) reubicados abajo -->
+      <!-- Botones de navegación (Menú e Inicio) -->
       <div class="mt-8 flex items-center justify-center gap-3">
         <button
           type="button"
@@ -488,139 +483,143 @@
       {
         id: 'fanplus',
         name: 'Fanplus',
-        description: 'Votaciones activas en Fanplus: December Birthday Vote y Actor Coreano Más Guapo 2026.',
+        description: 'December Birthday Vote y Actor Coreano Más Guapo 2026.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-16T17:00:00+09:00',
         links: [
-          { label: 'Ir a votar (December Birthday)', url: 'https://tinyurl.com/2wdcx32n' },
-          { label: 'Ir a votar (Actor Más Guapo)', url: 'https://fanplus.co.kr/es-ES/votes/560' }
+          { label: 'Fanplus - Ir a votar (December Birthday)', url: 'https://tinyurl.com/2wdcx32n' },
+          { label: 'Fanplus - Ir a votar (Actor Más Guapo)', url: 'https://fanplus.co.kr/es-ES/votes/560' }
         ]
       },
       {
         id: 'idol-champ',
         name: 'Idol Champ',
-        description: 'Votaciones activas en Idol Champ: December Birthday Vote Final y Show Champion.',
+        description: 'December Birthday Vote Final y Show Champion.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-18T23:59:00+09:00',
         links: [
-          { label: 'Ir a votar (December Birthday)', url: 'https://tinyurl.com/3wtvh2dz' },
-          { label: 'Ir a votar (Show Champion)', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote' }
+          { label: 'Idol Champ - Ir a votar (December Birthday)', url: 'https://tinyurl.com/3wtvh2dz' },
+          { label: 'Idol Champ - Ir a votar (Show Champion)', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote' }
         ]
       },
       {
         id: 'fannstar-dec-bday',
-        name: 'Fannstar – December Birthday',
+        name: 'Fannstar',
         description: 'Votación especial de cumpleaños de diciembre en Fannstar.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-23T12:00:00+09:00',
         links: [
-          { label: 'Ir a votar', url: 'https://tinyurl.com/2r8y7hm4' }
+          { label: 'Fannstar - Ir a votar', url: 'https://tinyurl.com/2r8y7hm4' }
         ]
       },
       {
         id: 'mnet-plus',
         name: 'Mnet Plus',
-        description: 'Votación December Birthday Artist Vote y acceso directo a la app oficial Mnet Plus.',
+        description: 'December Birthday Artist Vote y acceso directo a la app oficial Mnet Plus.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-25T23:59:00+09:00',
         links: [
-          { label: 'Ir a votar (December Birthday)', url: 'https://tinyurl.com/h8j954rj' },
-          { label: 'Ir a votar (App Mnet Plus)', url: isAppleDevice ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus' }
+          { label: 'Mnet Plus - Ir a votar (December Birthday)', url: 'https://tinyurl.com/h8j954rj' },
+          { label: 'Mnet Plus - Ir a votar (App Mnet Plus)', url: isAppleDevice ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus' }
         ]
       },
       {
         id: 'queeri',
         name: 'Queeri',
-        description: 'Votación Star Born in December y campañas diarias en la app oficial Queeri.',
+        description: 'Star Born in December y campañas diarias en la app oficial Queeri.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-25T15:00:00+07:00',
         links: [
-          { label: 'Ir a votar (Star Born in Dec)', url: 'https://tinyurl.com/35d8z3kz' },
-          { label: 'Ir a votar (App Queeri)', url: 'https://www.queeri.id/' }
+          { label: 'Queeri - Ir a votar (Star Born in Dec)', url: 'https://tinyurl.com/35d8z3kz' },
+          { label: 'Queeri - Ir a votar (App Queeri)', url: 'https://www.queeri.id/' }
         ]
       },
       {
         id: 'coogoong',
         name: 'Coogoong',
-        description: 'Votación December Artist Pick y acceso directo a la app oficial Coogoong.',
+        description: 'December Artist Pick y acceso directo a la app oficial Coogoong.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-26T23:59:00+09:00',
         links: [
-          { label: 'Ir a votar (December Pick)', url: 'https://tinyurl.com/yrph6ux6' },
-          { label: 'Ir a votar (App Coogoong)', url: isAppleDevice ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast' }
+          { label: 'Coogoong - Ir a votar (December Pick)', url: 'https://tinyurl.com/yrph6ux6' },
+          { label: 'Coogoong - Ir a votar (App Coogoong)', url: isAppleDevice ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast' }
         ]
       },
       {
         id: 'asian-celebrity-year',
-        name: 'Asian Celebrity of the Year',
-        description: 'Votación oficial en Netizens Choice para Asian Celebrity of the Year 2026.',
+        name: 'Netizens Choice',
+        description: 'Votación oficial para Asian Celebrity of the Year 2026.',
         type: 'Web',
         status: 'Activa',
         defaultDeadline: getDefaultDeadlineISO(3, 12, 0),
         links: [
-          { label: 'Ir a votar', url: 'https://netizenschoice.com/vote/asian-celebrity-of-the-year-2026/results' }
+          { label: 'Netizens Choice - Ir a votar (Asian Celebrity)', url: 'https://netizenschoice.com/vote/asian-celebrity-of-the-year-2026/results' }
         ]
       },
       {
         id: 'most-handsome-men-world',
-        name: 'Most Handsome Men in the World 2026',
-        description: 'Votación en Shining Awards para Most Handsome Men in the World 2026.',
+        name: 'Shining Awards',
+        description: 'Votación para Most Handsome Men in the World 2026.',
         type: 'Web',
         status: 'Activa',
         defaultDeadline: getDefaultDeadlineISO(4, 15, 0),
         links: [
-          { label: 'Ir a votar', url: 'https://shiningawards.com/most-handsome-men-in-the-world-2026/' }
+          { label: 'Shining Awards - Ir a votar (Most Handsome Men)', url: 'https://shiningawards.com/most-handsome-men-in-the-world-2026/' }
         ]
       },
       {
         id: 'shiningawards',
-        name: 'Most Handsome K-Pop Idols 2026',
-        description: 'Votación directa para V BTS en Shining Awards (Most Handsome K-Pop Idols).',
+        name: 'Shining Awards',
+        description: 'Votación directa para V BTS (Most Handsome K-Pop Idols).',
         type: 'Web',
         status: 'Activa',
         defaultDeadline: getDefaultDeadlineISO(4, 16, 0),
         links: [
-          { label: 'Ir a votar', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/' }
+          { label: 'Shining Awards - Ir a votar (K-Pop Idols)', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/' }
         ]
       },
       {
         id: 'nubia-asia',
-        name: 'The Most Handsome Man in Asia 2026 (Nubia)',
-        description: 'Votación directa en Nubia Magazine (Most Handsome Man in Asia 2026).',
+        name: 'Nubia Magazine',
+        description: 'Votación directa para The Most Handsome Man in Asia 2026.',
         type: 'Web',
         status: 'Activa',
         defaultDeadline: getDefaultDeadlineISO(5, 20, 0),
         links: [
-          { label: 'Ir a votar', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/results' }
+          { label: 'Nubia Magazine - Ir a votar (Man in Asia)', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/results' }
         ]
       },
       {
         id: 'nubia-korea',
-        name: 'Most Handsome Men in South Korea 2026 (Nubia)',
-        description: 'Votación en Nubia Magazine (Most Handsome Men in South Korea). Vota 2x cada hora.',
+        name: 'Nubia Magazine',
+        description: 'Votación para Most Handsome Men in South Korea 2026. Vota 2x cada hora.',
         type: 'Web',
         status: 'Activa',
         defaultDeadline: getDefaultDeadlineISO(3, 18, 0),
         links: [
-          { label: 'Ir a votar', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-south-korea-2026/results' }
+          { label: 'Nubia Magazine - Ir a votar (South Korea)', url: 'https://nubiapage.com/poll/vote-most-handsome-men-in-south-korea-2026/results' }
         ]
       },
       {
         id: 'bigc',
         name: 'Bigc',
-        description: 'Abre o descarga la app oficial Bigc (iOS / Android) para votar en eventos especiales.',
+        description: 'Abre o descarga la app oficial Bigc para votar en eventos especiales.',
         type: 'App Oficial',
         status: 'Activa',
         defaultDeadline: '2026-11-20T18:30:00+09:00',
         links: [
-          { label: 'Ir a votar (Android)', url: 'https://play.google.com/store/apps/details?id=im.bigc.lively&hl=en' },
-          { label: 'Ir a votar (iOS)', url: 'https://apps.apple.com/us/app/bigc-the-show-vote-bias-live/id1575835045' }
+          {
+            label: 'Ir a votar',
+            url: isAppleDevice
+              ? 'https://apps.apple.com/us/app/bigc-the-show-vote-bias-live/id1575835045'
+              : 'https://play.google.com/store/apps/details?id=im.bigc.lively&hl=en'
+          }
         ]
       }
     ];
@@ -647,9 +646,6 @@
     const clearSearchBtn = document.getElementById('clear-search-btn');
     const filterBtns = document.querySelectorAll('.filter-btn');
     const resetVotesBtn = document.getElementById('reset-votes-btn');
-    const progressBadgeEl = document.getElementById('progress-badge');
-    const progressSubtitleEl = document.getElementById('progress-subtitle');
-    const progressBarEl = document.getElementById('progress-bar');
     const toastEl = document.getElementById('toast');
     const toastMessageEl = document.getElementById('toast-message');
 
@@ -667,16 +663,6 @@
 
     function openSidebar() {
       if (sidebarDrawer && sidebarBackdrop) {
-        // Si se abre desde la sección de playlists, aplicamos borde azul al contenedor lateral
-        const isPlaylistActive = seccionPlaylistsEl && !seccionPlaylistsEl.classList.contains('hidden');
-        if (isPlaylistActive) {
-          sidebarDrawer.classList.remove('border-white/35');
-          sidebarDrawer.classList.add('border-blue-500', 'shadow-[0_0_35px_rgba(59,130,246,0.35)]');
-        } else {
-          sidebarDrawer.classList.remove('border-blue-500', 'shadow-[0_0_35px_rgba(59,130,246,0.35)]');
-          sidebarDrawer.classList.add('border-white/35');
-        }
-
         sidebarDrawer.classList.remove('-translate-x-full');
         sidebarBackdrop.classList.remove('opacity-0', 'pointer-events-none');
         sidebarBackdrop.classList.add('opacity-100', 'pointer-events-auto');
@@ -754,16 +740,6 @@
       }, 2500);
     }
 
-    function updateProgressUI() {
-      if (!progressBadgeEl || !progressBarEl) return;
-      const total = VOTING_PLATFORMS.length;
-      const completed = state.votedIds.length;
-      const percentage = Math.round((completed / total) * 100);
-      progressBadgeEl.textContent = `${completed} / ${total}`;
-      progressBarEl.style.width = `${percentage}%`;
-      progressSubtitleEl.textContent = completed === total ? '¡Ronda diaria completada al 100%! 💜' : `Llevás ${completed} de ${total} plataformas hoy.`;
-    }
-
     function getCountdownParts(isoString) {
       const diffMs = new Date(isoString).getTime() - Date.now();
       if (diffMs <= 0) return { expired: true, days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -781,7 +757,6 @@
 
     function sortPlatforms(platforms) {
       const now = Date.now();
-      // Filtramos directamente las que estén expiradas/finalizadas para que no aparezcan en la lista
       const activeOnly = platforms.filter(p => new Date(p.defaultDeadline).getTime() > now);
       return [...activeOnly].sort((a, b) => {
         const timeA = new Date(a.defaultDeadline).getTime();
@@ -821,18 +796,18 @@
         const hasMultipleLinks = platform.links.length > 1;
         const buttonsHtml = platform.links.map((link, idx) => {
           const linkKey = `${platform.id}_${idx}`;
-          const isClicked = hasMultipleLinks && state.clickedLinks.includes(linkKey);
+          const isClicked = state.clickedLinks.includes(linkKey);
           return `
           <a
             href="${link.url}"
             target="_blank"
             rel="noopener noreferrer"
             data-link-key="${linkKey}"
-            data-multi="${hasMultipleLinks}"
+            data-multi="true"
             class="vote-link-btn tata-btn-primary w-full inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer shadow-sm touch-manipulation ${isClicked ? '!border-blue-400 !bg-blue-500/25 !text-blue-200' : ''}"
           >
             ${isClicked ? '<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-500 text-white font-black text-[10px] shrink-0 shadow-sm">✓</span>' : ''}
-            <span class="truncate">${link.label}</span>
+            <span class="truncate">Ir a votar</span>
             <svg class="w-3.5 h-3.5 shrink-0 ${isClicked ? 'text-blue-400' : ''}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
@@ -848,14 +823,16 @@
                   <input type="checkbox" data-id="${platform.id}" ${isVoted ? 'checked' : ''} class="vote-checkbox appearance-none w-5 h-5 rounded-lg border-2 border-red-500 bg-black checked:bg-red-600 checked:border-red-500 cursor-pointer transition-all shadow-sm" />
                 </label>
                 <div class="w-full">
-                  <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
+                  <!-- Nombre de la plataforma arriba de todo -->
+                  <div class="flex flex-wrap items-center gap-1.5 mb-1">
                     <h3 class="text-sm sm:text-base font-black text-white ${isVoted ? 'line-through text-army-400' : ''}">${platform.name}</h3>
                     ${isFirst ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-black tata-badge-red">🔥 Cierra primero</span>' : ''}
                     <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold ${platform.type === 'App Oficial' ? 'tata-badge-blue' : 'bg-black/80 text-gray-300 border border-gray-600/40'}">${platform.type}</span>
                   </div>
+                  <!-- Descripción detallada de la votación debajo -->
                   <p class="text-xs font-semibold text-army-200 leading-snug mb-3">${platform.description}</p>
                   
-                  <!-- Conteo "Cierra en" alineado exactamente con el inicio del nombre y estirado hacia la derecha de forma prolija -->
+                  <!-- Conteo "Cierra en" perfectamente alineado -->
                   <div class="pt-2 pb-0.5 border-t border-white/15 flex items-center justify-between gap-2 text-xs font-black text-white pr-1">
                     <span class="text-army-300 font-bold">Cierra en:</span>
                     <div id="cd-${platform.id}" class="font-mono font-black text-white bg-black/45 px-3 py-1 rounded-lg border border-white/20"></div>
@@ -873,8 +850,6 @@
 
       document.querySelectorAll('.vote-link-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          const isMulti = btn.getAttribute('data-multi') === 'true';
-          if (!isMulti) return;
           const linkKey = btn.getAttribute('data-link-key');
           if (linkKey && !state.clickedLinks.includes(linkKey)) {
             state.clickedLinks.push(linkKey);
@@ -894,7 +869,6 @@
             showToast('¡Voto registrado! 💜');
           }
           saveVotedIds();
-          updateProgressUI();
           renderList();
         });
       });
@@ -958,7 +932,6 @@
         state.clickedLinks = [];
         saveVotedIds();
         saveClickedLinks();
-        updateProgressUI();
         renderList();
         showToast('Votos diarios reiniciados.');
       });
@@ -981,7 +954,7 @@
     let isDragging = false;
     let startX = 0;
     let startY = 0;
-    let isLocked = true; // Por defecto inicia bloqueado si ya fue configurado
+    let isLocked = true;
 
     function getMaxBounds() {
       if (!userUploadedImg || !userImgContainer) return { maxX: 0, maxY: 0 };
@@ -1238,7 +1211,6 @@
       });
     }
 
-    // Actualizar también la posición en el fondo del dashboard y de playlists mientras se arrastra en vivo
     window.addEventListener('mousemove', () => {
       if (!isLocked && userUploadedImg) {
         if (dashboardBgImg) dashboardBgImg.style.transform = userUploadedImg.style.transform;
@@ -1252,7 +1224,6 @@
       }
     });
 
-    updateProgressUI();
     renderList();
     setInterval(updateCountdowns, 1000);
   </script>
