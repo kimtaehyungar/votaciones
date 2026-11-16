@@ -63,28 +63,28 @@
     }
     /* Estilo ultratransparente de máximo Liquid Glass para los botones de la portada */
     .ios-glass-btn {
-      background: rgba(255, 255, 255, 0.005) !important;
+      background: rgba(0, 0, 0, 0.35) !important;
       backdrop-filter: blur(20px) !important;
       -webkit-backdrop-filter: blur(20px) !important;
-      border: 1px solid rgba(255, 255, 255, 0.6) !important;
-      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.9), inset 0 -1.5px 0 0 rgba(255, 255, 255, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.35), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.9), inset 0 -1.5px 0 0 rgba(255, 255, 255, 0.35);
     }
     .ios-glass-btn:hover, .ios-glass-btn:active {
-      background: rgba(255, 255, 255, 0.05) !important;
-      border-color: rgba(255, 255, 255, 0.9) !important;
+      background: rgba(255, 255, 255, 0.14) !important;
+      border-color: #ffffff !important;
     }
     /* Estilo 100% transparente y cristalino para el botón de ingresar sin blur para ver el fondo impecable */
     .enter-ultra-glass {
       background: rgba(255, 255, 255, 0.0) !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      border: 1px solid rgba(255, 255, 255, 0.5) !important;
-      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(255, 255, 255, 0.75) !important;
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.6);
     }
     .enter-ultra-glass:hover, .enter-ultra-glass:active {
       background: rgba(255, 255, 255, 0.08) !important;
-      border-color: rgba(255, 255, 255, 0.9) !important;
+      border-color: rgba(255, 255, 255, 0.95) !important;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.8);
     }
     /* Clases dinámicas para color de título adaptable con sombra profunda para máxima legibilidad */
@@ -128,19 +128,31 @@
     }
     /* Estilo refinado Liquid Glass para las tarjetas de votación para apreciar la foto de fondo */
     .tata-card-glass {
-      background: transparent !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+      background: rgba(0, 0, 0, 0.25) !important;
+      backdrop-filter: blur(6px) !important;
+      -webkit-backdrop-filter: blur(6px) !important;
+      border: 2px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
       transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       color: #ffffff;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.85);
     }
     .tata-card-glass:hover {
-      background: rgba(255, 255, 255, 0.03) !important;
-      border-color: rgba(59, 130, 246, 0.95);
-      box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.95), 0 0 0 1px rgba(59, 130, 246, 0.8), 0 15px 35px 0 rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(59, 130, 246, 0.98);
+      box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.95), 0 0 0 1px rgba(59, 130, 246, 0.85), 0 15px 35px 0 rgba(0, 0, 0, 0.55);
+    }
+    /* Pestaña inactiva más nítida y sombreada para distinguir claramente la sección activa */
+    .filter-tab-inactive {
+      background: rgba(0, 0, 0, 0.65) !important;
+      color: #f3f4f6 !important;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+    }
+    .filter-tab-inactive:hover {
+      background: rgba(0, 0, 0, 0.8) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.65) !important;
     }
     /* Botones temáticos con estilo Liquid Glass elegante y cristalino */
     .tata-btn-primary {
@@ -202,24 +214,24 @@
     </div>
 
     <!-- Controles inferiores derechos: Ajuste de posición y cambio de foto (z-50) -->
-    <div class="relative z-50 w-full flex items-center justify-between pb-1 px-1 pointer-events-auto">
-      <!-- Botón para resetear posición de la foto y bloquear -->
-      <div id="reposition-wrapper" class="flex items-center">
-        <div id="reposition-controls" class="hidden flex items-center gap-2 ios-glass-btn px-3 py-1.5 rounded-xl text-xs text-white touch-manipulation">
-          <span id="reposition-status-text" class="font-medium">🖱️ Arrastrá</span>
-          <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline cursor-pointer transition-colors">Centrar</button>
-          <span id="sep-divider" class="text-white/40">|</span>
-          <button type="button" id="lock-position-btn" class="ios-glass-btn text-white font-bold px-3 py-1 rounded-lg transition-all cursor-pointer">✓ Listo</button>
+    <!-- Controles inferiores derechos apilados uno arriba del otro (z-50) -->
+    <div class="relative z-50 w-full flex flex-col items-end justify-end gap-2.5 pb-1 px-1 pointer-events-auto">
+      <!-- Botón superior: Ajuste de posición de la foto -->
+      <div id="reposition-wrapper" class="flex items-center justify-end">
+        <div id="reposition-controls" class="hidden flex items-center gap-2 ios-glass-btn px-3.5 py-2 rounded-2xl text-xs text-white touch-manipulation">
+          <span id="reposition-status-text" class="font-semibold">🖱️ Arrastrá</span>
+          <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline font-bold cursor-pointer transition-colors">Centrar</button>
+          <span id="sep-divider" class="text-white/50">|</span>
+          <button type="button" id="lock-position-btn" class="bg-white/20 hover:bg-white/30 border border-white/70 text-white font-extrabold px-3 py-1 rounded-xl transition-all cursor-pointer">✓ Listo</button>
         </div>
-        <button type="button" id="modify-position-btn" class="hidden ios-glass-btn text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-all cursor-pointer flex items-center gap-1.5 touch-manipulation">
+        <button type="button" id="modify-position-btn" class="hidden ios-glass-btn text-white font-bold px-4 py-2.5 rounded-2xl text-xs transition-all cursor-pointer flex items-center gap-2 hover:scale-105 active:scale-95 touch-manipulation">
           <span>💜 Modificar posición</span>
         </button>
       </div>
-      <div></div>
 
-      <!-- Botón discreto abajo a la derecha con estilo iOS Liquid Glass unificado -->
-      <label class="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold ios-glass-btn text-white transition-all ml-auto hover:scale-105 active:scale-95 touch-manipulation">
-        <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <!-- Botón inferior: Agregá una foto de V -->
+      <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold ios-glass-btn text-white transition-all hover:scale-105 active:scale-95 touch-manipulation">
+        <svg class="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
         <span>Agregá una foto de V</span>
@@ -236,12 +248,9 @@
     </div>
 
     <div class="max-w-4xl mx-auto relative z-10">
-      <header class="mb-8 flex flex-col items-center text-center gap-3">
-        <div class="tata-card-glass px-6 py-4 rounded-3xl shadow-2xl max-w-lg w-full text-white">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/20 text-red-300 text-xs font-black uppercase tracking-wider mb-2 border border-red-500/30">
-            <span>❤️ Taehyung fans</span>
-          </div>
-          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">KIM TAEHYUNG VOTACIONES</h1>
+      <header class="mb-6 flex flex-col items-center text-center gap-2.5">
+        <div class="tata-card-glass px-5 py-2.5 rounded-2xl shadow-xl inline-block text-white">
+          <h1 class="text-xl sm:text-2xl font-black text-white tracking-wider uppercase">VOTACIONES</h1>
         </div>
         <div class="flex items-center gap-3 mt-1">
           <!-- Botón de Menú Desplegable con tres líneas (estilo Brave) -->
@@ -270,32 +279,12 @@
         </div>
       </header>
 
-    <section class="mb-8 tata-card-glass p-5 sm:p-6 rounded-3xl shadow-xl border-l-4 border-l-blue-500 text-white">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-3">
-        <div>
-          <span class="text-xs uppercase tracking-wider font-black text-blue-400">Progreso Diario</span>
-          <h2 id="progress-subtitle" class="text-sm sm:text-base font-extrabold text-white mt-0.5">Llevás 0 de 12 plataformas hoy.</h2>
-        </div>
-        <div id="progress-badge" class="px-3.5 py-1.5 bg-red-600/90 text-white font-black text-sm rounded-xl shadow-md border border-red-400/40">
-          0 / 12
-        </div>
-      </div>
-
-      <div class="w-full bg-black/60 rounded-full h-3.5 overflow-hidden border border-white/20 shadow-inner">
-        <div
-          id="progress-bar"
-          class="bg-gradient-to-r from-red-600 via-red-500 to-blue-600 h-full rounded-full transition-all duration-500 ease-out"
-          style="width: 0%"
-        ></div>
-      </div>
-    </section>
-
     <!-- Controles de búsqueda y filtros (restaurados en su posición original) -->
     <section class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 mb-6">
       <div class="flex flex-wrap items-center gap-2.5">
-        <div class="inline-flex p-1.5 tata-card-glass rounded-2xl shadow-sm w-full sm:w-auto justify-center">
-          <button type="button" data-filter="App Oficial" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-yellow-400 text-black shadow-md cursor-pointer transition-all touch-manipulation">Solo en App</button>
-          <button type="button" data-filter="Web" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">Web</button>
+        <div class="inline-flex gap-1.5 p-1.5 tata-card-glass rounded-2xl shadow-md w-full sm:w-auto justify-center">
+          <button type="button" data-filter="App Oficial" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-yellow-400 text-black border-2 border-yellow-200 shadow-md cursor-pointer transition-all touch-manipulation">Solo en App</button>
+          <button type="button" data-filter="Web" class="filter-btn filter-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer transition-all touch-manipulation">Web</button>
         </div>
       </div>
 
@@ -342,9 +331,9 @@
     </div>
   </div>
 
-  <!-- Menú Desplegable Lateral (Sidebar) estilo Brave con Liquid Glass -->
+  <!-- Menú Desplegable Lateral (Sidebar) estilo Liquid Glass -->
   <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border border-white/30 hover:border-yellow-400 group">
+  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border border-white/30 hover:border-blue-500 hover:shadow-[0_0_35px_rgba(59,130,246,0.35)] group">
     <div>
       <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/20">
         <h2 class="text-lg font-black text-white tracking-wide uppercase">Menú</h2>
@@ -355,7 +344,7 @@
         </button>
       </div>
 
-      <nav class="space-y-3">
+      <nav class="space-y-3 p-1 rounded-3xl transition-all duration-300 hover:border hover:border-blue-500 hover:bg-blue-500/10">
         <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_coraz%C3%B3n_con_cartel_de_Vote" alt="Votaciones" class="max-w-full max-h-full object-contain filter drop-shadow" />
@@ -630,12 +619,14 @@
     ];
 
     const STORAGE_KEY = 'v_bts_daily_votes_v3';
+    const CLICKED_LINKS_KEY = 'v_bts_clicked_links_v1';
     const CUSTOM_PHOTO_KEY = 'v_bts_custom_photo_v1';
     const CUSTOM_OFFSET_KEY = 'v_bts_custom_offset_v1';
     const CUSTOM_LOCK_KEY = 'v_bts_custom_lock_v1';
 
     let state = {
       votedIds: JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
+      clickedLinks: JSON.parse(localStorage.getItem(CLICKED_LINKS_KEY) || '[]'),
       currentFilter: 'App Oficial',
       searchQuery: ''
     };
@@ -669,6 +660,16 @@
 
     function openSidebar() {
       if (sidebarDrawer && sidebarBackdrop) {
+        // Si se abre desde la sección de playlists, aplicamos borde azul al contenedor lateral
+        const isPlaylistActive = seccionPlaylistsEl && !seccionPlaylistsEl.classList.contains('hidden');
+        if (isPlaylistActive) {
+          sidebarDrawer.classList.remove('border-white/35');
+          sidebarDrawer.classList.add('border-blue-500', 'shadow-[0_0_35px_rgba(59,130,246,0.35)]');
+        } else {
+          sidebarDrawer.classList.remove('border-blue-500', 'shadow-[0_0_35px_rgba(59,130,246,0.35)]');
+          sidebarDrawer.classList.add('border-white/35');
+        }
+
         sidebarDrawer.classList.remove('-translate-x-full');
         sidebarBackdrop.classList.remove('opacity-0', 'pointer-events-none');
         sidebarBackdrop.classList.add('opacity-100', 'pointer-events-auto');
@@ -729,6 +730,10 @@
 
     function saveVotedIds() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.votedIds));
+    }
+
+    function saveClickedLinks() {
+      localStorage.setItem(CLICKED_LINKS_KEY, JSON.stringify(state.clickedLinks));
     }
 
     function showToast(message) {
@@ -803,49 +808,74 @@
         const isFirst = firstActive && firstActive.id === platform.id;
 
         const card = document.createElement('article');
-        card.className = `p-4 sm:p-5 rounded-3xl tata-card-glass transition-all text-white ${
-          countdown.expired ? 'opacity-60 grayscale-[30%]' : isVoted ? 'opacity-85 border-green-500/40 bg-transparent' : isFirst ? 'shadow-xl' : ''
+        card.className = `p-3.5 sm:p-4 rounded-3xl tata-card-glass transition-all text-white ${
+          countdown.expired ? 'opacity-60 grayscale-[30%]' : isVoted ? 'opacity-85 border-blue-500/40 bg-transparent' : isFirst ? 'shadow-xl' : ''
         }`;
 
-        const buttonsHtml = platform.links.map(link => `
+        const hasMultipleLinks = platform.links.length > 1;
+        const buttonsHtml = platform.links.map((link, idx) => {
+          const linkKey = `${platform.id}_${idx}`;
+          const isClicked = hasMultipleLinks && state.clickedLinks.includes(linkKey);
+          return `
           <a
             href="${link.url}"
             target="_blank"
             rel="noopener noreferrer"
-            class="tata-btn-primary w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm touch-manipulation"
+            data-link-key="${linkKey}"
+            data-multi="${hasMultipleLinks}"
+            class="vote-link-btn tata-btn-primary w-full inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer shadow-sm touch-manipulation ${isClicked ? '!border-blue-400 !bg-blue-500/25 !text-blue-200' : ''}"
           >
-            <span>${link.label}</span>
-            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            ${isClicked ? '<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-500 text-white font-black text-[10px] shrink-0 shadow-sm">✓</span>' : ''}
+            <span class="truncate">${link.label}</span>
+            <svg class="w-3.5 h-3.5 shrink-0 ${isClicked ? 'text-blue-400' : ''}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
-        `).join('');
+        `;
+        }).join('');
 
         card.innerHTML = `
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div class="flex items-start gap-4 flex-1">
-              <label class="pt-1 cursor-pointer">
-                <input type="checkbox" data-id="${platform.id}" ${isVoted ? 'checked' : ''} class="vote-checkbox appearance-none w-6 h-6 rounded-lg border-2 border-red-500 bg-black checked:bg-red-600 checked:border-red-500 cursor-pointer transition-all shadow-sm" />
-              </label>
-              <div>
-                <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <h3 class="text-base sm:text-lg font-black text-white ${isVoted ? 'line-through text-army-400' : ''}">${platform.name}</h3>
-                  ${isFirst ? '<span class="px-2.5 py-0.5 rounded-full text-xs font-black tata-badge-red">🔥 Cierra primero</span>' : ''}
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold ${platform.type === 'App Oficial' ? 'tata-badge-blue' : 'bg-black/80 text-gray-300 border border-gray-600/40'}">${platform.type}</span>
+          <div class="flex flex-col gap-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-start gap-3 flex-1">
+                <label class="pt-0.5 cursor-pointer">
+                  <input type="checkbox" data-id="${platform.id}" ${isVoted ? 'checked' : ''} class="vote-checkbox appearance-none w-5 h-5 rounded-lg border-2 border-red-500 bg-black checked:bg-red-600 checked:border-red-500 cursor-pointer transition-all shadow-sm" />
+                </label>
+                <div class="w-full">
+                  <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
+                    <h3 class="text-sm sm:text-base font-black text-white ${isVoted ? 'line-through text-army-400' : ''}">${platform.name}</h3>
+                    ${isFirst ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-black tata-badge-red">🔥 Cierra primero</span>' : ''}
+                    <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold ${platform.type === 'App Oficial' ? 'tata-badge-blue' : 'bg-black/80 text-gray-300 border border-gray-600/40'}">${platform.type}</span>
+                  </div>
+                  <p class="text-xs font-semibold text-army-200 leading-snug mb-3">${platform.description}</p>
+                  
+                  <!-- Conteo "Cierra en" alineado exactamente con el inicio del nombre y estirado hacia la derecha de forma prolija -->
+                  <div class="pt-2 pb-0.5 border-t border-white/15 flex items-center justify-between gap-2 text-xs font-black text-white pr-1">
+                    <span class="text-army-300 font-bold">Cierra en:</span>
+                    <div id="cd-${platform.id}" class="font-mono font-black text-white bg-black/45 px-3 py-1 rounded-lg border border-white/20"></div>
+                  </div>
                 </div>
-                <p class="text-xs sm:text-sm font-semibold text-army-200">${platform.description}</p>
+              </div>
+              <div class="flex flex-col items-stretch gap-1.5 w-full sm:w-52 shrink-0 self-center sm:self-start">
+                ${buttonsHtml}
               </div>
             </div>
-            <div class="flex flex-col items-stretch gap-2 w-full sm:w-56 shrink-0">
-              ${buttonsHtml}
-            </div>
-          </div>
-          <div class="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs font-black text-white">
-            <span class="text-army-300">Cierra en:</span>
-            <div id="cd-${platform.id}" class="font-mono font-black text-white bg-black/40 px-3 py-1 rounded-xl border border-white/20"></div>
           </div>
         `;
         votingListEl.appendChild(card);
+      });
+
+      document.querySelectorAll('.vote-link-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const isMulti = btn.getAttribute('data-multi') === 'true';
+          if (!isMulti) return;
+          const linkKey = btn.getAttribute('data-link-key');
+          if (linkKey && !state.clickedLinks.includes(linkKey)) {
+            state.clickedLinks.push(linkKey);
+            saveClickedLinks();
+            renderList();
+          }
+        });
       });
 
       document.querySelectorAll('.vote-checkbox').forEach(cb => {
@@ -907,11 +937,11 @@
       btn.addEventListener('click', () => {
         state.currentFilter = btn.getAttribute('data-filter');
         filterBtns.forEach(b => {
-          b.classList.remove('bg-yellow-400', 'text-black', 'shadow-md');
-          b.classList.add('text-army-300');
+          b.classList.remove('bg-yellow-400', 'text-black', 'border-2', 'border-yellow-200', 'shadow-md');
+          b.classList.add('filter-tab-inactive');
         });
-        btn.classList.add('bg-yellow-400', 'text-black', 'shadow-md');
-        btn.classList.remove('text-army-300');
+        btn.classList.remove('filter-tab-inactive');
+        btn.classList.add('bg-yellow-400', 'text-black', 'border-2', 'border-yellow-200', 'shadow-md');
         renderList();
       });
     });
@@ -919,7 +949,9 @@
     if (resetVotesBtn) {
       resetVotesBtn.addEventListener('click', () => {
         state.votedIds = [];
+        state.clickedLinks = [];
         saveVotedIds();
+        saveClickedLinks();
         updateProgressUI();
         renderList();
         showToast('Votos diarios reiniciados.');
@@ -1048,28 +1080,34 @@
       });
     }
 
-    if (resetPositionBtn) {
-      resetPositionBtn.addEventListener('click', () => {
-        if (isLocked) return;
-        currentX = 0;
-        currentY = 0;
-        if (userUploadedImg) userUploadedImg.style.transform = `translate(0px, 0px)`;
-        saveOffset();
-        showToast('Posición centrada.');
-      });
+    function resetPositionHandler() {
+      currentX = 0;
+      currentY = 0;
+      if (userUploadedImg) userUploadedImg.style.transform = `translate(0px, 0px)`;
+      if (dashboardBgImg) dashboardBgImg.style.transform = `translate(0px, 0px)`;
+      if (playlistsBgImg) playlistsBgImg.style.transform = `translate(0px, 0px)`;
+      saveOffset();
+      showToast('Posición centrada.');
     }
 
-    if (lockPositionBtn) {
-      lockPositionBtn.addEventListener('click', () => {
-        setLockedState(true);
-        showToast('¡Posición guardada y bloqueada! 💜');
-      });
+    function lockPositionHandler() {
+      setLockedState(true);
+      if (dashboardBgImg && userUploadedImg) {
+        dashboardBgImg.style.transform = userUploadedImg.style.transform;
+      }
+      if (playlistsBgImg && userUploadedImg) {
+        playlistsBgImg.style.transform = userUploadedImg.style.transform;
+      }
+      showToast('¡Posición guardada y bloqueada! 💜');
     }
+
+    if (resetPositionBtn) resetPositionBtn.addEventListener('click', resetPositionHandler);
+    if (lockPositionBtn) lockPositionBtn.addEventListener('click', lockPositionHandler);
 
     if (modifyPositionBtn) {
       modifyPositionBtn.addEventListener('click', () => {
         setLockedState(false);
-        showToast('Ya podés volver a mover tu foto.');
+        showToast('Ya podés mover y ver tu foto en vivo. ¡Dale a Listo cuando termines!');
       });
     }
 
@@ -1161,7 +1199,7 @@
             }
             if (userImgContainer) userImgContainer.classList.remove('hidden');
             setLockedState(false);
-            showToast('¡Foto actualizada con éxito! Ajustala y guardala 💜');
+            showToast('¡Foto agregada! Mové la imagen y dale a Listo 💜');
           };
           reader.readAsDataURL(file);
         }
