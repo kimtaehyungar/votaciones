@@ -290,8 +290,15 @@
       </div>
     </section>
 
-    <!-- Controles de búsqueda y filtros -->
+    <!-- Controles de búsqueda y filtros (restaurados en su posición original) -->
     <section class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 mb-6">
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div class="inline-flex p-1.5 tata-card-glass rounded-2xl shadow-sm w-full sm:w-auto justify-center">
+          <button type="button" data-filter="App Oficial" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-yellow-400 text-black shadow-md cursor-pointer transition-all touch-manipulation">Solo en App</button>
+          <button type="button" data-filter="Web" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">Web</button>
+        </div>
+      </div>
+
       <div class="relative flex-1">
         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-army-400">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -313,13 +320,6 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5">
-        <div class="inline-flex p-1.5 tata-card-glass rounded-2xl shadow-sm w-full sm:w-auto justify-center">
-          <button type="button" data-filter="App Oficial" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-yellow-400 text-black shadow-md cursor-pointer transition-all touch-manipulation">Solo en App</button>
-          <button type="button" data-filter="Web" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">Web</button>
-        </div>
       </div>
     </section>
 
@@ -384,36 +384,139 @@
     </div>
   </aside>
 
-  <!-- Reproductor Flotante de Música (Bottom-Left) con persistencia y controles estilo YouTube Music -->
-  <div id="persistent-music-player" class="fixed bottom-4 left-4 z-40 tata-card-glass px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3.5 max-w-xs sm:max-w-sm backdrop-blur-md border border-white/30 text-white">
-    <!-- Miniatura de la canción actual -->
-    <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-black/60 shadow-md border border-white/20 relative">
-      <img id="player-album-art" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80" alt="Album Art" class="w-full h-full object-cover" />
+  <!-- Reproductor Flotante de Música Estilo Layover con dimensiones exactas e interactividad completa -->
+  <style>
+    #layover-player {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(355px, calc(100% - 30px));
+      box-sizing: border-box;
+      padding: 12px;
+      border-radius: 23px;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.30),
+        rgba(255,255,255,.09) 45%,
+        rgba(220,235,255,.20)
+      );
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow:
+        0 8px 35px rgba(0,0,0,.35),
+        inset 0 1px 1px rgba(255,255,255,.8),
+        inset 0 -1px 2px rgba(255,255,255,.2);
+      z-index: 99999;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+    #layover-player:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(
+        125deg,
+        rgba(255,255,255,.24),
+        transparent 40%,
+        rgba(255,255,255,.08)
+      );
+    }
+    .layover-content {
+      position: relative;
+      z-index: 1;
+    }
+    .layover-top {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    .layover-top img {
+      width: 46px;
+      height: 46px;
+      object-fit: cover;
+      border-radius: 11px;
+      border: 1px solid rgba(255,255,255,.6);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    }
+    .layover-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .layover-info strong {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .layover-info small {
+      display: block;
+      font-size: 11px;
+      margin-top: 3px;
+      color: rgba(255,255,255,.9);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .layover-link {
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 8px 11px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .layover-link:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    .layover-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+  </style>
+
+  <div id="layover-player">
+    <div class="layover-content">
+      <div class="layover-top">
+        <img id="player-album-art" src="https://upload.wikimedia.org/wikipedia/en/1/11/V_-_Layover.png" alt="Layover - V">
+        <div class="layover-info">
+          <strong id="player-song-title">Winter Ahead</strong>
+          <small id="player-song-artist">V y Park Hyo Shin</small>
+        </div>
+        <a class="layover-link" href="https://music.youtube.com/playlist?list=PLGIIQvUIFpVU" target="_blank" rel="noopener">
+          OPEN ↗
+        </a>
+      </div>
+      <div class="layover-controls">
+        <button type="button" id="player-prev-btn" class="p-1 text-white/80 hover:text-white transition-colors cursor-pointer" title="Anterior">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button type="button" id="player-toggle-btn" class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer" title="Reproducir / Pausar">
+          <svg id="player-play-icon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="player-pause-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button type="button" id="player-next-btn" class="p-1 text-white/80 hover:text-white transition-colors cursor-pointer" title="Siguiente">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
     </div>
-
-    <!-- Información de la canción -->
-    <div class="flex flex-col min-w-0 flex-1">
-      <span id="player-song-title" class="text-xs sm:text-sm font-black truncate text-white">Winter Ahead</span>
-      <span id="player-song-artist" class="text-[11px] font-semibold text-army-300 truncate">V y Park Hyo Shin</span>
-    </div>
-
-    <!-- Controles (Anterior, Play/Pause, Siguiente) -->
-    <div class="flex items-center gap-1.5 shrink-0">
-      <button type="button" id="player-prev-btn" class="p-1.5 text-white/80 hover:text-white transition-colors cursor-pointer" title="Anterior">
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-
-      <button type="button" id="player-toggle-btn" class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer" title="Reproducir / Pausar">
-        <svg id="player-play-icon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="player-pause-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-
-      <button type="button" id="player-next-btn" class="p-1.5 text-white/80 hover:text-white transition-colors cursor-pointer" title="Siguiente">
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-    </div>
-
-    <!-- Elemento de audio invisible para reproducción real o simulada -->
     <audio id="bg-audio-element" preload="auto" loop></audio>
   </div>
 
@@ -1245,30 +1348,30 @@
     renderList();
     setInterval(updateCountdowns, 1000);
 
-    // Reproductor de Música Flotante (Playlist de Taehyung / YouTube Music)
+    // Reproductor de Música Interactivo con la lista de Kim Taehyung
     const playlistSongs = [
       {
         title: "Winter Ahead",
         artist: "V y Park Hyo Shin",
-        cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80",
-        audioUrl: "https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg" // Audio de muestra estable o streaming
+        cover: "https://upload.wikimedia.org/wikipedia/en/1/11/V_-_Layover.png",
+        audioUrl: "https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg"
       },
       {
         title: "Slow Dancing",
-        artist: "V (Layover Album)",
-        cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=150&auto=format&fit=crop&q=80",
+        artist: "V (Layover)",
+        cover: "https://upload.wikimedia.org/wikipedia/en/1/11/V_-_Layover.png",
         audioUrl: "https://actions.google.com/sounds/v1/ambiences/rain_heavy.ogg"
       },
       {
         title: "Love Me Again",
-        artist: "V (Layover Album)",
-        cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150&auto=format&fit=crop&q=80",
+        artist: "V (Layover)",
+        cover: "https://upload.wikimedia.org/wikipedia/en/1/11/V_-_Layover.png",
         audioUrl: "https://actions.google.com/sounds/v1/weather/wind_gust.ogg"
       },
       {
         title: "Christmas Tree",
-        artist: "V (Our Beloved Summer OST)",
-        cover: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=150&auto=format&fit=crop&q=80",
+        artist: "V (OST)",
+        cover: "https://upload.wikimedia.org/wikipedia/en/1/11/V_-_Layover.png",
         audioUrl: "https://actions.google.com/sounds/v1/ambiences/night_crickets.ogg"
       }
     ];
@@ -1293,16 +1396,20 @@
       if (albumArtEl) albumArtEl.src = song.cover;
       if (audioElement) {
         audioElement.src = song.audioUrl;
+        audioElement.load();
       }
     }
 
     function playSong() {
       isPlaying = true;
       if (audioElement) {
-        audioElement.play().catch(e => console.log("Autoplay bloqueado por el navegador:", e));
+        audioElement.play().then(() => {
+          if (playIcon) playIcon.classList.add('hidden');
+          if (pauseIcon) pauseIcon.classList.remove('hidden');
+        }).catch(err => {
+          console.log("Reproducción automática interactiva:", err);
+        });
       }
-      if (playIcon) playIcon.classList.add('hidden');
-      if (pauseIcon) pauseIcon.classList.remove('hidden');
     }
 
     function pauseSong() {
@@ -1315,32 +1422,39 @@
     }
 
     if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
+      toggleBtn.onclick = () => {
         if (isPlaying) {
           pauseSong();
         } else {
           playSong();
         }
-      });
+      };
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
+      nextBtn.onclick = () => {
         currentSongIndex = (currentSongIndex + 1) % playlistSongs.length;
         loadSong(currentSongIndex);
         if (isPlaying) playSong();
-      });
+      };
     }
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
+      prevBtn.onclick = () => {
         currentSongIndex = (currentSongIndex - 1 + playlistSongs.length) % playlistSongs.length;
         loadSong(currentSongIndex);
         if (isPlaying) playSong();
-      });
+      };
     }
 
-    // Inicializar reproductor en la primera canción
+    if (audioElement) {
+      audioElement.onended = () => {
+        currentSongIndex = (currentSongIndex + 1) % playlistSongs.length;
+        loadSong(currentSongIndex);
+        if (isPlaying) playSong();
+      };
+    }
+
     loadSong(currentSongIndex);
   </script>
 </body>
