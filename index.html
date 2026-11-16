@@ -232,8 +232,8 @@
   <!-- Panel de Votaciones Dashboard con fondo de la foto elegida por el usuario -->
   <div id="seccion-votaciones" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
     <!-- Contenedor de la foto elegida adaptado para cubrir todo el fondo de votaciones de forma prolija en la misma posición y dimensión sin fondos predeterminados o de Tata -->
-    <div id="dashboard-custom-photo-bg" class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
-      <img id="dashboard-bg-img" src="" alt="" class="absolute min-w-full min-h-full w-auto h-auto object-cover filter brightness-[0.98] contrast-[1.02]" />
+    <div id="dashboard-custom-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
+      <img id="dashboard-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02]" />
     </div>
 
     <div class="max-w-4xl mx-auto relative z-10">
@@ -358,18 +358,24 @@
 
       <nav class="space-y-3">
         <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
-          <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_corazón_con_cartel_de_Vote" alt="Votaciones" class="w-12 h-12 object-contain shrink-0 filter drop-shadow" />
-          <span>Votaciones</span>
+          <div class="w-12 h-12 flex items-center justify-center shrink-0">
+            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_corazón_con_cartel_de_Vote" alt="Votaciones" class="max-w-full max-h-full object-contain filter drop-shadow" />
+          </div>
+          <span class="leading-tight">Votaciones</span>
         </button>
 
         <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
-          <img src="https://i.pinimg.com/736x/8c/08/59/8c085923ba2b02262e2aa276c95a89d8.jpg" alt="Listas de reproducción" class="w-8 h-8 object-contain shrink-0 filter drop-shadow" />
-          <span>Listas de reproducción</span>
+          <div class="w-12 h-12 flex items-center justify-center shrink-0">
+            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/Coraz%C3%B3n_DJ_con_auriculares_verdes.png" alt="Listas de reproducción" class="max-w-full max-h-full object-contain filter drop-shadow" />
+          </div>
+          <span class="leading-tight">Listas de reproducción</span>
         </button>
 
         <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
-          <img src="https://i.pinimg.com/736x/29/dc/5c/29dc5cd05cd88b22d2395bf207c3071a.jpg" alt="Inicio" class="w-8 h-8 object-contain shrink-0 filter drop-shadow" />
-          <span>Inicio (Cambiar foto)</span>
+          <div class="w-12 h-12 flex items-center justify-center shrink-0">
+            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-16 h-16 max-w-none object-contain filter drop-shadow" />
+          </div>
+          <span class="leading-tight">Inicio</span>
         </button>
       </nav>
     </div>
@@ -381,8 +387,8 @@
 
   <!-- Sección de Listas de Reproducción (Página dedicada idéntica a votaciones) -->
   <div id="seccion-playlists" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
-    <div id="playlists-custom-photo-bg" class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
-      <img id="playlists-bg-img" src="" alt="" class="absolute max-w-none min-w-[70vw] min-h-[70vh] w-auto h-auto object-cover filter brightness-[0.98] contrast-[1.02]" />
+    <div id="playlists-custom-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
+      <img id="playlists-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02]" />
     </div>
 
     <div class="max-w-4xl mx-auto relative z-10">
@@ -434,7 +440,7 @@
         </div>
       </main>
 
-      <!-- Botones de navegación (Menú e Ir a Votaciones) reubicados abajo -->
+      <!-- Botones de navegación (Menú e Inicio) reubicados abajo -->
       <div class="mt-8 flex items-center justify-center gap-3">
         <button
           type="button"
@@ -454,9 +460,9 @@
           class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation shadow-lg"
         >
           <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
-          <span>Ir a Votaciones</span>
+          <span>Inicio</span>
         </button>
       </div>
 
@@ -564,14 +570,6 @@
       });
     }
 
-    if (goVotingFromPlaylistBtn) {
-      goVotingFromPlaylistBtn.addEventListener('click', () => {
-        if (seccionPlaylistsEl) seccionPlaylistsEl.classList.add('hidden');
-        if (seccionVotacionesEl) seccionVotacionesEl.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
     if (menuItemPlaylist) {
       menuItemPlaylist.addEventListener('click', () => {
         closeSidebar();
@@ -587,6 +585,15 @@
         closeSidebar();
         if (seccionVotacionesEl) seccionVotacionesEl.classList.add('hidden');
         if (seccionPlaylistsEl) seccionPlaylistsEl.classList.add('hidden');
+        if (heroSectionEl) heroSectionEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    if (goVotingFromPlaylistBtn) {
+      goVotingFromPlaylistBtn.addEventListener('click', () => {
+        if (seccionPlaylistsEl) seccionPlaylistsEl.classList.add('hidden');
+        if (seccionVotacionesEl) seccionVotacionesEl.classList.add('hidden');
         if (heroSectionEl) heroSectionEl.classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
