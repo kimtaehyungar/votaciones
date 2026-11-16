@@ -1,703 +1,678 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
 <head>
-    <meta charset="UTF-8" />
-    <!-- Metatags optimizados para dispositivos móviles (iOS Safari & Android Chrome) -->
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Kim Taehyung votaciones.</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet" />
-    <!-- Configuración de Tailwind -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        army: {
-                            950: '#000000',
-                            900: '#0a0a0a',
-                            800: '#121212',
-                            700: '#1f1f1f',
-                            600: '#2b2b2b',
-                            500: '#3d3d3d',
-                            400: '#a3a3a3',
-                            300: '#d4d4d4',
-                        }
-                    }
-                }
+  <meta charset="UTF-8" />
+  <!-- Metatags optimizados para dispositivos móviles (iOS Safari & Android Chrome) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Kim Taehyung votaciones.</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Configuración de Tailwind -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            army: {
+              950: '#000000',
+              900: '#0a0a0a',
+              800: '#121212',
+              700: '#1f1f1f',
+              600: '#2b2b2b',
+              500: '#3d3d3d',
+              400: '#a3a3a3',
+              300: '#d4d4d4',
             }
+          }
         }
-    </script>
-    <style>
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        body {
-            background-color: #000000;
-            color: #f3f4f6;
-            font-family: 'Inter', sans-serif;
-            overscroll-behavior-y: none;
-        }
-
-        /* Compatibilidad multi-navegador robusta (Brave, Chrome, Safari, Firefox, iOS, Android, PC) */
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .custom-checkbox:checked {
-            background-color: #ef4444;
-            border-color: #ef4444;
-            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-        }
-
-        /* Estilo ultratransparente de máximo Liquid Glass para los botones de la portada */
-        .ios-glass-btn {
-            background: rgba(255, 255, 255, 0.005) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.6) !important;
-            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.9), inset 0 -1.5px 0 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .ios-glass-btn:hover,
-        .ios-glass-btn:active {
-            background: rgba(255, 255, 255, 0.05) !important;
-            border-color: rgba(255, 255, 255, 0.9) !important;
-        }
-
-        /* Estilo 100% transparente y cristalino para el botón de ingresar sin blur para ver el fondo impecable */
-        .enter-ultra-glass {
-            background: rgba(255, 255, 255, 0.0) !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
-            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.6);
-        }
-
-        .enter-ultra-glass:hover,
-        .enter-ultra-glass:active {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border-color: rgba(255, 255, 255, 0.9) !important;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Clases dinámicas para color de título adaptable con sombra profunda para máxima legibilidad */
-        .title-theme-dark {
-            color: #000000;
-            text-shadow: 0 2px 25px rgba(255, 255, 255, 0.95), 0 0 15px rgba(255, 255, 255, 0.95), 0 0 40px rgba(255, 255, 255, 0.8);
-        }
-
-        .title-theme-light {
-            color: #ffffff;
-            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.98), 0 0 15px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Contenedor de la foto adaptado para ajustarse exactamente al tamaño de pantalla sin desbordes ni recortes en Brave, Chrome, Safari y Firefox */
-        #user-image-container {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #000000;
-            z-index: 0;
-        }
-
-        #user-uploaded-img {
-            cursor: grab;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-            touch-action: none;
-            max-width: 100%;
-            max-height: 100%;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            position: relative;
-            will-change: transform;
-        }
-
-        #user-uploaded-img:active {
-            cursor: grabbing;
-        }
-
-        /* Estilo refinado Liquid Glass para las tarjetas de votación para apreciar la foto de fondo */
-        .tata-card-glass {
-            background: transparent !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
-            transition: all 0.25s ease;
-            color: #ffffff;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.8);
-        }
-
-        .tata-card-glass:hover {
-            background: rgba(255, 255, 255, 0.03) !important;
-            border-color: rgba(239, 68, 68, 0.8);
-            box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-        }
-
-        /* Botones temáticos con estilo Liquid Glass elegante y cristalino */
-        .tata-btn-primary {
-            background: rgba(255, 255, 255, 0.08) !important;
-            backdrop-filter: blur(14px) !important;
-            -webkit-backdrop-filter: blur(14px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.45) !important;
-            color: #ffffff;
-            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
-            transition: all 0.2s ease;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .tata-btn-primary:hover,
-        .tata-btn-primary:active {
-            background: rgba(255, 255, 255, 0.18) !important;
-            border-color: rgba(255, 255, 255, 0.85) !important;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
-            transform: scale(1.02);
-        }
-
-        .tata-badge-red {
-            background-color: rgba(239, 68, 68, 0.25);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.5);
-        }
-
-        .tata-badge-blue {
-            background-color: rgba(59, 130, 246, 0.25);
-            color: #93c5fd;
-            border: 1px solid rgba(59, 130, 246, 0.5);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #000000;
+      color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+      overscroll-behavior-y: none;
+    }
+    /* Compatibilidad multi-navegador robusta (Brave, Chrome, Safari, Firefox, iOS, Android, PC) */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .custom-checkbox:checked {
+      background-color: #ef4444;
+      border-color: #ef4444;
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    }
+    /* Estilo ultratransparente de máximo Liquid Glass para los botones de la portada */
+    .ios-glass-btn {
+      background: rgba(255, 255, 255, 0.005) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.6) !important;
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.9), inset 0 -1.5px 0 0 rgba(255, 255, 255, 0.3);
+    }
+    .ios-glass-btn:hover, .ios-glass-btn:active {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(255, 255, 255, 0.9) !important;
+    }
+    /* Estilo 100% transparente y cristalino para el botón de ingresar sin blur para ver el fondo impecable */
+    .enter-ultra-glass {
+      background: rgba(255, 255, 255, 0.0) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.5) !important;
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.6);
+    }
+    .enter-ultra-glass:hover, .enter-ultra-glass:active {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: rgba(255, 255, 255, 0.9) !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+    /* Clases dinámicas para color de título adaptable con sombra profunda para máxima legibilidad */
+    .title-theme-dark {
+      color: #000000;
+      text-shadow: 0 2px 25px rgba(255, 255, 255, 0.95), 0 0 15px rgba(255, 255, 255, 0.95), 0 0 40px rgba(255, 255, 255, 0.8);
+    }
+    .title-theme-light {
+      color: #ffffff;
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.98), 0 0 15px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+    /* Contenedor de la foto adaptado para ajustarse exactamente al tamaño de pantalla sin desbordes ni recortes en Brave, Chrome, Safari y Firefox */
+    #user-image-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000000;
+      z-index: 0;
+    }
+    #user-uploaded-img {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: none;
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: relative;
+      will-change: transform;
+    }
+    #user-uploaded-img:active {
+      cursor: grabbing;
+    }
+    /* Estilo refinado Liquid Glass para las tarjetas de votación para apreciar la foto de fondo */
+    .tata-card-glass {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+      transition: all 0.25s ease;
+      color: #ffffff;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.8);
+    }
+    .tata-card-glass:hover {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border-color: rgba(239, 68, 68, 0.8);
+      box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+    }
+    /* Botones temáticos con estilo Liquid Glass elegante y cristalino */
+    .tata-btn-primary {
+      background: rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.45) !important;
+      color: #ffffff;
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.2s ease;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+    .tata-btn-primary:hover, .tata-btn-primary:active {
+      background: rgba(255, 255, 255, 0.18) !important;
+      border-color: rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+      transform: scale(1.02);
+    }
+    .tata-badge-red {
+      background-color: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.5);
+    }
+    .tata-badge-blue {
+      background-color: rgba(59, 130, 246, 0.25);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.5);
+    }
+  </style>
 </head>
-
 <body class="antialiased selection:bg-red-500 selection:text-white">
 
-    <!-- Portada Inicial Limpia y Personalizable con adaptabilidad a notches de móviles -->
-    <section id="hero-section"
-        class="relative w-full h-[100dvh] flex flex-col items-center justify-between py-6 px-4 overflow-hidden bg-black"
-        style="padding-top: max(1.5rem, env(safe-area-inset-top)); padding-bottom: max(1.5rem, env(safe-area-inset-top));">
+  <!-- Portada Inicial Limpia y Personalizable con adaptabilidad a notches de móviles -->
+  <section id="hero-section" class="relative w-full h-[100dvh] flex flex-col items-center justify-between py-6 px-4 overflow-hidden bg-black" style="padding-top: max(1.5rem, env(safe-area-inset-top)); padding-bottom: max(1.5rem, env(safe-area-inset-top));">
+    
+    <!-- Contenedor dinámico de imagen personalizada adaptado por completo para Brave, Chrome, Safari y Firefox -->
+    <div id="user-image-container" class="hidden">
+      <!-- Imagen principal con ajuste inteligente de tamaño según el dispositivo sin desbordarse -->
+      <img id="user-uploaded-img" src="" alt="Custom Kim Taehyung" style="transform: translate(0px, 0px); touch-action: none;" crossorigin="anonymous" />
+    </div>
 
-        <!-- Contenedor dinámico de imagen personalizada adaptado por completo para Brave, Chrome, Safari y Firefox -->
-        <div id="user-image-container" class="hidden">
-            <!-- Imagen principal con ajuste inteligente de tamaño según el dispositivo sin desbordarse -->
-            <img id="user-uploaded-img" src="" alt="Custom Kim Taehyung"
-                style="transform: translate(0px, 0px); touch-action: none;" crossorigin="anonymous" />
+    <!-- Título principal en capa superior (z-50) para que NUNCA sea tapado mientras se mueve la foto -->
+    <div class="relative z-50 pt-2 sm:pt-4 text-center pointer-events-none mx-auto w-full flex flex-col items-center justify-center">
+      <h1 id="hero-title" class="leading-none transition-colors duration-500 select-none text-center">
+        <span class="block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-main">KIM TAEHYUNG</span>
+        <span class="block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-sub">VOTACIONES</span>
+      </h1>
+    </div>
+
+    <!-- Botón central "Ingresar" con efecto Liquid Glass de iOS (z-50) -->
+    <div class="relative z-50 my-auto flex flex-col items-center gap-4">
+      <button
+        type="button"
+        id="enter-dashboard-btn"
+        class="enter-ultra-glass inline-flex items-center justify-center px-14 py-6 rounded-3xl text-lg sm:text-xl font-extrabold text-white transition-all transform hover:scale-105 active:scale-95 cursor-pointer pointer-events-auto touch-manipulation"
+      >
+        <span>Ingresar</span>
+      </button>
+    </div>
+
+    <!-- Controles inferiores derechos: Ajuste de posición y cambio de foto (z-50) -->
+    <div class="relative z-50 w-full flex items-center justify-between pb-1 px-1 pointer-events-auto">
+      <!-- Botón para resetear posición de la foto y bloquear -->
+      <div id="reposition-wrapper" class="flex items-center">
+        <div id="reposition-controls" class="hidden flex items-center gap-2 ios-glass-btn px-3 py-1.5 rounded-xl text-xs text-white touch-manipulation">
+          <span id="reposition-status-text" class="font-medium">🖱️ Arrastrá</span>
+          <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline cursor-pointer transition-colors">Centrar</button>
+          <span id="sep-divider" class="text-white/40">|</span>
+          <button type="button" id="lock-position-btn" class="ios-glass-btn text-white font-bold px-3 py-1 rounded-lg transition-all cursor-pointer">✓ Listo</button>
         </div>
+        <button type="button" id="modify-position-btn" class="hidden ios-glass-btn text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-all cursor-pointer flex items-center gap-1.5 touch-manipulation">
+          <span>💜 Modificar posición</span>
+        </button>
+      </div>
+      <div></div>
 
-        <!-- Título principal en capa superior (z-50) para que NUNCA sea tapado mientras se mueve la foto -->
+      <!-- Botón discreto abajo a la derecha con estilo iOS Liquid Glass unificado -->
+      <label class="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold ios-glass-btn text-white transition-all ml-auto hover:scale-105 active:scale-95 touch-manipulation">
+        <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <span>Agregá una foto de V</span>
+        <input type="file" id="photo-upload-input" accept=".jpg,.jpeg,.png,.webp,.gif,.heic,.heif" class="hidden" />
+      </label>
+    </div>
+  </section>
+
+  <!-- Panel de Votaciones Dashboard con fondo de la foto elegida por el usuario -->
+  <div id="seccion-votaciones" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
+    <!-- Contenedor de la foto elegida adaptado para cubrir todo el fondo de votaciones de forma prolija en la misma posición y dimensión sin fondos predeterminados o de Tata -->
+    <div id="dashboard-custom-photo-bg" class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
+      <img id="dashboard-bg-img" src="" alt="" class="absolute min-w-full min-h-full w-auto h-auto object-cover filter brightness-[0.98] contrast-[1.02]" />
+    </div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+      <header class="mb-8 flex flex-col items-center text-center gap-3">
+        <div class="tata-card-glass px-6 py-4 rounded-3xl shadow-2xl max-w-lg w-full text-white">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/20 text-red-300 text-xs font-black uppercase tracking-wider mb-2 border border-red-500/30">
+            <span>❤️ Taehyung fans</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">KIM TAEHYUNG VOTACIONES</h1>
+        </div>
+        <div class="flex items-center gap-3 mt-1">
+          <!-- Botón de Menú Desplegable con tres líneas (estilo Brave) -->
+          <button
+            type="button"
+            id="open-sidebar-btn"
+            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation"
+            aria-label="Abrir menú"
+          >
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span>Menú</span>
+          </button>
+
+          <button
+            type="button"
+            id="reset-votes-btn"
+            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation"
+          >
+            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Reiniciar votos diarios</span>
+          </button>
+        </div>
+      </header>
+
+    <section class="mb-8 tata-card-glass p-5 sm:p-6 rounded-3xl shadow-xl border-l-4 border-l-red-500 text-white">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-3">
+        <div>
+          <span class="text-xs uppercase tracking-wider font-black text-red-400">Progreso Diario</span>
+          <h2 id="progress-subtitle" class="text-sm sm:text-base font-extrabold text-white mt-0.5">Llevás 0 de 9 plataformas hoy.</h2>
+        </div>
+        <div id="progress-badge" class="px-3.5 py-1.5 bg-red-600/90 text-white font-black text-sm rounded-xl shadow-md border border-red-400/40">
+          0 / 9
+        </div>
+      </div>
+
+      <div class="w-full bg-black/60 rounded-full h-3.5 overflow-hidden border border-white/20 shadow-inner">
         <div
-            class="relative z-50 pt-2 sm:pt-4 text-center pointer-events-none mx-auto w-full flex flex-col items-center justify-center">
-            <h1 id="hero-title" class="leading-none transition-colors duration-500 select-none text-center">
-                <span
-                    class="block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-main">KIM
-                    TAEHYUNG</span>
-                <span
-                    class="block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-sub">VOTACIONES</span>
-            </h1>
-        </div>
-
-        <!-- Botón central "Ingresar" con efecto Liquid Glass de iOS (z-50) -->
-        <div class="relative z-50 my-auto flex flex-col items-center gap-4">
-            <button type="button" id="enter-dashboard-btn"
-                class="enter-ultra-glass inline-flex items-center justify-center px-14 py-6 rounded-3xl text-lg sm:text-xl font-extrabold text-white transition-all transform hover:scale-105 active:scale-95 cursor-pointer pointer-events-auto touch-manipulation">
-                <span>Ingresar</span>
-            </button>
-        </div>
-
-        <!-- Controles inferiores derechos: Ajuste de posición y cambio de foto (z-50) -->
-        <div class="relative z-50 w-full flex items-center justify-between pb-1 px-1 pointer-events-auto">
-            <!-- Botón para resetear posición de la foto y bloquear -->
-            <div id="reposition-wrapper" class="flex items-center">
-                <div id="reposition-controls"
-                    class="hidden flex items-center gap-2 ios-glass-btn px-3 py-1.5 rounded-xl text-xs text-white touch-manipulation">
-                    <span id="reposition-status-text" class="font-medium">🖱️ Arrastrá</span>
-                    <button type="button" id="reset-position-btn"
-                        class="hover:text-purple-300 underline cursor-pointer transition-colors">Centrar</button>
-                    <span id="sep-divider" class="text-white/40">|</span>
-                    <button type="button" id="lock-position-btn"
-                        class="ios-glass-btn text-white font-bold px-3 py-1 rounded-lg transition-all cursor-pointer">✓
-                        Listo</button>
-                </div>
-                <button type="button" id="modify-position-btn"
-                    class="hidden ios-glass-btn text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-all cursor-pointer flex items-center gap-1.5 touch-manipulation">
-                    <span>💜 Modificar posición</span>
-                </button>
-            </div>
-            <div></div>
-
-            <!-- Botón discreto abajo a la derecha con estilo iOS Liquid Glass unificado -->
-            <label
-                class="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold ios-glass-btn text-white transition-all ml-auto hover:scale-105 active:scale-95 touch-manipulation">
-                <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" stroke-width="2"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Agregá una foto de V</span>
-                <input type="file" id="photo-upload-input" accept=".jpg,.jpeg,.png,.webp,.gif,.heic,.heif"
-                    class="hidden" />
-            </label>
-        </div>
+          id="progress-bar"
+          class="bg-gradient-to-r from-red-600 via-red-500 to-blue-600 h-full rounded-full transition-all duration-500 ease-out"
+          style="width: 0%"
+        ></div>
+      </div>
     </section>
 
-    <!-- Panel de Votaciones Dashboard con fondo de la foto elegida por el usuario -->
-    <div id="seccion-votaciones" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
-        <!-- Contenedor de la foto elegida adaptado para cubrir todo el fondo de votaciones de forma prolija en la misma posición y dimensión sin fondos predeterminados o de Tata -->
-        <div id="dashboard-custom-photo-bg"
-            class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
-            <img id="dashboard-bg-img" src="" alt=""
-                class="absolute max-w-none w-full h-full object-contain filter brightness-[0.98] contrast-[1.02]" />
+    <!-- Controles de búsqueda y filtros -->
+    <section class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 mb-6">
+      <div class="relative flex-1">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-army-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
+          </svg>
         </div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Buscar plataforma..."
+          class="w-full pl-10 pr-9 py-3 tata-card-glass rounded-2xl text-sm font-semibold text-white placeholder-army-400 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-sm"
+        />
+        <button
+          id="clear-search-btn"
+          type="button"
+          class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-army-400 hover:text-white cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-        <div class="max-w-4xl mx-auto relative z-10">
-            <header class="mb-8 flex flex-col items-center text-center gap-3">
-                <div class="tata-card-glass px-6 py-4 rounded-3xl shadow-2xl max-w-lg w-full text-white">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/20 text-red-300 text-xs font-black uppercase tracking-wider mb-2 border border-red-500/30">
-                        <span>❤️ Taehyung fans</span>
-                    </div>
-                    <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">KIM TAEHYUNG VOTACIONES</h1>
-                </div>
-                <div class="flex items-center gap-3 mt-1">
-                    <!-- Botón de Menú Desplegable con tres líneas (estilo Brave) -->
-                    <button type="button" id="open-sidebar-btn"
-                        class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation"
-                        aria-label="Abrir menú">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <span>Menú</span>
-                    </button>
-
-                    <button type="button" id="reset-votes-btn"
-                        class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation">
-                        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                        <span>Reiniciar votos diarios</span>
-                    </button>
-                </div>
-            </header>
-
-            <section
-                class="mb-8 tata-card-glass p-5 sm:p-6 rounded-3xl shadow-xl border-l-4 border-l-red-500 text-white">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-3">
-                    <div>
-                        <span class="text-xs uppercase tracking-wider font-black text-red-400">Progreso Diario</span>
-                        <h2 id="progress-subtitle" class="text-sm sm:text-base font-extrabold text-white mt-0.5">Llevás
-                            0 de 9 plataformas hoy.</h2>
-                    </div>
-                    <div id="progress-badge"
-                        class="px-3.5 py-1.5 bg-red-600/90 text-white font-black text-sm rounded-xl shadow-md border border-red-400/40">
-                        0 / 9
-                    </div>
-                </div>
-
-                <div class="w-full bg-black/60 rounded-full h-3.5 overflow-hidden border border-white/20 shadow-inner">
-                    <div id="progress-bar"
-                        class="bg-gradient-to-r from-red-600 via-red-500 to-blue-600 h-full rounded-full transition-all duration-500 ease-out"
-                        style="width: 0%"></div>
-                </div>
-            </section>
-
-            <!-- Controles de búsqueda y filtros -->
-            <section
-                class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 mb-6">
-                <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-army-400">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
-                        </svg>
-                    </div>
-                    <input type="text" id="search-input" placeholder="Buscar plataforma..."
-                        class="w-full pl-10 pr-9 py-3 tata-card-glass rounded-2xl text-sm font-semibold text-white placeholder-army-400 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-sm" />
-                    <button id="clear-search-btn" type="button"
-                        class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-army-400 hover:text-white cursor-pointer">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2.5">
-                    <div
-                        class="inline-flex p-1.5 tata-card-glass rounded-2xl shadow-sm w-full sm:w-auto justify-center">
-                        <button type="button" data-filter="Todas"
-                            class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-red-600 text-white shadow-md cursor-pointer transition-all touch-manipulation">Todas</button>
-                        <button type="button" data-filter="App Oficial"
-                            class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">App
-                            Oficial</button>
-                        <button type="button" data-filter="Web"
-                            class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">Web</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Lista de plataformas -->
-            <main id="voting-list" class="space-y-4"></main>
-
-            <!-- Estado vacío -->
-            <div id="empty-state"
-                class="hidden text-center py-12 px-4 tata-card-glass rounded-3xl shadow-lg text-white">
-                <h3 class="text-base font-extrabold text-white mb-1">No se encontraron votaciones</h3>
-                <p class="text-sm font-semibold text-army-300 mb-4">Probá con otro término de búsqueda.</p>
-            </div>
-
-            <footer class="mt-12 pt-6 border-t border-white/15 text-center text-xs font-black text-white">
-                <div
-                    class="tata-card-glass py-3 px-6 rounded-2xl inline-block shadow-sm flex flex-col items-center gap-1">
-                    <span>Hecho con amor por una army de Argentina</span>
-                    <span class="text-red-400 font-extrabold">@taesweetnight7</span>
-                </div>
-            </footer>
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div class="inline-flex p-1.5 tata-card-glass rounded-2xl shadow-sm w-full sm:w-auto justify-center">
+          <button type="button" data-filter="Todas" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-red-600 text-white shadow-md cursor-pointer transition-all touch-manipulation">Todas</button>
+          <button type="button" data-filter="App Oficial" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">App Oficial</button>
+          <button type="button" data-filter="Web" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">Web</button>
         </div>
+      </div>
+    </section>
+
+    <!-- Lista de plataformas -->
+    <main id="voting-list" class="space-y-4"></main>
+
+    <!-- Estado vacío -->
+    <div id="empty-state" class="hidden text-center py-12 px-4 tata-card-glass rounded-3xl shadow-lg text-white">
+      <h3 class="text-base font-extrabold text-white mb-1">No se encontraron votaciones</h3>
+      <p class="text-sm font-semibold text-army-300 mb-4">Probá con otro término de búsqueda.</p>
     </div>
 
-    <!-- Menú Desplegable Lateral (Sidebar) estilo Brave con Liquid Glass -->
-    <div id="sidebar-backdrop"
-        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+    <footer class="mt-12 pt-6 border-t border-white/15 text-center text-xs font-black text-white">
+      <div class="tata-card-glass py-3 px-6 rounded-2xl inline-block shadow-sm flex flex-col items-center gap-1">
+        <span>Hecho con amor por una army de Argentina</span>
+        <span class="text-red-400 font-extrabold">@taesweetnight7</span>
+      </div>
+    </footer>
     </div>
-    <aside id="sidebar-drawer"
-        class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border-r border-white/30">
-        <div>
-            <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/20">
-                <h2 class="text-lg font-black text-white tracking-wide uppercase">Menú</h2>
-                <button type="button" id="close-sidebar-btn"
-                    class="p-2 rounded-xl tata-card-glass hover:text-red-400 transition-colors cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+  </div>
 
-            <nav class="space-y-3">
-                <button type="button" id="menu-item-votaciones"
-                    class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3 transition-all hover:bg-white/10 cursor-pointer">
-                    <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Votaciones</span>
-                </button>
+  <!-- Menú Desplegable Lateral (Sidebar) estilo Brave con Liquid Glass -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border-r border-white/30">
+    <div>
+      <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/20">
+        <h2 class="text-lg font-black text-white tracking-wide uppercase">Menú</h2>
+        <button type="button" id="close-sidebar-btn" class="p-2 rounded-xl tata-card-glass hover:text-red-400 transition-colors cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-                <button type="button" id="menu-item-playlist"
-                    class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3 transition-all hover:bg-white/10 cursor-pointer">
-                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2.5"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                    </svg>
-                    <span>Listas de reproducción</span>
-                </button>
+      <nav class="space-y-3">
+        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
+          <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_corazón_con_cartel_de_Vote" alt="Votaciones" class="w-12 h-12 object-contain shrink-0 filter drop-shadow" />
+          <span>Votaciones</span>
+        </button>
 
-                <button type="button" id="menu-item-home"
-                    class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3 transition-all hover:bg-white/10 cursor-pointer">
-                    <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2.5"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    <span>Inicio (Cambiar foto)</span>
-                </button>
-            </nav>
-        </div>
+        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
+          <img src="https://i.pinimg.com/736x/8c/08/59/8c085923ba2b02262e2aa276c95a89d8.jpg" alt="Listas de reproducción" class="w-8 h-8 object-contain shrink-0 filter drop-shadow" />
+          <span>Listas de reproducción</span>
+        </button>
 
-        <div class="pt-6 border-t border-white/20 text-center text-xs text-army-300 font-semibold">
-            <span>Kim Taehyung 💜 ARMY</span>
-        </div>
-    </aside>
-
-    <!-- Modal para Listas de reproducción -->
-    <div id="playlist-modal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="tata-card-glass max-w-lg w-full p-6 rounded-3xl shadow-2xl relative text-white">
-            <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
-                <h3 class="text-lg font-black text-white">Listas de reproducción para V</h3>
-                <button type="button" id="close-playlist-modal"
-                    class="p-1.5 rounded-xl tata-card-glass hover:text-red-400 transition-colors cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <p class="text-xs sm:text-sm font-semibold text-army-200 mb-4">Escuchá y streameá las canciones oficiales y
-                solos de Kim Taehyung (BTS) para sumar puntos en las plataformas:</p>
-
-            <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
-                <a href="https://open.spotify.com/artist/3JsHnjpbhX4Snyspvpa9DK" target="_blank"
-                    rel="noopener noreferrer"
-                    class="tata-card-glass p-3.5 rounded-2xl flex items-center justify-between transition-all hover:bg-white/10">
-                    <div class="flex items-center gap-3">
-                        <span
-                            class="w-8 h-8 rounded-xl bg-green-500/20 text-green-400 flex items-center justify-center font-black">🎵</span>
-                        <div>
-                            <h4 class="font-bold text-sm">Spotify - V (Kim Taehyung)</h4>
-                            <p class="text-xs text-army-300">Perfil de artista oficial</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold text-red-400 underline">Escuchar &rarr;</span>
-                </a>
-
-                <a href="https://music.youtube.com/channel/UCf53q0_7K9oG1p5hY6M1o5g" target="_blank"
-                    rel="noopener noreferrer"
-                    class="tata-card-glass p-3.5 rounded-2xl flex items-center justify-between transition-all hover:bg-white/10">
-                    <div class="flex items-center gap-3">
-                        <span
-                            class="w-8 h-8 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-black">▶️</span>
-                        <div>
-                            <h4 class="font-bold text-sm">YouTube Music - V Playlist</h4>
-                            <p class="text-xs text-army-300">Playlist de streaming oficial</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold text-red-400 underline">Escuchar &rarr;</span>
-                </a>
-            </div>
-        </div>
+        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
+          <img src="https://i.pinimg.com/736x/29/dc/5c/29dc5cd05cd88b22d2395bf207c3071a.jpg" alt="Inicio" class="w-8 h-8 object-contain shrink-0 filter drop-shadow" />
+          <span>Inicio (Cambiar foto)</span>
+        </button>
+      </nav>
     </div>
 
-    <!-- Toast -->
-    <div id="toast"
-        class="fixed bottom-5 right-5 left-5 sm:left-auto sm:w-80 ios-glass-btn text-white px-4 py-3 rounded-2xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 z-50">
-        <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
-        <p id="toast-message" class="text-xs sm:text-sm font-medium"></p>
+    <div class="pt-6 border-t border-white/20 text-center text-xs text-army-300 font-semibold">
+      <span>Kim Taehyung 💜 ARMY</span>
+    </div>
+  </aside>
+
+  <!-- Sección de Listas de Reproducción (Página dedicada idéntica a votaciones) -->
+  <div id="seccion-playlists" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
+    <div id="playlists-custom-photo-bg" class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
+      <img id="playlists-bg-img" src="" alt="" class="absolute max-w-none min-w-[70vw] min-h-[70vh] w-auto h-auto object-cover filter brightness-[0.98] contrast-[1.02]" />
     </div>
 
-    <script>
-        function getDefaultDeadlineISO(daysOffset, hoursOffset, minutesOffset) {
-            const target = new Date(Date.now() + daysOffset * 86400000 + hoursOffset * 3600000 + minutesOffset * 60000);
-            return target.toISOString();
-        }
+    <div class="max-w-4xl mx-auto relative z-10">
+      <header class="mb-8 flex flex-col items-center text-center gap-3">
+        <div class="tata-card-glass px-6 py-4 rounded-3xl shadow-2xl max-w-lg w-full text-white">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full tata-card-glass text-white text-xs font-black uppercase tracking-wider mb-2 border border-white/30 shadow-sm">
+            <span>Streaming de V 💜</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">LISTAS DE REPRODUCCIÓN</h1>
+        </div>
+      </header>
 
-        const VOTING_PLATFORMS = [
-            {id: 'fanplus', name: 'Fanplus', url: 'https://fanplus.co.kr/es-ES/votes/560', description: 'Votación al Actor Coreano Más Guapo de 2026 (V en #1).', type: 'App Oficial', status: 'Activa', defaultDeadline: '2027-01-04T23:28:00.000Z'},
-            {id: 'fannstar', name: 'Fannstar', url: 'https://en.fannstar.tf.co.kr/rank/view/each', description: 'Premios de la música coreana y votación semanal (en inglés).', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(0, 16, 20)},
-            {id: 'choeaedol', name: 'Chaeodol', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/kpop-idol-vote-choeaedol/id1131995698' : 'https://play.google.com/store/apps/details?id=net.ib.mn', description: 'Abre o descarga la app oficial CHOEAEDOL (iOS / Android) para votar por V.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(2, 8, 10)},
-            {id: 'idol-champ', name: 'Idol champ', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote', description: 'Apartado directo de votaciones de Show Champion.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(1, 12, 0)},
-            {id: 'shiningawards', name: 'Shiningawards', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/v-bts/', description: 'Votación directa para V BTS en Shining Awards.', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(4, 15, 0)},
-            {id: 'nubia-awards', name: 'Nubia Awards', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/', description: 'Votación directa en Nubia Magazine (Most Handsome Man in Asia 2026).', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(5, 20, 0)},
-            {id: 'coogoong', name: 'Coogoong', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast', description: 'Abre o descarga la app oficial Coogoong (antes Fancast, iOS / Android) para votar.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(3, 10, 0)},
-            {id: 'bigc', name: 'Bigc', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/bigc/id1643245451' : 'https://play.google.com/store/apps/details?id=com.bigc.global', description: 'Abre o descarga la app oficial Bigc (iOS / Android) para votar en eventos especiales.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(4, 18, 30)},
-            {id: 'queeri', name: 'Queeri', url: 'https://www.queeri.id/', description: 'Votación diaria y campañas en la app oficial Queeri.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(7, 14, 0)},
-            {id: 'mnet-plus', name: 'Mnet plus', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus', description: 'Abre o descarga la app oficial Mnet Plus (iOS / Android) para votar.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(10, 14, 50)}
-        ];
+      <section class="mb-8 tata-card-glass p-4 sm:p-5 rounded-3xl shadow-xl text-white">
+        <h2 class="text-sm sm:text-base font-extrabold text-white mb-1">Escuchá y streameá a Kim Taehyung 💜</h2>
+        <p class="text-xs sm:text-sm font-semibold text-army-200">Reproducí las canciones oficiales y solos de V en tu app favorita, así sube el conteo! 💜.</p>
+      </section>
 
-        const STORAGE_KEY = 'v_bts_daily_votes_v3';
-        const CUSTOM_PHOTO_KEY = 'v_bts_custom_photo_v1';
-        const CUSTOM_OFFSET_KEY = 'v_bts_custom_offset_v1';
-        const CUSTOM_LOCK_KEY = 'v_bts_custom_lock_v1';
+      <main class="space-y-4">
+        <div class="tata-card-glass p-5 rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+          <div class="flex items-center gap-4">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Spotify_App_Logo.svg/3840px-Spotify_App_Logo.svg.png?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="Spotify" class="w-12 h-12 rounded-2xl object-cover shadow-md bg-black/40" />
+            <div>
+              <h3 class="font-black text-base sm:text-lg text-white">Spotify - Playlist de V (Kim Taehyung)</h3>
+              <p class="text-xs sm:text-sm font-semibold text-army-200">Playlist Spotify</p>
+            </div>
+          </div>
+          <a href="https://open.spotify.com/playlist/3AgiTes9AU5ujvWnFAju1n?si=yJ0uDUhuTf2NfU2AKVxlSg&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="tata-btn-primary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all shadow-sm cursor-pointer">
+            <span>Escuchar</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
 
-        let state = {
-            votedIds: JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
-            currentFilter: 'Todas',
-            searchQuery: ''
-        };
+        <div class="tata-card-glass p-5 rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+          <div class="flex items-center gap-4">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR711exw15t_7tmFv4AVKYlsk7wrwDHW2P1-TlZtACqZgjhyGc3Wbo_bZRJ&s=10" alt="YouTube Music" class="w-12 h-12 rounded-2xl object-cover shadow-md bg-black/40" />
+            <div>
+              <h3 class="font-black text-base sm:text-lg text-white">YT Music - V Daily</h3>
+              <p class="text-xs sm:text-sm font-semibold text-army-200">Playlist de YT music</p>
+            </div>
+          </div>
+          <a href="https://music.youtube.com/playlist?list=PLo5lOCtFtHCWmBjgyJrhXtWyvaYUMpQ4a" target="_blank" rel="noopener noreferrer" class="tata-btn-primary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all shadow-sm cursor-pointer">
+            <span>Escuchar</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </main>
 
-        const heroSectionEl = document.getElementById('hero-section');
-        const seccionVotacionesEl = document.getElementById('seccion-votaciones');
-        const enterDashboardBtn = document.getElementById('enter-dashboard-btn');
-        const votingListEl = document.getElementById('voting-list');
-        const emptyStateEl = document.getElementById('empty-state');
-        const searchInputEl = document.getElementById('search-input');
-        const clearSearchBtn = document.getElementById('clear-search-btn');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const resetVotesBtn = document.getElementById('reset-votes-btn');
-        const progressBadgeEl = document.getElementById('progress-badge');
-        const progressSubtitleEl = document.getElementById('progress-subtitle');
-        const progressBarEl = document.getElementById('progress-bar');
-        const toastEl = document.getElementById('toast');
-        const toastMessageEl = document.getElementById('toast-message');
+      <!-- Botones de navegación (Menú e Ir a Votaciones) reubicados abajo -->
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          id="open-sidebar-from-playlist-btn"
+          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation shadow-lg"
+          aria-label="Abrir menú"
+        >
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span>Menú</span>
+        </button>
 
-        // Lógica del menú desplegable lateral (Sidebar)
-        const openSidebarBtn = document.getElementById('open-sidebar-btn');
-        const closeSidebarBtn = document.getElementById('close-sidebar-btn');
-        const sidebarDrawer = document.getElementById('sidebar-drawer');
-        const sidebarBackdrop = document.getElementById('sidebar-backdrop');
-        const menuItemVotaciones = document.getElementById('menu-item-votaciones');
-        const menuItemPlaylist = document.getElementById('menu-item-playlist');
-        const menuItemHome = document.getElementById('menu-item-home');
-        const playlistModal = document.getElementById('playlist-modal');
-        const closePlaylistModal = document.getElementById('close-playlist-modal');
+        <button
+          type="button"
+          id="go-voting-from-playlist-btn"
+          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation shadow-lg"
+        >
+          <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Ir a Votaciones</span>
+        </button>
+      </div>
 
-        function openSidebar() {
-            if (sidebarDrawer && sidebarBackdrop) {
-                sidebarDrawer.classList.remove('-translate-x-full');
-                sidebarBackdrop.classList.remove('opacity-0', 'pointer-events-none');
-                sidebarBackdrop.classList.add('opacity-100', 'pointer-events-auto');
-            }
-        }
+      <footer class="mt-16 pt-4 pb-4 border-t border-white/15 flex justify-end text-xs font-black text-white">
+        <div class="tata-card-glass py-2 px-4 rounded-2xl inline-block shadow-sm flex flex-col items-center gap-0.5 text-center">
+          <span>Hecho con amor</span>
+          <span>por una army de argentina</span>
+          <span class="text-red-400 font-extrabold">@taesweetnight7</span>
+        </div>
+      </footer>
+    </div>
+  </div>
 
-        function closeSidebar() {
-            if (sidebarDrawer && sidebarBackdrop) {
-                sidebarDrawer.classList.add('-translate-x-full');
-                sidebarBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
-                sidebarBackdrop.classList.add('opacity-0', 'pointer-events-none');
-            }
-        }
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 left-5 sm:left-auto sm:w-80 ios-glass-btn text-white px-4 py-3 rounded-2xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 z-50">
+    <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+    <p id="toast-message" class="text-xs sm:text-sm font-medium"></p>
+  </div>
 
-        if (openSidebarBtn) openSidebarBtn.addEventListener('click', openSidebar);
-        if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
-        if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
+  <script>
+    function getDefaultDeadlineISO(daysOffset, hoursOffset, minutesOffset) {
+      const target = new Date(Date.now() + daysOffset * 86400000 + hoursOffset * 3600000 + minutesOffset * 60000);
+      return target.toISOString();
+    }
 
-        if (menuItemVotaciones) {
-            menuItemVotaciones.addEventListener('click', () => {
-                closeSidebar();
-                if (heroSectionEl && !heroSectionEl.classList.contains('hidden')) {
-                    enterDashboardBtn.click();
-                } else {
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }
-            });
-        }
+    const VOTING_PLATFORMS = [
+      { id: 'fanplus', name: 'Fanplus', url: 'https://fanplus.co.kr/es-ES/votes/560', description: 'Votación al Actor Coreano Más Guapo de 2026 (V en #1).', type: 'App Oficial', status: 'Activa', defaultDeadline: '2027-01-04T23:28:00.000Z' },
+      { id: 'fannstar', name: 'Fannstar', url: 'https://en.fannstar.tf.co.kr/rank/view/each', description: 'Premios de la música coreana y votación semanal (en inglés).', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(0, 16, 20) },
+      { id: 'choeaedol', name: 'Chaeodol', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/kpop-idol-vote-choeaedol/id1131995698' : 'https://play.google.com/store/apps/details?id=net.ib.mn', description: 'Abre o descarga la app oficial CHOEAEDOL (iOS / Android) para votar por V.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(2, 8, 10) },
+      { id: 'idol-champ', name: 'Idol champ', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote', description: 'Apartado directo de votaciones de Show Champion.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(1, 12, 0) },
+      { id: 'shiningawards', name: 'Shiningawards', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/v-bts/', description: 'Votación directa para V BTS en Shining Awards.', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(4, 15, 0) },
+      { id: 'nubia-awards', name: 'Nubia Awards', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/', description: 'Votación directa en Nubia Magazine (Most Handsome Man in Asia 2026).', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(5, 20, 0) },
+      { id: 'coogoong', name: 'Coogoong', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast', description: 'Abre o descarga la app oficial Coogoong (antes Fancast, iOS / Android) para votar.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(3, 10, 0) },
+      { id: 'bigc', name: 'Bigc', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/bigc/id1643245451' : 'https://play.google.com/store/apps/details?id=com.bigc.global', description: 'Abre o descarga la app oficial Bigc (iOS / Android) para votar en eventos especiales.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(4, 18, 30) },
+      { id: 'queeri', name: 'Queeri', url: 'https://www.queeri.id/', description: 'Votación diaria y campañas en la app oficial Queeri.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(7, 14, 0) },
+      { id: 'mnet-plus', name: 'Mnet plus', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus', description: 'Abre o descarga la app oficial Mnet Plus (iOS / Android) para votar.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(10, 14, 50) }
+    ];
 
-        if (menuItemPlaylist) {
-            menuItemPlaylist.addEventListener('click', () => {
-                closeSidebar();
-                if (playlistModal) {
-                    playlistModal.classList.remove('opacity-0', 'pointer-events-none');
-                    playlistModal.classList.add('opacity-100', 'pointer-events-auto');
-                }
-            });
-        }
+    const STORAGE_KEY = 'v_bts_daily_votes_v3';
+    const CUSTOM_PHOTO_KEY = 'v_bts_custom_photo_v1';
+    const CUSTOM_OFFSET_KEY = 'v_bts_custom_offset_v1';
+    const CUSTOM_LOCK_KEY = 'v_bts_custom_lock_v1';
 
-        if (menuItemHome) {
-            menuItemHome.addEventListener('click', () => {
-                closeSidebar();
-                if (seccionVotacionesEl) seccionVotacionesEl.classList.add('hidden');
-                if (heroSectionEl) heroSectionEl.classList.remove('hidden');
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
-        }
+    let state = {
+      votedIds: JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
+      currentFilter: 'Todas',
+      searchQuery: ''
+    };
 
-        if (closePlaylistModal) {
-            closePlaylistModal.addEventListener('click', () => {
-                if (playlistModal) {
-                    playlistModal.classList.remove('opacity-100', 'pointer-events-auto');
-                    playlistModal.classList.add('opacity-0', 'pointer-events-none');
-                }
-            });
-        }
+    const heroSectionEl = document.getElementById('hero-section');
+    const seccionVotacionesEl = document.getElementById('seccion-votaciones');
+    const enterDashboardBtn = document.getElementById('enter-dashboard-btn');
+    const votingListEl = document.getElementById('voting-list');
+    const emptyStateEl = document.getElementById('empty-state');
+    const searchInputEl = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const resetVotesBtn = document.getElementById('reset-votes-btn');
+    const progressBadgeEl = document.getElementById('progress-badge');
+    const progressSubtitleEl = document.getElementById('progress-subtitle');
+    const progressBarEl = document.getElementById('progress-bar');
+    const toastEl = document.getElementById('toast');
+    const toastMessageEl = document.getElementById('toast-message');
 
-        if (playlistModal) {
-            playlistModal.addEventListener('click', (e) => {
-                if (e.target === playlistModal) {
-                    playlistModal.classList.remove('opacity-100', 'pointer-events-auto');
-                    playlistModal.classList.add('opacity-0', 'pointer-events-none');
-                }
-            });
-        }
+    // Lógica del menú desplegable lateral (Sidebar)
+    const openSidebarBtn = document.getElementById('open-sidebar-btn');
+    const closeSidebarBtn = document.getElementById('close-sidebar-btn');
+    const sidebarDrawer = document.getElementById('sidebar-drawer');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const menuItemVotaciones = document.getElementById('menu-item-votaciones');
+    const menuItemPlaylist = document.getElementById('menu-item-playlist');
+    const menuItemHome = document.getElementById('menu-item-home');
+    const seccionPlaylistsEl = document.getElementById('seccion-playlists');
+    const openSidebarFromPlaylistBtn = document.getElementById('open-sidebar-from-playlist-btn');
+    const goVotingFromPlaylistBtn = document.getElementById('go-voting-from-playlist-btn');
 
-        function saveVotedIds() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state.votedIds));
-        }
+    function openSidebar() {
+      if (sidebarDrawer && sidebarBackdrop) {
+        sidebarDrawer.classList.remove('-translate-x-full');
+        sidebarBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+        sidebarBackdrop.classList.add('opacity-100', 'pointer-events-auto');
+      }
+    }
 
-        function showToast(message) {
-            if (!toastMessageEl || !toastEl) return;
-            toastMessageEl.textContent = message;
-            toastEl.classList.remove('translate-y-24', 'opacity-0');
-            toastEl.classList.add('translate-y-0', 'opacity-100');
-            setTimeout(() => {
-                toastEl.classList.remove('translate-y-0', 'opacity-100');
-                toastEl.classList.add('translate-y-24', 'opacity-0');
-            }, 2500);
-        }
+    function closeSidebar() {
+      if (sidebarDrawer && sidebarBackdrop) {
+        sidebarDrawer.classList.add('-translate-x-full');
+        sidebarBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        sidebarBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
 
-        function updateProgressUI() {
-            if (!progressBadgeEl || !progressBarEl) return;
-            const total = VOTING_PLATFORMS.length;
-            const completed = state.votedIds.length;
-            const percentage = Math.round((completed / total) * 100);
-            progressBadgeEl.textContent = `${completed} / ${total}`;
-            progressBarEl.style.width = `${percentage}%`;
-            progressSubtitleEl.textContent = completed === total ? '¡Ronda diaria completada al 100%! 💜' : `Llevás ${completed} de ${total} plataformas hoy.`;
-        }
+    if (openSidebarBtn) openSidebarBtn.addEventListener('click', openSidebar);
+    if (openSidebarFromPlaylistBtn) openSidebarFromPlaylistBtn.addEventListener('click', openSidebar);
+    if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
+    if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
 
-        function getCountdownParts(isoString) {
-            const diffMs = new Date(isoString).getTime() - Date.now();
-            if (diffMs <= 0) return {expired: true, days: 0, hours: 0, minutes: 0, seconds: 0};
-            const totalSecs = Math.floor(diffMs / 1000);
-            return {
-                expired: false,
-                days: Math.floor(totalSecs / 86400),
-                hours: Math.floor((totalSecs % 86400) / 3600),
-                minutes: Math.floor((totalSecs % 3600) / 60),
-                seconds: totalSecs % 60
-            };
-        }
+    if (menuItemVotaciones) {
+      menuItemVotaciones.addEventListener('click', () => {
+        closeSidebar();
+        if (heroSectionEl) heroSectionEl.classList.add('hidden');
+        if (seccionPlaylistsEl) seccionPlaylistsEl.classList.add('hidden');
+        if (seccionVotacionesEl) seccionVotacionesEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-        function pad(n) {return String(n).padStart(2, '0');}
+    if (goVotingFromPlaylistBtn) {
+      goVotingFromPlaylistBtn.addEventListener('click', () => {
+        if (seccionPlaylistsEl) seccionPlaylistsEl.classList.add('hidden');
+        if (seccionVotacionesEl) seccionVotacionesEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-        function sortPlatforms(platforms) {
-            const now = Date.now();
-            return [...platforms].sort((a, b) => {
-                const timeA = new Date(a.defaultDeadline).getTime();
-                const timeB = new Date(b.defaultDeadline).getTime();
-                const expA = timeA <= now;
-                const expB = timeB <= now;
-                if (expA !== expB) return expA ? 1 : -1;
-                return timeA - timeB;
-            });
-        }
+    if (menuItemPlaylist) {
+      menuItemPlaylist.addEventListener('click', () => {
+        closeSidebar();
+        if (heroSectionEl) heroSectionEl.classList.add('hidden');
+        if (seccionVotacionesEl) seccionVotacionesEl.classList.add('hidden');
+        if (seccionPlaylistsEl) seccionPlaylistsEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-        function renderList() {
-            if (!votingListEl) return;
-            const filtered = VOTING_PLATFORMS.filter(p => {
-                const matchesFilter = state.currentFilter === 'Todas' || p.type === state.currentFilter;
-                const matchesSearch = !state.searchQuery || p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) || p.description.toLowerCase().includes(state.searchQuery.toLowerCase());
-                return matchesFilter && matchesSearch;
-            });
+    if (menuItemHome) {
+      menuItemHome.addEventListener('click', () => {
+        closeSidebar();
+        if (seccionVotacionesEl) seccionVotacionesEl.classList.add('hidden');
+        if (seccionPlaylistsEl) seccionPlaylistsEl.classList.add('hidden');
+        if (heroSectionEl) heroSectionEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-            const sorted = sortPlatforms(filtered);
-            votingListEl.innerHTML = '';
-            if (sorted.length === 0) {
-                if (emptyStateEl) emptyStateEl.classList.remove('hidden');
-                return;
-            }
-            if (emptyStateEl) emptyStateEl.classList.add('hidden');
+    function saveVotedIds() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.votedIds));
+    }
 
-            const firstActive = sorted.find(p => !getCountdownParts(p.defaultDeadline).expired);
+    function showToast(message) {
+      if (!toastMessageEl || !toastEl) return;
+      toastMessageEl.textContent = message;
+      toastEl.classList.remove('translate-y-24', 'opacity-0');
+      toastEl.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toastEl.classList.remove('translate-y-0', 'opacity-100');
+        toastEl.classList.add('translate-y-24', 'opacity-0');
+      }, 2500);
+    }
 
-            sorted.forEach((platform) => {
-                const isVoted = state.votedIds.includes(platform.id);
-                const countdown = getCountdownParts(platform.defaultDeadline);
-                const isFirst = firstActive && firstActive.id === platform.id;
+    function updateProgressUI() {
+      if (!progressBadgeEl || !progressBarEl) return;
+      const total = VOTING_PLATFORMS.length;
+      const completed = state.votedIds.length;
+      const percentage = Math.round((completed / total) * 100);
+      progressBadgeEl.textContent = `${completed} / ${total}`;
+      progressBarEl.style.width = `${percentage}%`;
+      progressSubtitleEl.textContent = completed === total ? '¡Ronda diaria completada al 100%! 💜' : `Llevás ${completed} de ${total} plataformas hoy.`;
+    }
 
-                const card = document.createElement('article');
-                card.className = `p-4 sm:p-5 rounded-3xl tata-card-glass transition-all text-white ${countdown.expired ? 'opacity-60 grayscale-[30%]' : isVoted ? 'opacity-85 border-green-500/40 bg-transparent' : isFirst ? 'shadow-xl border-2 border-red-500' : ''
-                    }`;
+    function getCountdownParts(isoString) {
+      const diffMs = new Date(isoString).getTime() - Date.now();
+      if (diffMs <= 0) return { expired: true, days: 0, hours: 0, minutes: 0, seconds: 0 };
+      const totalSecs = Math.floor(diffMs / 1000);
+      return {
+        expired: false,
+        days: Math.floor(totalSecs / 86400),
+        hours: Math.floor((totalSecs % 86400) / 3600),
+        minutes: Math.floor((totalSecs % 3600) / 60),
+        seconds: totalSecs % 60
+      };
+    }
 
-                card.innerHTML = `
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function sortPlatforms(platforms) {
+      const now = Date.now();
+      return [...platforms].sort((a, b) => {
+        const timeA = new Date(a.defaultDeadline).getTime();
+        const timeB = new Date(b.defaultDeadline).getTime();
+        const expA = timeA <= now;
+        const expB = timeB <= now;
+        if (expA !== expB) return expA ? 1 : -1;
+        return timeA - timeB;
+      });
+    }
+
+    function renderList() {
+      if (!votingListEl) return;
+      const filtered = VOTING_PLATFORMS.filter(p => {
+        const matchesFilter = state.currentFilter === 'Todas' || p.type === state.currentFilter;
+        const matchesSearch = !state.searchQuery || p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) || p.description.toLowerCase().includes(state.searchQuery.toLowerCase());
+        return matchesFilter && matchesSearch;
+      });
+
+      const sorted = sortPlatforms(filtered);
+      votingListEl.innerHTML = '';
+      if (sorted.length === 0) {
+        if (emptyStateEl) emptyStateEl.classList.remove('hidden');
+        return;
+      }
+      if (emptyStateEl) emptyStateEl.classList.add('hidden');
+
+      const firstActive = sorted.find(p => !getCountdownParts(p.defaultDeadline).expired);
+
+      sorted.forEach((platform) => {
+        const isVoted = state.votedIds.includes(platform.id);
+        const countdown = getCountdownParts(platform.defaultDeadline);
+        const isFirst = firstActive && firstActive.id === platform.id;
+
+        const card = document.createElement('article');
+        card.className = `p-4 sm:p-5 rounded-3xl tata-card-glass transition-all text-white ${
+          countdown.expired ? 'opacity-60 grayscale-[30%]' : isVoted ? 'opacity-85 border-green-500/40 bg-transparent' : isFirst ? 'shadow-xl border-2 border-red-500' : ''
+        }`;
+
+        card.innerHTML = `
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div class="flex items-start gap-4 flex-1">
               <label class="pt-1 cursor-pointer">
@@ -731,358 +706,372 @@
             <div id="cd-${platform.id}" class="font-mono font-black text-white bg-black/40 px-3 py-1 rounded-xl border border-white/20"></div>
           </div>
         `;
-                votingListEl.appendChild(card);
-            });
+        votingListEl.appendChild(card);
+      });
 
-            document.querySelectorAll('.vote-checkbox').forEach(cb => {
-                cb.addEventListener('change', (e) => {
-                    const id = e.target.getAttribute('data-id');
-                    if (state.votedIds.includes(id)) {
-                        state.votedIds = state.votedIds.filter(i => i !== id);
-                    } else {
-                        state.votedIds.push(id);
-                        showToast('¡Voto registrado! 💜');
-                    }
-                    saveVotedIds();
-                    updateProgressUI();
-                    renderList();
-                });
-            });
-            updateCountdowns();
-        }
-
-        function updateCountdowns() {
-            VOTING_PLATFORMS.forEach(p => {
-                const el = document.getElementById(`cd-${p.id}`);
-                if (!el) return;
-                const c = getCountdownParts(p.defaultDeadline);
-                if (c.expired) {
-                    el.innerHTML = '<span class="text-red-600 font-black">FINALIZADA</span>';
-                } else {
-                    el.innerHTML = `${pad(c.days)}d : ${pad(c.hours)}h : ${pad(c.minutes)}m : ${pad(c.seconds)}s`;
-                }
-            });
-        }
-
-        if (enterDashboardBtn) {
-            enterDashboardBtn.addEventListener('click', () => {
-                if (heroSectionEl) heroSectionEl.classList.add('hidden');
-                if (seccionVotacionesEl) seccionVotacionesEl.classList.remove('hidden');
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
-        }
-
-        if (searchInputEl) {
-            searchInputEl.addEventListener('input', (e) => {
-                state.searchQuery = e.target.value;
-                if (clearSearchBtn) clearSearchBtn.classList.toggle('hidden', !state.searchQuery);
-                renderList();
-            });
-        }
-
-        if (clearSearchBtn) {
-            clearSearchBtn.addEventListener('click', () => {
-                state.searchQuery = '';
-                searchInputEl.value = '';
-                clearSearchBtn.classList.add('hidden');
-                renderList();
-            });
-        }
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                state.currentFilter = btn.getAttribute('data-filter');
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-red-600', 'text-white', 'shadow-md');
-                    b.classList.add('text-army-300');
-                });
-                btn.classList.add('bg-red-600', 'text-white', 'shadow-md');
-                btn.classList.remove('text-army-300');
-                renderList();
-            });
+      document.querySelectorAll('.vote-checkbox').forEach(cb => {
+        cb.addEventListener('change', (e) => {
+          const id = e.target.getAttribute('data-id');
+          if (state.votedIds.includes(id)) {
+            state.votedIds = state.votedIds.filter(i => i !== id);
+          } else {
+            state.votedIds.push(id);
+            showToast('¡Voto registrado! 💜');
+          }
+          saveVotedIds();
+          updateProgressUI();
+          renderList();
         });
+      });
+      updateCountdowns();
+    }
 
-        if (resetVotesBtn) {
-            resetVotesBtn.addEventListener('click', () => {
-                state.votedIds = [];
-                saveVotedIds();
-                updateProgressUI();
-                renderList();
-                showToast('Votos diarios reiniciados.');
-            });
-        }
-
-        // Manejo de la foto de V personalizada con persistencia y arrastre interactivo optimizado para touch (iOS & Android)
-        const photoInput = document.getElementById('photo-upload-input');
-        const userImgContainer = document.getElementById('user-image-container');
-        const userUploadedImg = document.getElementById('user-uploaded-img');
-        const heroTitleEl = document.getElementById('hero-title');
-        const titleMainEl = heroTitleEl ? heroTitleEl.querySelector('.title-main') : null;
-        const titleSubEl = heroTitleEl ? heroTitleEl.querySelector('.title-sub') : null;
-        const repositionControlsEl = document.getElementById('reposition-controls');
-        const resetPositionBtn = document.getElementById('reset-position-btn');
-        const lockPositionBtn = document.getElementById('lock-position-btn');
-        const modifyPositionBtn = document.getElementById('modify-position-btn');
-
-        let currentX = 0;
-        let currentY = 0;
-        let isDragging = false;
-        let startX = 0;
-        let startY = 0;
-        let isLocked = true; // Por defecto inicia bloqueado si ya fue configurado
-
-        function getMaxBounds() {
-            if (!userUploadedImg || !userImgContainer) return {maxX: 0, maxY: 0};
-            const containerRect = userImgContainer.getBoundingClientRect();
-            const imgRect = userUploadedImg.getBoundingClientRect();
-            const maxX = Math.max(0, (imgRect.width - containerRect.width) / 2);
-            const maxY = Math.max(0, (imgRect.height - containerRect.height) / 2);
-            return {maxX: maxX + 100, maxY: maxY + 100};
-        }
-
-        function loadSavedOffset() {
-            const savedOffset = localStorage.getItem(CUSTOM_OFFSET_KEY);
-            if (savedOffset) {
-                try {
-                    const pos = JSON.parse(savedOffset);
-                    currentX = pos.x || 0;
-                    currentY = pos.y || 0;
-                } catch (e) { }
-            } else {
-                currentX = 0;
-                currentY = 0;
-            }
-            if (userUploadedImg) {
-                userUploadedImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            }
-        }
-
-        function saveOffset() {
-            localStorage.setItem(CUSTOM_OFFSET_KEY, JSON.stringify({x: currentX, y: currentY}));
-        }
-
-        function setLockedState(locked) {
-            isLocked = locked;
-            localStorage.setItem(CUSTOM_LOCK_KEY, locked ? 'true' : 'false');
-            if (repositionControlsEl && modifyPositionBtn) {
-                if (isLocked) {
-                    repositionControlsEl.classList.add('hidden');
-                    modifyPositionBtn.classList.remove('hidden');
-                    if (userUploadedImg) userUploadedImg.style.pointerEvents = 'none';
-                } else {
-                    repositionControlsEl.classList.remove('hidden');
-                    modifyPositionBtn.classList.add('hidden');
-                    if (userUploadedImg) userUploadedImg.style.pointerEvents = 'auto';
-                }
-            }
-        }
-
-        if (userUploadedImg) {
-            userUploadedImg.addEventListener('mousedown', (e) => {
-                if (isLocked) return;
-                isDragging = true;
-                startX = e.clientX - currentX;
-                startY = e.clientY - currentY;
-                e.preventDefault();
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (!isDragging || isLocked) return;
-                currentX = e.clientX - startX;
-                currentY = e.clientY - startY;
-                const bounds = getMaxBounds();
-                if (currentX > bounds.maxX) currentX = bounds.maxX;
-                if (currentX < -bounds.maxX) currentX = -bounds.maxX;
-                if (currentY > bounds.maxY) currentY = bounds.maxY;
-                if (currentY < -bounds.maxY) currentY = -bounds.maxY;
-                userUploadedImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            });
-
-            window.addEventListener('mouseup', () => {
-                if (isDragging) {
-                    isDragging = false;
-                    saveOffset();
-                }
-            });
-
-            userUploadedImg.addEventListener('touchstart', (e) => {
-                if (isLocked) return;
-                if (e.touches.length === 1) {
-                    isDragging = true;
-                    startX = e.touches[0].clientX - currentX;
-                    startY = e.touches[0].clientY - currentY;
-                }
-            }, {passive: true});
-
-            window.addEventListener('touchmove', (e) => {
-                if (!isDragging || isLocked || e.touches.length !== 1) return;
-                currentX = e.touches[0].clientX - startX;
-                currentY = e.touches[0].clientY - startY;
-                const bounds = getMaxBounds();
-                if (currentX > bounds.maxX) currentX = bounds.maxX;
-                if (currentX < -bounds.maxX) currentX = -bounds.maxX;
-                if (currentY > bounds.maxY) currentY = bounds.maxY;
-                if (currentY < -bounds.maxY) currentY = -bounds.maxY;
-                userUploadedImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            }, {passive: true});
-
-            window.addEventListener('touchend', () => {
-                if (isDragging) {
-                    isDragging = false;
-                    saveOffset();
-                }
-            });
-        }
-
-        if (resetPositionBtn) {
-            resetPositionBtn.addEventListener('click', () => {
-                if (isLocked) return;
-                currentX = 0;
-                currentY = 0;
-                if (userUploadedImg) userUploadedImg.style.transform = `translate(0px, 0px)`;
-                saveOffset();
-                showToast('Posición centrada.');
-            });
-        }
-
-        if (lockPositionBtn) {
-            lockPositionBtn.addEventListener('click', () => {
-                setLockedState(true);
-                showToast('¡Posición guardada y bloqueada! 💜');
-            });
-        }
-
-        if (modifyPositionBtn) {
-            modifyPositionBtn.addEventListener('click', () => {
-                setLockedState(false);
-                showToast('Ya podés volver a mover tu foto.');
-            });
-        }
-
-        function analyzeImageBrightness(imgElement) {
-            if (!titleMainEl || !titleSubEl) return;
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 100;
-            canvas.height = 100;
-            try {
-                ctx.drawImage(imgElement, 0, 0, 100, 100);
-                const data = ctx.getImageData(25, 10, 50, 40).data;
-                let r = 0, g = 0, b = 0, count = 0;
-                for (let i = 0; i < data.length; i += 4) {
-                    r += data[i];
-                    g += data[i + 1];
-                    b += data[i + 2];
-                    count++;
-                }
-                r = Math.floor(r / count);
-                g = Math.floor(g / count);
-                b = Math.floor(b / count);
-
-                const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-                if (yiq >= 135) {
-                    titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-theme-dark';
-                    titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-theme-dark';
-                } else {
-                    titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-theme-light';
-                    titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-theme-light';
-                }
-            } catch (err) {
-                console.error("No se pudo analizar el brillo", err);
-            }
-        }
-
-        const savedPhoto = localStorage.getItem(CUSTOM_PHOTO_KEY);
-        const savedLockState = localStorage.getItem(CUSTOM_LOCK_KEY);
-
-        const dashboardBgImg = document.getElementById('dashboard-bg-img');
-
-        if (savedPhoto && userUploadedImg) {
-            userUploadedImg.src = savedPhoto;
-            if (userImgContainer) userImgContainer.classList.remove('hidden');
-            if (dashboardBgImg) {
-                dashboardBgImg.src = savedPhoto;
-                dashboardBgImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            }
-            loadSavedOffset();
-
-            const shouldLock = savedLockState === null ? true : (savedLockState === 'true');
-            setLockedState(shouldLock);
-
-            userUploadedImg.onload = () => analyzeImageBrightness(userUploadedImg);
+    function updateCountdowns() {
+      VOTING_PLATFORMS.forEach(p => {
+        const el = document.getElementById(`cd-${p.id}`);
+        if (!el) return;
+        const c = getCountdownParts(p.defaultDeadline);
+        if (c.expired) {
+          el.innerHTML = '<span class="text-red-600 font-black">FINALIZADA</span>';
         } else {
-            if (userImgContainer) userImgContainer.classList.add('hidden');
-            if (dashboardBgImg) dashboardBgImg.src = '';
+          el.innerHTML = `${pad(c.days)}d : ${pad(c.hours)}h : ${pad(c.minutes)}m : ${pad(c.seconds)}s`;
         }
+      });
+    }
 
-        if (photoInput) {
-            photoInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        const base64String = event.target.result;
-                        localStorage.setItem(CUSTOM_PHOTO_KEY, base64String);
-                        currentX = 0;
-                        currentY = 0;
-                        saveOffset();
-                        if (userUploadedImg) {
-                            userUploadedImg.src = base64String;
-                            userUploadedImg.style.transform = `translate(0px, 0px)`;
-                            userUploadedImg.onload = () => analyzeImageBrightness(userUploadedImg);
-                        }
-                        if (dashboardBgImg) {
-                            dashboardBgImg.src = base64String;
-                            dashboardBgImg.style.transform = `translate(0px, 0px)`;
-                        }
-                        if (userImgContainer) userImgContainer.classList.remove('hidden');
-                        setLockedState(false);
-                        showToast('¡Foto actualizada con éxito! Ajustala y guardala 💜');
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        }
+    if (enterDashboardBtn) {
+      enterDashboardBtn.addEventListener('click', () => {
+        if (heroSectionEl) heroSectionEl.classList.add('hidden');
+        if (seccionVotacionesEl) seccionVotacionesEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-        if (lockPositionBtn) {
-            lockPositionBtn.addEventListener('click', () => {
-                setLockedState(true);
-                if (dashboardBgImg && userUploadedImg) {
-                    dashboardBgImg.style.transform = userUploadedImg.style.transform;
-                }
-                showToast('¡Posición guardada y bloqueada! 💜');
-            });
-        }
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        if (clearSearchBtn) clearSearchBtn.classList.toggle('hidden', !state.searchQuery);
+        renderList();
+      });
+    }
 
-        if (resetPositionBtn) {
-            resetPositionBtn.addEventListener('click', () => {
-                if (isLocked) return;
-                currentX = 0;
-                currentY = 0;
-                if (userUploadedImg) userUploadedImg.style.transform = `translate(0px, 0px)`;
-                if (dashboardBgImg) dashboardBgImg.style.transform = `translate(0px, 0px)`;
-                saveOffset();
-                showToast('Posición centrada.');
-            });
-        }
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        state.searchQuery = '';
+        searchInputEl.value = '';
+        clearSearchBtn.classList.add('hidden');
+        renderList();
+      });
+    }
 
-        // Actualizar también la posición en el fondo del dashboard mientras se arrastra en vivo
-        const origMouseMove = window.onmousemove;
-        window.addEventListener('mousemove', () => {
-            if (!isLocked && dashboardBgImg && userUploadedImg) {
-                dashboardBgImg.style.transform = userUploadedImg.style.transform;
-            }
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.currentFilter = btn.getAttribute('data-filter');
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-red-600', 'text-white', 'shadow-md');
+          b.classList.add('text-army-300');
         });
-        window.addEventListener('touchmove', () => {
-            if (!isLocked && dashboardBgImg && userUploadedImg) {
-                dashboardBgImg.style.transform = userUploadedImg.style.transform;
-            }
-        });
+        btn.classList.add('bg-red-600', 'text-white', 'shadow-md');
+        btn.classList.remove('text-army-300');
+        renderList();
+      });
+    });
 
+    if (resetVotesBtn) {
+      resetVotesBtn.addEventListener('click', () => {
+        state.votedIds = [];
+        saveVotedIds();
         updateProgressUI();
         renderList();
-        setInterval(updateCountdowns, 1000);
-    </script>
-</body>
+        showToast('Votos diarios reiniciados.');
+      });
+    }
 
+    // Manejo de la foto de V personalizada con persistencia y arrastre interactivo optimizado para touch (iOS & Android)
+    const photoInput = document.getElementById('photo-upload-input');
+    const userImgContainer = document.getElementById('user-image-container');
+    const userUploadedImg = document.getElementById('user-uploaded-img');
+    const heroTitleEl = document.getElementById('hero-title');
+    const titleMainEl = heroTitleEl ? heroTitleEl.querySelector('.title-main') : null;
+    const titleSubEl = heroTitleEl ? heroTitleEl.querySelector('.title-sub') : null;
+    const repositionControlsEl = document.getElementById('reposition-controls');
+    const resetPositionBtn = document.getElementById('reset-position-btn');
+    const lockPositionBtn = document.getElementById('lock-position-btn');
+    const modifyPositionBtn = document.getElementById('modify-position-btn');
+
+    let currentX = 0;
+    let currentY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let isLocked = true; // Por defecto inicia bloqueado si ya fue configurado
+
+    function getMaxBounds() {
+      if (!userUploadedImg || !userImgContainer) return { maxX: 0, maxY: 0 };
+      const containerRect = userImgContainer.getBoundingClientRect();
+      const imgRect = userUploadedImg.getBoundingClientRect();
+      const maxX = Math.max(0, (imgRect.width - containerRect.width) / 2);
+      const maxY = Math.max(0, (imgRect.height - containerRect.height) / 2);
+      return { maxX: maxX + 100, maxY: maxY + 100 };
+    }
+
+    function loadSavedOffset() {
+      const savedOffset = localStorage.getItem(CUSTOM_OFFSET_KEY);
+      if (savedOffset) {
+        try {
+          const pos = JSON.parse(savedOffset);
+          currentX = pos.x || 0;
+          currentY = pos.y || 0;
+        } catch(e) {}
+      } else {
+        currentX = 0;
+        currentY = 0;
+      }
+      if (userUploadedImg) {
+        userUploadedImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+    }
+
+    function saveOffset() {
+      localStorage.setItem(CUSTOM_OFFSET_KEY, JSON.stringify({ x: currentX, y: currentY }));
+    }
+
+    function setLockedState(locked) {
+      isLocked = locked;
+      localStorage.setItem(CUSTOM_LOCK_KEY, locked ? 'true' : 'false');
+      if (repositionControlsEl && modifyPositionBtn) {
+        if (isLocked) {
+          repositionControlsEl.classList.add('hidden');
+          modifyPositionBtn.classList.remove('hidden');
+          if (userUploadedImg) userUploadedImg.style.pointerEvents = 'none';
+        } else {
+          repositionControlsEl.classList.remove('hidden');
+          modifyPositionBtn.classList.add('hidden');
+          if (userUploadedImg) userUploadedImg.style.pointerEvents = 'auto';
+        }
+      }
+    }
+
+    if (userUploadedImg) {
+      userUploadedImg.addEventListener('mousedown', (e) => {
+        if (isLocked) return;
+        isDragging = true;
+        startX = e.clientX - currentX;
+        startY = e.clientY - currentY;
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging || isLocked) return;
+        currentX = e.clientX - startX;
+        currentY = e.clientY - startY;
+        const bounds = getMaxBounds();
+        if (currentX > bounds.maxX) currentX = bounds.maxX;
+        if (currentX < -bounds.maxX) currentX = -bounds.maxX;
+        if (currentY > bounds.maxY) currentY = bounds.maxY;
+        if (currentY < -bounds.maxY) currentY = -bounds.maxY;
+        userUploadedImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          saveOffset();
+        }
+      });
+
+      userUploadedImg.addEventListener('touchstart', (e) => {
+        if (isLocked) return;
+        if (e.touches.length === 1) {
+          isDragging = true;
+          startX = e.touches[0].clientX - currentX;
+          startY = e.touches[0].clientY - currentY;
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || isLocked || e.touches.length !== 1) return;
+        currentX = e.touches[0].clientX - startX;
+        currentY = e.touches[0].clientY - startY;
+        const bounds = getMaxBounds();
+        if (currentX > bounds.maxX) currentX = bounds.maxX;
+        if (currentX < -bounds.maxX) currentX = -bounds.maxX;
+        if (currentY > bounds.maxY) currentY = bounds.maxY;
+        if (currentY < -bounds.maxY) currentY = -bounds.maxY;
+        userUploadedImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          saveOffset();
+        }
+      });
+    }
+
+    if (resetPositionBtn) {
+      resetPositionBtn.addEventListener('click', () => {
+        if (isLocked) return;
+        currentX = 0;
+        currentY = 0;
+        if (userUploadedImg) userUploadedImg.style.transform = `translate(0px, 0px)`;
+        saveOffset();
+        showToast('Posición centrada.');
+      });
+    }
+
+    if (lockPositionBtn) {
+      lockPositionBtn.addEventListener('click', () => {
+        setLockedState(true);
+        showToast('¡Posición guardada y bloqueada! 💜');
+      });
+    }
+
+    if (modifyPositionBtn) {
+      modifyPositionBtn.addEventListener('click', () => {
+        setLockedState(false);
+        showToast('Ya podés volver a mover tu foto.');
+      });
+    }
+
+    function analyzeImageBrightness(imgElement) {
+      if (!titleMainEl || !titleSubEl) return;
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 100;
+      canvas.height = 100;
+      try {
+        ctx.drawImage(imgElement, 0, 0, 100, 100);
+        const data = ctx.getImageData(25, 10, 50, 40).data;
+        let r = 0, g = 0, b = 0, count = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          r += data[i];
+          g += data[i+1];
+          b += data[i+2];
+          count++;
+        }
+        r = Math.floor(r / count);
+        g = Math.floor(g / count);
+        b = Math.floor(b / count);
+        
+        const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+        if (yiq >= 135) {
+          titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-theme-dark';
+          titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-theme-dark';
+        } else {
+          titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-theme-light';
+          titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-theme-light';
+        }
+      } catch (err) {
+        console.error("No se pudo analizar el brillo", err);
+      }
+    }
+
+    const savedPhoto = localStorage.getItem(CUSTOM_PHOTO_KEY);
+    const savedLockState = localStorage.getItem(CUSTOM_LOCK_KEY);
+    
+    const dashboardBgImg = document.getElementById('dashboard-bg-img');
+    const playlistsBgImg = document.getElementById('playlists-bg-img');
+
+    if (savedPhoto && userUploadedImg) {
+      userUploadedImg.src = savedPhoto;
+      if (userImgContainer) userImgContainer.classList.remove('hidden');
+      if (dashboardBgImg) {
+        dashboardBgImg.src = savedPhoto;
+        dashboardBgImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+      if (playlistsBgImg) {
+        playlistsBgImg.src = savedPhoto;
+        playlistsBgImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+      loadSavedOffset();
+      
+      const shouldLock = savedLockState === null ? true : (savedLockState === 'true');
+      setLockedState(shouldLock);
+
+      userUploadedImg.onload = () => analyzeImageBrightness(userUploadedImg);
+    } else {
+      if (userImgContainer) userImgContainer.classList.add('hidden');
+      if (dashboardBgImg) dashboardBgImg.src = '';
+      if (playlistsBgImg) playlistsBgImg.src = '';
+    }
+
+    if (photoInput) {
+      photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            const base64String = event.target.result;
+            localStorage.setItem(CUSTOM_PHOTO_KEY, base64String);
+            currentX = 0;
+            currentY = 0;
+            saveOffset();
+            if (userUploadedImg) {
+              userUploadedImg.src = base64String;
+              userUploadedImg.style.transform = `translate(0px, 0px)`;
+              userUploadedImg.onload = () => analyzeImageBrightness(userUploadedImg);
+            }
+            if (dashboardBgImg) {
+              dashboardBgImg.src = base64String;
+              dashboardBgImg.style.transform = `translate(0px, 0px)`;
+            }
+            if (playlistsBgImg) {
+              playlistsBgImg.src = base64String;
+              playlistsBgImg.style.transform = `translate(0px, 0px)`;
+            }
+            if (userImgContainer) userImgContainer.classList.remove('hidden');
+            setLockedState(false);
+            showToast('¡Foto actualizada con éxito! Ajustala y guardala 💜');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    if (lockPositionBtn) {
+      lockPositionBtn.addEventListener('click', () => {
+        setLockedState(true);
+        if (dashboardBgImg && userUploadedImg) {
+          dashboardBgImg.style.transform = userUploadedImg.style.transform;
+        }
+        if (playlistsBgImg && userUploadedImg) {
+          playlistsBgImg.style.transform = userUploadedImg.style.transform;
+        }
+        showToast('¡Posición guardada y bloqueada! 💜');
+      });
+    }
+
+    if (resetPositionBtn) {
+      resetPositionBtn.addEventListener('click', () => {
+        if (isLocked) return;
+        currentX = 0;
+        currentY = 0;
+        if (userUploadedImg) userUploadedImg.style.transform = `translate(0px, 0px)`;
+        if (dashboardBgImg) dashboardBgImg.style.transform = `translate(0px, 0px)`;
+        if (playlistsBgImg) playlistsBgImg.style.transform = `translate(0px, 0px)`;
+        saveOffset();
+        showToast('Posición centrada.');
+      });
+    }
+
+    // Actualizar también la posición en el fondo del dashboard y de playlists mientras se arrastra en vivo
+    window.addEventListener('mousemove', () => {
+      if (!isLocked && userUploadedImg) {
+        if (dashboardBgImg) dashboardBgImg.style.transform = userUploadedImg.style.transform;
+        if (playlistsBgImg) playlistsBgImg.style.transform = userUploadedImg.style.transform;
+      }
+    });
+    window.addEventListener('touchmove', () => {
+      if (!isLocked && userUploadedImg) {
+        if (dashboardBgImg) dashboardBgImg.style.transform = userUploadedImg.style.transform;
+        if (playlistsBgImg) playlistsBgImg.style.transform = userUploadedImg.style.transform;
+      }
+    });
+
+    updateProgressUI();
+    renderList();
+    setInterval(updateCountdowns, 1000);
+  </script>
+</body>
 </html>
