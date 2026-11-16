@@ -175,13 +175,6 @@
       color: #93c5fd;
       border: 1px solid rgba(59, 130, 246, 0.5);
     }
-    /* Estilo de botón para alineación vertical central cuando hay un solo enlace */
-    .single-btn-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
-    }
   </style>
 </head>
 <body class="antialiased selection:bg-red-500 selection:text-white">
@@ -198,8 +191,8 @@
     <!-- Título principal en capa superior (z-50) para que NUNCA sea tapado mientras se mueve la foto -->
     <div class="relative z-50 pt-2 sm:pt-4 text-center pointer-events-none mx-auto w-full flex flex-col items-center justify-center">
       <h1 id="hero-title" class="leading-none transition-colors duration-500 select-none text-center">
-        <span class="block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-main">KIM TAEHYUNG</span>
-        <span class="block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-sub">VOTACIONES</span>
+        <span class="block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-main title-theme-light">KIM TAEHYUNG</span>
+        <span class="block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-sub title-theme-light">VOTACIONES</span>
       </h1>
     </div>
 
@@ -257,7 +250,7 @@
           <button
             type="button"
             id="open-sidebar-btn"
-            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:border-blue-400 hover:text-white touch-manipulation"
+            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:border-blue-400 touch-manipulation"
             aria-label="Abrir menú"
           >
             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -269,7 +262,7 @@
           <button
             type="button"
             id="reset-votes-btn"
-            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer hover:text-white touch-manipulation"
+            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer touch-manipulation hover:border-blue-400"
           >
             <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -345,22 +338,22 @@
       </div>
 
       <!-- Contenedor con hover azul -->
-      <nav id="sidebar-nav-container" class="space-y-3 p-2 rounded-3xl transition-all duration-300 hover:border hover:border-blue-500 hover:bg-blue-500/10">
-        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 cursor-pointer">
+      <nav id="sidebar-nav-container" class="space-y-3 p-2 rounded-3xl transition-all duration-300">
+        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-blue-600/30 hover:border-blue-400 cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_coraz%C3%B3n_con_cartel_de_Vote" alt="Votaciones" class="max-w-full max-h-full object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight">Votaciones</span>
         </button>
 
-        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 cursor-pointer">
+        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-blue-600/30 hover:border-blue-400 cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/Coraz%C3%B3n_DJ_con_auriculares_verdes.png" alt="Listas de reproducción" class="max-w-full max-h-full object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight">Listas de reproducción</span>
         </button>
 
-        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 cursor-pointer">
+        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-blue-600/30 hover:border-blue-400 cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-16 h-16 max-w-none object-contain filter drop-shadow" />
           </div>
@@ -434,7 +427,7 @@
         <button
           type="button"
           id="open-sidebar-from-playlist-btn"
-          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:border-blue-400 hover:text-white touch-manipulation shadow-lg"
+          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:border-blue-400 touch-manipulation shadow-lg"
           aria-label="Abrir menú"
         >
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -446,7 +439,7 @@
         <button
           type="button"
           id="go-voting-from-playlist-btn"
-          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer hover:text-white touch-manipulation shadow-lg"
+          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-army-200 active:scale-[0.99] transition-all cursor-pointer touch-manipulation shadow-lg hover:text-blue-400 hover:border-blue-400"
         >
           <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -488,8 +481,8 @@
         status: 'Activa',
         defaultDeadline: '2026-11-16T17:00:00+09:00',
         links: [
-          { label: 'Fanplus - Ir a votar (December Birthday)', url: 'https://tinyurl.com/2wdcx32n' },
-          { label: 'Fanplus - Ir a votar (Actor Más Guapo)', url: 'https://fanplus.co.kr/es-ES/votes/560' }
+          { label: 'Ir a votar', url: 'https://tinyurl.com/2wdcx32n' },
+          { label: 'Ir a votar', url: 'https://fanplus.co.kr/es-ES/votes/560' }
         ]
       },
       {
@@ -500,8 +493,8 @@
         status: 'Activa',
         defaultDeadline: '2026-11-18T23:59:00+09:00',
         links: [
-          { label: 'Idol Champ - Ir a votar (December Birthday)', url: 'https://tinyurl.com/3wtvh2dz' },
-          { label: 'Idol Champ - Ir a votar (Show Champion)', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote' }
+          { label: 'Ir a votar', url: 'https://tinyurl.com/3wtvh2dz' },
+          { label: 'Ir a votar', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote' }
         ]
       },
       {
@@ -512,7 +505,7 @@
         status: 'Activa',
         defaultDeadline: '2026-11-23T12:00:00+09:00',
         links: [
-          { label: 'Fannstar - Ir a votar', url: 'https://tinyurl.com/2r8y7hm4' }
+          { label: 'Ir a votar', url: 'https://tinyurl.com/2r8y7hm4' }
         ]
       },
       {
@@ -523,8 +516,8 @@
         status: 'Activa',
         defaultDeadline: '2026-11-25T23:59:00+09:00',
         links: [
-          { label: 'Mnet Plus - Ir a votar (December Birthday)', url: 'https://tinyurl.com/h8j954rj' },
-          { label: 'Mnet Plus - Ir a votar (App Mnet Plus)', url: isAppleDevice ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus' }
+          { label: 'Ir a votar', url: 'https://tinyurl.com/h8j954rj' },
+          { label: 'Ir a votar', url: isAppleDevice ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus' }
         ]
       },
       {
@@ -535,8 +528,8 @@
         status: 'Activa',
         defaultDeadline: '2026-11-25T15:00:00+07:00',
         links: [
-          { label: 'Queeri - Ir a votar (Star Born in Dec)', url: 'https://tinyurl.com/35d8z3kz' },
-          { label: 'Queeri - Ir a votar (App Queeri)', url: 'https://www.queeri.id/' }
+          { label: 'Ir a votar', url: 'https://tinyurl.com/35d8z3kz' },
+          { label: 'Ir a votar', url: 'https://www.queeri.id/' }
         ]
       },
       {
@@ -547,63 +540,8 @@
         status: 'Activa',
         defaultDeadline: '2026-11-26T23:59:00+09:00',
         links: [
-          { label: 'Coogoong - Ir a votar (December Pick)', url: 'https://tinyurl.com/yrph6ux6' },
-          { label: 'Coogoong - Ir a votar (App Coogoong)', url: isAppleDevice ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast' }
-        ]
-      },
-      {
-        id: 'asian-celebrity-year',
-        name: 'Netizens Choice',
-        description: 'Votación oficial para Asian Celebrity of the Year 2026.',
-        type: 'Web',
-        status: 'Activa',
-        defaultDeadline: getDefaultDeadlineISO(3, 12, 0),
-        links: [
-          { label: 'Netizens Choice - Ir a votar (Asian Celebrity)', url: 'https://netizenschoice.com/vote/asian-celebrity-of-the-year-2026/results' }
-        ]
-      },
-      {
-        id: 'most-handsome-men-world',
-        name: 'Shining Awards',
-        description: 'Votación para Most Handsome Men in the World 2026.',
-        type: 'Web',
-        status: 'Activa',
-        defaultDeadline: getDefaultDeadlineISO(4, 15, 0),
-        links: [
-          { label: 'Shining Awards - Ir a votar (Most Handsome Men)', url: 'https://shiningawards.com/most-handsome-men-in-the-world-2026/' }
-        ]
-      },
-      {
-        id: 'shiningawards',
-        name: 'Shining Awards',
-        description: 'Votación directa para V BTS (Most Handsome K-Pop Idols).',
-        type: 'Web',
-        status: 'Activa',
-        defaultDeadline: getDefaultDeadlineISO(4, 16, 0),
-        links: [
-          { label: 'Shining Awards - Ir a votar (K-Pop Idols)', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/' }
-        ]
-      },
-      {
-        id: 'nubia-asia',
-        name: 'Nubia Magazine',
-        description: 'Votación directa para The Most Handsome Man in Asia 2026.',
-        type: 'Web',
-        status: 'Activa',
-        defaultDeadline: getDefaultDeadlineISO(5, 20, 0),
-        links: [
-          { label: 'Nubia Magazine - Ir a votar (Man in Asia)', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/results' }
-        ]
-      },
-      {
-        id: 'nubia-korea',
-        name: 'Nubia Magazine',
-        description: 'Votación para Most Handsome Men in South Korea 2026. Vota 2x cada hora.',
-        type: 'Web',
-        status: 'Activa',
-        defaultDeadline: getDefaultDeadlineISO(3, 18, 0),
-        links: [
-          { label: 'Nubia Magazine - Ir a votar (South Korea)', url: 'https://nubiapage.com/poll/vote-most-handsome-men-in-south-korea-2026/results' }
+          { label: 'Ir a votar', url: 'https://tinyurl.com/yrph6ux6' },
+          { label: 'Ir a votar', url: isAppleDevice ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast' }
         ]
       },
       {
@@ -620,6 +558,41 @@
               ? 'https://apps.apple.com/us/app/bigc-the-show-vote-bias-live/id1575835045'
               : 'https://play.google.com/store/apps/details?id=im.bigc.lively&hl=en'
           }
+        ]
+      },
+      {
+        id: 'netizens-choice',
+        name: 'Netizens Choice',
+        description: 'Votación oficial para Asian Celebrity of the Year 2026.',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(3, 12, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://netizenschoice.com/vote/asian-celebrity-of-the-year-2026/results' }
+        ]
+      },
+      {
+        id: 'shining-awards',
+        name: 'Shining Awards',
+        description: 'Votaciones web para Most Handsome Men in the World y K-Pop Idols 2026.',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(4, 15, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://shiningawards.com/most-handsome-men-in-the-world-2026/' },
+          { label: 'Ir a votar', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/' }
+        ]
+      },
+      {
+        id: 'nubia-magazine',
+        name: 'Nubia Magazine',
+        description: 'Votaciones oficiales para The Most Handsome Man in Asia y South Korea (vota 2x cada hora).',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(3, 18, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/results' },
+          { label: 'Ir a votar', url: 'https://nubiapage.com/poll/vote-most-handsome-men-in-south-korea-2026/results' }
         ]
       }
     ];
@@ -807,7 +780,7 @@
             class="vote-link-btn tata-btn-primary w-full inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer shadow-sm touch-manipulation ${isClicked ? '!border-blue-400 !bg-blue-500/25 !text-blue-200' : ''}"
           >
             ${isClicked ? '<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-500 text-white font-black text-[10px] shrink-0 shadow-sm">✓</span>' : ''}
-            <span class="truncate">Ir a votar</span>
+            <span class="truncate">${link.label}</span>
             <svg class="w-3.5 h-3.5 shrink-0 ${isClicked ? 'text-blue-400' : ''}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
@@ -1112,11 +1085,11 @@
         
         const yiq = (r * 299 + g * 587 + b * 114) / 1000;
         if (yiq >= 135) {
-          titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-theme-dark';
-          titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-theme-dark';
+          titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-main title-theme-dark';
+          titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-sub title-theme-dark';
         } else {
-          titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-theme-light';
-          titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-theme-light';
+          titleMainEl.className = 'block text-3xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase title-main title-theme-light';
+          titleSubEl.className = 'block text-base sm:text-2xl md:text-3xl font-bold tracking-widest uppercase mt-1 opacity-95 title-sub title-theme-light';
         }
       } catch (err) {
         console.error("No se pudo analizar el brillo", err);
