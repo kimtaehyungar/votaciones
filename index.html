@@ -248,7 +248,7 @@
           <button
             type="button"
             id="open-sidebar-btn"
-            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation"
+            class="tata-card-glass inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:border-blue-400 hover:text-white touch-manipulation"
             aria-label="Abrir menú"
           >
             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -344,7 +344,7 @@
 
   <!-- Menú Desplegable Lateral (Sidebar) estilo Brave con Liquid Glass -->
   <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border-r border-white/30">
+  <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-72 sm:w-80 tata-card-glass z-50 p-6 transform -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl border border-white/30 hover:border-yellow-400 group">
     <div>
       <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/20">
         <h2 class="text-lg font-black text-white tracking-wide uppercase">Menú</h2>
@@ -356,21 +356,21 @@
       </div>
 
       <nav class="space-y-3">
-        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
+        <button type="button" id="menu-item-votaciones" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto,q_auto/Personaje_corazón_con_cartel_de_Vote" alt="Votaciones" class="max-w-full max-h-full object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight">Votaciones</span>
         </button>
 
-        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
+        <button type="button" id="menu-item-playlist" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/Coraz%C3%B3n_DJ_con_auriculares_verdes.png" alt="Listas de reproducción" class="max-w-full max-h-full object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight">Listas de reproducción</span>
         </button>
 
-        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-white/10 cursor-pointer">
+        <button type="button" id="menu-item-home" class="w-full text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:border-white/60 hover:text-white cursor-pointer">
           <div class="w-12 h-12 flex items-center justify-center shrink-0">
             <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-16 h-16 max-w-none object-contain filter drop-shadow" />
           </div>
@@ -444,7 +444,7 @@
         <button
           type="button"
           id="open-sidebar-from-playlist-btn"
-          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:text-red-400 touch-manipulation shadow-lg"
+          class="tata-card-glass inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold text-white active:scale-[0.99] transition-all cursor-pointer hover:border-blue-400 hover:text-white touch-manipulation shadow-lg"
           aria-label="Abrir menú"
         >
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
