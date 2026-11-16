@@ -180,6 +180,13 @@
       color: #93c5fd;
       border: 1px solid rgba(59, 130, 246, 0.5);
     }
+    /* Estilo de botón para alineación vertical central cuando hay un solo enlace */
+    .single-btn-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-red-500 selection:text-white">
@@ -610,9 +617,10 @@
         description: 'Abre o descarga la app oficial Bigc (iOS / Android) para votar en eventos especiales.',
         type: 'App Oficial',
         status: 'Activa',
-        defaultDeadline: getDefaultDeadlineISO(4, 18, 30),
+        defaultDeadline: '2026-11-20T18:30:00+09:00',
         links: [
-          { label: 'Ir a votar', url: isAppleDevice ? 'https://apps.apple.com/app/bigc/id1643245451' : 'https://play.google.com/store/apps/details?id=com.bigc.global' }
+          { label: 'Ir a votar (Android)', url: 'https://play.google.com/store/apps/details?id=im.bigc.lively&hl=en' },
+          { label: 'Ir a votar (iOS)', url: 'https://apps.apple.com/us/app/bigc-the-show-vote-bias-live/id1575835045' }
         ]
       }
     ];
@@ -834,7 +842,7 @@
 
         card.innerHTML = `
           <div class="flex flex-col gap-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex flex-col sm:flex-row sm:items-stretch justify-between gap-3">
               <div class="flex items-start gap-3 flex-1">
                 <label class="pt-0.5 cursor-pointer">
                   <input type="checkbox" data-id="${platform.id}" ${isVoted ? 'checked' : ''} class="vote-checkbox appearance-none w-5 h-5 rounded-lg border-2 border-red-500 bg-black checked:bg-red-600 checked:border-red-500 cursor-pointer transition-all shadow-sm" />
@@ -854,7 +862,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-col items-stretch gap-1.5 w-full sm:w-52 shrink-0 self-center sm:self-start">
+              <div class="flex flex-col ${hasMultipleLinks ? 'justify-start' : 'justify-center'} gap-1.5 w-full sm:w-52 shrink-0">
                 ${buttonsHtml}
               </div>
             </div>
