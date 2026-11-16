@@ -133,15 +133,14 @@
       -webkit-backdrop-filter: none !important;
       border: 1px solid rgba(255, 255, 255, 0.35);
       box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
-      transition: all 0.25s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       color: #ffffff;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.85);
     }
     .tata-card-glass:hover {
       background: rgba(255, 255, 255, 0.03) !important;
-      border-color: rgba(239, 68, 68, 0.8);
-      box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
-      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.95);
+      box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.95), 0 0 0 1px rgba(59, 130, 246, 0.8), 0 15px 35px 0 rgba(0, 0, 0, 0.5);
     }
     /* Botones temáticos con estilo Liquid Glass elegante y cristalino */
     .tata-btn-primary {
@@ -152,7 +151,7 @@
       color: #ffffff;
       box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
       transition: all 0.2s ease;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.9);
     }
     .tata-btn-primary:hover, .tata-btn-primary:active {
       background: rgba(255, 255, 255, 0.18) !important;
@@ -230,10 +229,10 @@
   </section>
 
   <!-- Panel de Votaciones Dashboard con fondo de la foto elegida por el usuario -->
-  <div id="seccion-votaciones" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
-    <!-- Contenedor de la foto elegida adaptado para cubrir todo el fondo de votaciones de forma prolija en la misma posición y dimensión sin fondos predeterminados o de Tata -->
-    <div id="dashboard-custom-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
-      <img id="dashboard-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02]" />
+  <div id="seccion-votaciones" class="hidden min-h-screen relative bg-black px-4 py-8">
+    <!-- Contenedor de la foto elegida adaptado para cubrir todo el fondo de votaciones de forma estable sin saltos al hacer scroll -->
+    <div id="dashboard-custom-photo-bg" class="fixed top-0 left-0 w-screen h-[100lvh] pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black" style="transform: translateZ(0); will-change: transform;">
+      <img id="dashboard-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02] select-none" />
     </div>
 
     <div class="max-w-4xl mx-auto relative z-10">
@@ -271,14 +270,14 @@
         </div>
       </header>
 
-    <section class="mb-8 tata-card-glass p-5 sm:p-6 rounded-3xl shadow-xl border-l-4 border-l-red-500 text-white">
+    <section class="mb-8 tata-card-glass p-5 sm:p-6 rounded-3xl shadow-xl border-l-4 border-l-blue-500 text-white">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-3">
         <div>
-          <span class="text-xs uppercase tracking-wider font-black text-red-400">Progreso Diario</span>
-          <h2 id="progress-subtitle" class="text-sm sm:text-base font-extrabold text-white mt-0.5">Llevás 0 de 9 plataformas hoy.</h2>
+          <span class="text-xs uppercase tracking-wider font-black text-blue-400">Progreso Diario</span>
+          <h2 id="progress-subtitle" class="text-sm sm:text-base font-extrabold text-white mt-0.5">Llevás 0 de 12 plataformas hoy.</h2>
         </div>
         <div id="progress-badge" class="px-3.5 py-1.5 bg-red-600/90 text-white font-black text-sm rounded-xl shadow-md border border-red-400/40">
-          0 / 9
+          0 / 12
         </div>
       </div>
 
@@ -318,8 +317,7 @@
 
       <div class="flex flex-wrap items-center gap-2.5">
         <div class="inline-flex p-1.5 tata-card-glass rounded-2xl shadow-sm w-full sm:w-auto justify-center">
-          <button type="button" data-filter="Todas" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-red-600 text-white shadow-md cursor-pointer transition-all touch-manipulation">Todas</button>
-          <button type="button" data-filter="App Oficial" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">App Oficial</button>
+          <button type="button" data-filter="App Oficial" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-yellow-400 text-black shadow-md cursor-pointer transition-all touch-manipulation">Solo en App</button>
           <button type="button" data-filter="Web" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-army-300 hover:text-white cursor-pointer transition-all touch-manipulation">Web</button>
         </div>
       </div>
@@ -334,10 +332,11 @@
       <p class="text-sm font-semibold text-army-300 mb-4">Probá con otro término de búsqueda.</p>
     </div>
 
-    <footer class="mt-12 pt-6 border-t border-white/15 text-center text-xs font-black text-white">
-      <div class="tata-card-glass py-3 px-6 rounded-2xl inline-block shadow-sm flex flex-col items-center gap-1">
-        <span>Hecho con amor por una army de Argentina</span>
-        <span class="text-red-400 font-extrabold">@taesweetnight7</span>
+    <footer class="mt-16 pt-4 pb-4 border-t border-white/15 flex justify-end text-xs font-black text-white">
+      <div class="tata-card-glass py-2 px-4 rounded-2xl inline-block shadow-sm flex flex-col items-center gap-0.5 text-center">
+        <span>Hecho con amor</span>
+        <span>por una army de Argentina</span>
+        <span class="text-red-400 font-extrabold">@Taesweetnight7</span>
       </div>
     </footer>
     </div>
@@ -386,9 +385,9 @@
   </aside>
 
   <!-- Sección de Listas de Reproducción (Página dedicada idéntica a votaciones) -->
-  <div id="seccion-playlists" class="hidden min-h-screen relative overflow-hidden bg-black px-4 py-8">
-    <div id="playlists-custom-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black">
-      <img id="playlists-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02]" />
+  <div id="seccion-playlists" class="hidden min-h-screen relative bg-black px-4 py-8">
+    <div id="playlists-custom-photo-bg" class="fixed top-0 left-0 w-screen h-[100lvh] pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black" style="transform: translateZ(0); will-change: transform;">
+      <img id="playlists-bg-img" src="" alt="" class="w-full h-full object-contain filter brightness-[0.98] contrast-[1.02] select-none" />
     </div>
 
     <div class="max-w-4xl mx-auto relative z-10">
@@ -469,8 +468,8 @@
       <footer class="mt-16 pt-4 pb-4 border-t border-white/15 flex justify-end text-xs font-black text-white">
         <div class="tata-card-glass py-2 px-4 rounded-2xl inline-block shadow-sm flex flex-col items-center gap-0.5 text-center">
           <span>Hecho con amor</span>
-          <span>por una army de argentina</span>
-          <span class="text-red-400 font-extrabold">@taesweetnight7</span>
+          <span>por una army de Argentina</span>
+          <span class="text-red-400 font-extrabold">@Taesweetnight7</span>
         </div>
       </footer>
     </div>
@@ -488,17 +487,146 @@
       return target.toISOString();
     }
 
+    const isAppleDevice = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+
     const VOTING_PLATFORMS = [
-      { id: 'fanplus', name: 'Fanplus', url: 'https://fanplus.co.kr/es-ES/votes/560', description: 'Votación al Actor Coreano Más Guapo de 2026 (V en #1).', type: 'App Oficial', status: 'Activa', defaultDeadline: '2027-01-04T23:28:00.000Z' },
-      { id: 'fannstar', name: 'Fannstar', url: 'https://en.fannstar.tf.co.kr/rank/view/each', description: 'Premios de la música coreana y votación semanal (en inglés).', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(0, 16, 20) },
-      { id: 'choeaedol', name: 'Chaeodol', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/kpop-idol-vote-choeaedol/id1131995698' : 'https://play.google.com/store/apps/details?id=net.ib.mn', description: 'Abre o descarga la app oficial CHOEAEDOL (iOS / Android) para votar por V.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(2, 8, 10) },
-      { id: 'idol-champ', name: 'Idol champ', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote', description: 'Apartado directo de votaciones de Show Champion.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(1, 12, 0) },
-      { id: 'shiningawards', name: 'Shiningawards', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/v-bts/', description: 'Votación directa para V BTS en Shining Awards.', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(4, 15, 0) },
-      { id: 'nubia-awards', name: 'Nubia Awards', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/', description: 'Votación directa en Nubia Magazine (Most Handsome Man in Asia 2026).', type: 'Web', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(5, 20, 0) },
-      { id: 'coogoong', name: 'Coogoong', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast', description: 'Abre o descarga la app oficial Coogoong (antes Fancast, iOS / Android) para votar.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(3, 10, 0) },
-      { id: 'bigc', name: 'Bigc', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/bigc/id1643245451' : 'https://play.google.com/store/apps/details?id=com.bigc.global', description: 'Abre o descarga la app oficial Bigc (iOS / Android) para votar en eventos especiales.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(4, 18, 30) },
-      { id: 'queeri', name: 'Queeri', url: 'https://www.queeri.id/', description: 'Votación diaria y campañas en la app oficial Queeri.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(7, 14, 0) },
-      { id: 'mnet-plus', name: 'Mnet plus', url: /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus', description: 'Abre o descarga la app oficial Mnet Plus (iOS / Android) para votar.', type: 'App Oficial', status: 'Activa', defaultDeadline: getDefaultDeadlineISO(10, 14, 50) }
+      {
+        id: 'fanplus',
+        name: 'Fanplus',
+        description: 'Votaciones activas en Fanplus: December Birthday Vote y Actor Coreano Más Guapo 2026.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: '2026-11-16T17:00:00+09:00',
+        links: [
+          { label: 'Ir a votar (December Birthday)', url: 'https://tinyurl.com/2wdcx32n' },
+          { label: 'Ir a votar (Actor Más Guapo)', url: 'https://fanplus.co.kr/es-ES/votes/560' }
+        ]
+      },
+      {
+        id: 'idol-champ',
+        name: 'Idol Champ',
+        description: 'Votaciones activas en Idol Champ: December Birthday Vote Final y Show Champion.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: '2026-11-18T23:59:00+09:00',
+        links: [
+          { label: 'Ir a votar (December Birthday)', url: 'https://tinyurl.com/3wtvh2dz' },
+          { label: 'Ir a votar (Show Champion)', url: 'https://promo-web.idolchamp.com/app_proxy.html?type=vote' }
+        ]
+      },
+      {
+        id: 'fannstar-dec-bday',
+        name: 'Fannstar – December Birthday',
+        description: 'Votación especial de cumpleaños de diciembre en Fannstar.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: '2026-11-23T12:00:00+09:00',
+        links: [
+          { label: 'Ir a votar', url: 'https://tinyurl.com/2r8y7hm4' }
+        ]
+      },
+      {
+        id: 'mnet-plus',
+        name: 'Mnet Plus',
+        description: 'Votación December Birthday Artist Vote y acceso directo a la app oficial Mnet Plus.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: '2026-11-25T23:59:00+09:00',
+        links: [
+          { label: 'Ir a votar (December Birthday)', url: 'https://tinyurl.com/h8j954rj' },
+          { label: 'Ir a votar (App Mnet Plus)', url: isAppleDevice ? 'https://apps.apple.com/app/mnet-plus/id6443405421' : 'https://play.google.com/store/apps/details?id=world.mnetplus' }
+        ]
+      },
+      {
+        id: 'queeri',
+        name: 'Queeri',
+        description: 'Votación Star Born in December y campañas diarias en la app oficial Queeri.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: '2026-11-25T15:00:00+07:00',
+        links: [
+          { label: 'Ir a votar (Star Born in Dec)', url: 'https://tinyurl.com/35d8z3kz' },
+          { label: 'Ir a votar (App Queeri)', url: 'https://www.queeri.id/' }
+        ]
+      },
+      {
+        id: 'coogoong',
+        name: 'Coogoong',
+        description: 'Votación December Artist Pick y acceso directo a la app oficial Coogoong.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: '2026-11-26T23:59:00+09:00',
+        links: [
+          { label: 'Ir a votar (December Pick)', url: 'https://tinyurl.com/yrph6ux6' },
+          { label: 'Ir a votar (App Coogoong)', url: isAppleDevice ? 'https://apps.apple.com/app/coogoong/id1591109215' : 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast' }
+        ]
+      },
+      {
+        id: 'asian-celebrity-year',
+        name: 'Asian Celebrity of the Year',
+        description: 'Votación oficial en Netizens Choice para Asian Celebrity of the Year 2026.',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(3, 12, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://netizenschoice.com/vote/asian-celebrity-of-the-year-2026/results' }
+        ]
+      },
+      {
+        id: 'most-handsome-men-world',
+        name: 'Most Handsome Men in the World 2026',
+        description: 'Votación en Shining Awards para Most Handsome Men in the World 2026.',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(4, 15, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://shiningawards.com/most-handsome-men-in-the-world-2026/' }
+        ]
+      },
+      {
+        id: 'shiningawards',
+        name: 'Most Handsome K-Pop Idols 2026',
+        description: 'Votación directa para V BTS en Shining Awards (Most Handsome K-Pop Idols).',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(4, 16, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://shiningawards.com/most-handsome-kpop-idols-2026/' }
+        ]
+      },
+      {
+        id: 'nubia-asia',
+        name: 'The Most Handsome Man in Asia 2026 (Nubia)',
+        description: 'Votación directa en Nubia Magazine (Most Handsome Man in Asia 2026).',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(5, 20, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-asia-2026/results' }
+        ]
+      },
+      {
+        id: 'nubia-korea',
+        name: 'Most Handsome Men in South Korea 2026 (Nubia)',
+        description: 'Votación en Nubia Magazine (Most Handsome Men in South Korea). Vota 2x cada hora.',
+        type: 'Web',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(3, 18, 0),
+        links: [
+          { label: 'Ir a votar', url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-south-korea-2026/results' }
+        ]
+      },
+      {
+        id: 'bigc',
+        name: 'Bigc',
+        description: 'Abre o descarga la app oficial Bigc (iOS / Android) para votar en eventos especiales.',
+        type: 'App Oficial',
+        status: 'Activa',
+        defaultDeadline: getDefaultDeadlineISO(4, 18, 30),
+        links: [
+          { label: 'Ir a votar', url: isAppleDevice ? 'https://apps.apple.com/app/bigc/id1643245451' : 'https://play.google.com/store/apps/details?id=com.bigc.global' }
+        ]
+      }
     ];
 
     const STORAGE_KEY = 'v_bts_daily_votes_v3';
@@ -508,7 +636,7 @@
 
     let state = {
       votedIds: JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
-      currentFilter: 'Todas',
+      currentFilter: 'App Oficial',
       searchQuery: ''
     };
 
@@ -654,7 +782,7 @@
     function renderList() {
       if (!votingListEl) return;
       const filtered = VOTING_PLATFORMS.filter(p => {
-        const matchesFilter = state.currentFilter === 'Todas' || p.type === state.currentFilter;
+        const matchesFilter = p.type === state.currentFilter;
         const matchesSearch = !state.searchQuery || p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) || p.description.toLowerCase().includes(state.searchQuery.toLowerCase());
         return matchesFilter && matchesSearch;
       });
@@ -676,8 +804,22 @@
 
         const card = document.createElement('article');
         card.className = `p-4 sm:p-5 rounded-3xl tata-card-glass transition-all text-white ${
-          countdown.expired ? 'opacity-60 grayscale-[30%]' : isVoted ? 'opacity-85 border-green-500/40 bg-transparent' : isFirst ? 'shadow-xl border-2 border-red-500' : ''
+          countdown.expired ? 'opacity-60 grayscale-[30%]' : isVoted ? 'opacity-85 border-green-500/40 bg-transparent' : isFirst ? 'shadow-xl' : ''
         }`;
+
+        const buttonsHtml = platform.links.map(link => `
+          <a
+            href="${link.url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="tata-btn-primary w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm touch-manipulation"
+          >
+            <span>${link.label}</span>
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        `).join('');
 
         card.innerHTML = `
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -694,18 +836,8 @@
                 <p class="text-xs sm:text-sm font-semibold text-army-200">${platform.description}</p>
               </div>
             </div>
-            <div class="flex items-center gap-2 sm:self-center">
-              <a
-                href="${platform.url}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="tata-btn-primary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm touch-manipulation"
-              >
-                <span>Ir a votar</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+            <div class="flex flex-col items-stretch gap-2 w-full sm:w-56 shrink-0">
+              ${buttonsHtml}
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs font-black text-white">
@@ -775,10 +907,10 @@
       btn.addEventListener('click', () => {
         state.currentFilter = btn.getAttribute('data-filter');
         filterBtns.forEach(b => {
-          b.classList.remove('bg-red-600', 'text-white', 'shadow-md');
+          b.classList.remove('bg-yellow-400', 'text-black', 'shadow-md');
           b.classList.add('text-army-300');
         });
-        btn.classList.add('bg-red-600', 'text-white', 'shadow-md');
+        btn.classList.add('bg-yellow-400', 'text-black', 'shadow-md');
         btn.classList.remove('text-army-300');
         renderList();
       });
