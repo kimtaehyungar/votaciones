@@ -384,6 +384,39 @@
     </div>
   </aside>
 
+  <!-- Reproductor Flotante de Música (Bottom-Left) con persistencia y controles estilo YouTube Music -->
+  <div id="persistent-music-player" class="fixed bottom-4 left-4 z-40 tata-card-glass px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3.5 max-w-xs sm:max-w-sm backdrop-blur-md border border-white/30 text-white">
+    <!-- Miniatura de la canción actual -->
+    <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-black/60 shadow-md border border-white/20 relative">
+      <img id="player-album-art" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80" alt="Album Art" class="w-full h-full object-cover" />
+    </div>
+
+    <!-- Información de la canción -->
+    <div class="flex flex-col min-w-0 flex-1">
+      <span id="player-song-title" class="text-xs sm:text-sm font-black truncate text-white">Winter Ahead</span>
+      <span id="player-song-artist" class="text-[11px] font-semibold text-army-300 truncate">V y Park Hyo Shin</span>
+    </div>
+
+    <!-- Controles (Anterior, Play/Pause, Siguiente) -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button type="button" id="player-prev-btn" class="p-1.5 text-white/80 hover:text-white transition-colors cursor-pointer" title="Anterior">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+
+      <button type="button" id="player-toggle-btn" class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer" title="Reproducir / Pausar">
+        <svg id="player-play-icon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="player-pause-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+
+      <button type="button" id="player-next-btn" class="p-1.5 text-white/80 hover:text-white transition-colors cursor-pointer" title="Siguiente">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+    </div>
+
+    <!-- Elemento de audio invisible para reproducción real o simulada -->
+    <audio id="bg-audio-element" preload="auto" loop></audio>
+  </div>
+
   <!-- Sección de Listas de Reproducción (Página dedicada idéntica a votaciones) -->
   <div id="seccion-playlists" class="hidden min-h-screen relative bg-black px-4 py-8">
     <div id="playlists-custom-photo-bg" class="fixed top-0 left-0 w-screen h-[100lvh] pointer-events-none overflow-hidden z-0 flex items-center justify-center bg-black" style="transform: translateZ(0); will-change: transform;">
@@ -1211,6 +1244,104 @@
     updateProgressUI();
     renderList();
     setInterval(updateCountdowns, 1000);
+
+    // Reproductor de Música Flotante (Playlist de Taehyung / YouTube Music)
+    const playlistSongs = [
+      {
+        title: "Winter Ahead",
+        artist: "V y Park Hyo Shin",
+        cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80",
+        audioUrl: "https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg" // Audio de muestra estable o streaming
+      },
+      {
+        title: "Slow Dancing",
+        artist: "V (Layover Album)",
+        cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=150&auto=format&fit=crop&q=80",
+        audioUrl: "https://actions.google.com/sounds/v1/ambiences/rain_heavy.ogg"
+      },
+      {
+        title: "Love Me Again",
+        artist: "V (Layover Album)",
+        cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150&auto=format&fit=crop&q=80",
+        audioUrl: "https://actions.google.com/sounds/v1/weather/wind_gust.ogg"
+      },
+      {
+        title: "Christmas Tree",
+        artist: "V (Our Beloved Summer OST)",
+        cover: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=150&auto=format&fit=crop&q=80",
+        audioUrl: "https://actions.google.com/sounds/v1/ambiences/night_crickets.ogg"
+      }
+    ];
+
+    let currentSongIndex = 0;
+    let isPlaying = false;
+
+    const albumArtEl = document.getElementById('player-album-art');
+    const songTitleEl = document.getElementById('player-song-title');
+    const songArtistEl = document.getElementById('player-song-artist');
+    const toggleBtn = document.getElementById('player-toggle-btn');
+    const playIcon = document.getElementById('player-play-icon');
+    const pauseIcon = document.getElementById('player-pause-icon');
+    const prevBtn = document.getElementById('player-prev-btn');
+    const nextBtn = document.getElementById('player-next-btn');
+    const audioElement = document.getElementById('bg-audio-element');
+
+    function loadSong(index) {
+      const song = playlistSongs[index];
+      if (songTitleEl) songTitleEl.textContent = song.title;
+      if (songArtistEl) songArtistEl.textContent = song.artist;
+      if (albumArtEl) albumArtEl.src = song.cover;
+      if (audioElement) {
+        audioElement.src = song.audioUrl;
+      }
+    }
+
+    function playSong() {
+      isPlaying = true;
+      if (audioElement) {
+        audioElement.play().catch(e => console.log("Autoplay bloqueado por el navegador:", e));
+      }
+      if (playIcon) playIcon.classList.add('hidden');
+      if (pauseIcon) pauseIcon.classList.remove('hidden');
+    }
+
+    function pauseSong() {
+      isPlaying = false;
+      if (audioElement) {
+        audioElement.pause();
+      }
+      if (playIcon) playIcon.classList.remove('hidden');
+      if (pauseIcon) pauseIcon.classList.add('hidden');
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          pauseSong();
+        } else {
+          playSong();
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        currentSongIndex = (currentSongIndex + 1) % playlistSongs.length;
+        loadSong(currentSongIndex);
+        if (isPlaying) playSong();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentSongIndex = (currentSongIndex - 1 + playlistSongs.length) % playlistSongs.length;
+        loadSong(currentSongIndex);
+        if (isPlaying) playSong();
+      });
+    }
+
+    // Inicializar reproductor en la primera canción
+    loadSong(currentSongIndex);
   </script>
 </body>
 </html>
