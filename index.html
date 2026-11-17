@@ -215,14 +215,14 @@
     </div>
 
     <!-- Controles inferiores fijos para que nunca cambien de lugar al mostrar/ocultar opciones (z-50) -->
-    <div class="fixed bottom-0 left-0 right-0 z-50 w-full flex flex-col items-end justify-end gap-2.5 pb-6 px-4 pointer-events-none" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
-      <!-- Botón superior: Ajuste de posición de la foto flotante (más chico) -->
-      <div id="reposition-wrapper" class="w-full flex items-center justify-end pointer-events-none">
-        <div id="reposition-controls" class="hidden flex items-center gap-1.5 ios-glass-btn px-2 py-1 rounded-lg text-[10px] text-white touch-manipulation pointer-events-auto shadow-md">
+    <div class="fixed bottom-0 left-0 right-0 z-50 w-full flex flex-col items-end justify-end gap-3 pb-6 px-4 pointer-events-none" style="padding-bottom: max(3rem, env(safe-area-inset-top));">
+      <!-- Botón superior: Ajuste de posición de la foto flotante (alineado a la derecha arriba del botón "Foto de V") -->
+      <div id="reposition-wrapper" class="w-full flex items-center justify-end pointer-events-none mb-24 sm:mb-28">
+        <div id="reposition-controls" class="hidden flex items-center gap-2 ios-glass-btn px-3.5 py-3 rounded-2xl text-xs text-white touch-manipulation pointer-events-auto shadow-2xl">
           <span id="reposition-status-text" class="font-semibold">🖱️ Arrastrá</span>
-          <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline font-bold cursor-pointer transition-colors">Centrar</button>
+          <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline font-bold cursor-pointer transition-colors px-1">Centrar</button>
           <span id="sep-divider" class="text-white/50">|</span>
-          <button type="button" id="lock-position-btn" class="bg-white/20 hover:bg-white/30 border border-white/70 text-white font-extrabold px-2 py-0.5 rounded transition-all cursor-pointer">✓ Listo</button>
+          <button type="button" id="lock-position-btn" class="bg-white/25 hover:bg-white/40 border border-white/80 text-white font-extrabold px-3.5 py-1.5 rounded-lg transition-all cursor-pointer">✓ Listo</button>
         </div>
       </div>
 
@@ -233,11 +233,11 @@
           <button
             type="button"
             id="bg-music-toggle-btn"
-            class="ios-glass-btn p-2.5 rounded-2xl inline-flex items-center justify-center shadow-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 touch-manipulation"
+            class="ios-glass-btn p-2 rounded-2xl inline-flex items-center justify-center shadow-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 touch-manipulation"
             aria-label="Abrir reproductor"
             title="Reproductor"
           >
-            <img id="bg-music-icon-img" src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto/q_auto/Personaje_coraz%C3%B3n_con_cartel_musical.png" alt="Reproductor" class="w-16 h-16 sm:w-20 sm:h-20 object-contain filter drop-shadow-lg" />
+            <img id="bg-music-icon-img" src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto/q_auto/Personaje_coraz%C3%B3n_con_cartel_musical.png" alt="Reproductor" class="w-20 h-20 sm:w-24 sm:h-24 object-contain filter drop-shadow-lg" />
           </button>
         </div>
 
@@ -258,12 +258,10 @@
           <button
             type="button"
             id="photo-menu-trigger-btn"
-            class="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold ios-glass-btn text-white transition-transform hover:scale-105 active:scale-95 touch-manipulation"
+            class="cursor-pointer inline-flex flex-col items-center justify-center gap-1 px-3 py-2.5 rounded-2xl text-[11px] sm:text-xs font-extrabold ios-glass-btn text-white transition-transform hover:scale-105 active:scale-95 touch-manipulation"
           >
-            <svg class="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <span>Agregá una foto de V</span>
+            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/v1794953149/Artista_Tata_pintando_su_retrato.png" alt="Foto de V" class="w-20 h-20 sm:w-24 sm:h-24 object-contain filter drop-shadow-md" />
+            <span class="tracking-tight leading-tight">Foto de V</span>
           </button>
           <input type="file" id="photo-upload-input" accept="image/*" class="hidden" />
         </div>
@@ -518,12 +516,12 @@
         <button
           type="button"
           id="go-voting-from-playlist-btn"
-          class="w-full sm:w-auto text-left px-4 py-3.5 rounded-2xl tata-card-glass font-extrabold text-sm text-white flex items-center gap-3.5 transition-all hover:bg-blue-600/30 hover:border-blue-400 cursor-pointer shadow-lg"
+          class="inline-flex items-center gap-3 px-4 py-3 rounded-2xl tata-card-glass font-extrabold text-sm text-white transition-all hover:bg-blue-600/30 hover:border-blue-400 cursor-pointer shadow-lg"
         >
-          <div class="w-12 h-12 flex items-center justify-center shrink-0">
-            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-16 h-16 max-w-none object-contain filter drop-shadow" />
+          <div class="w-10 h-10 flex items-center justify-center shrink-0">
+            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-14 h-14 max-w-none object-contain filter drop-shadow" />
           </div>
-          <span class="leading-tight">Inicio</span>
+          <span class="leading-tight pr-2">Inicio</span>
         </button>
       </div>
 
@@ -1364,6 +1362,7 @@
 
     let isPlayerOpen = false;
     let scWidget = null;
+    let lastPlayedTrackId = null;
 
     // Restaurar estado guardado de botones de listas de reproducción "Escuchado"
     let playlistListenedState = {};
@@ -1460,6 +1459,13 @@
       // Ocultar automáticamente el reproductor tanto al reproducir (PLAY) como al pausar o terminar (PAUSE / FINISH)
       scWidget.bind(SC.Widget.Events.PLAY, () => {
         setPlayerOpen(false);
+        try {
+          scWidget.getCurrentSound((sound) => {
+            if (sound && sound.id) {
+              lastPlayedTrackId = sound.id;
+            }
+          });
+        } catch (e) {}
       });
 
       scWidget.bind(SC.Widget.Events.PAUSE, () => {
@@ -1468,6 +1474,16 @@
 
       scWidget.bind(SC.Widget.Events.FINISH, () => {
         setPlayerOpen(false);
+        try {
+          scWidget.getSounds((sounds) => {
+            scWidget.getCurrentSoundIndex((idx) => {
+              if (Array.isArray(sounds) && sounds.length > 1) {
+                const nextIndex = (idx + 1) % sounds.length;
+                scWidget.skip(nextIndex);
+              }
+            });
+          });
+        } catch (e) {}
       });
     }
 
