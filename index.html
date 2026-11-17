@@ -216,24 +216,24 @@
 
     <!-- Controles inferiores fijos para que nunca cambien de lugar al mostrar/ocultar opciones (z-50) -->
     <div class="fixed bottom-0 left-0 right-0 z-50 w-full flex flex-col items-end justify-end gap-2.5 pb-6 px-4 pointer-events-none" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
-      <!-- Botón superior: Ajuste de posición de la foto flotante -->
+      <!-- Botón superior: Ajuste de posición de la foto flotante (más chico) -->
       <div id="reposition-wrapper" class="w-full flex items-center justify-end pointer-events-none">
-        <div id="reposition-controls" class="hidden flex items-center gap-1.5 ios-glass-btn px-2.5 py-1.5 rounded-xl text-[11px] text-white touch-manipulation pointer-events-auto">
+        <div id="reposition-controls" class="hidden flex items-center gap-1.5 ios-glass-btn px-2 py-1 rounded-lg text-[10px] text-white touch-manipulation pointer-events-auto shadow-md">
           <span id="reposition-status-text" class="font-semibold">🖱️ Arrastrá</span>
           <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline font-bold cursor-pointer transition-colors">Centrar</button>
           <span id="sep-divider" class="text-white/50">|</span>
-          <button type="button" id="lock-position-btn" class="bg-white/20 hover:bg-white/30 border border-white/70 text-white font-extrabold px-2.5 py-0.5 rounded-lg transition-all cursor-pointer">✓ Listo</button>
+          <button type="button" id="lock-position-btn" class="bg-white/20 hover:bg-white/30 border border-white/70 text-white font-extrabold px-2 py-0.5 rounded transition-all cursor-pointer">✓ Listo</button>
         </div>
       </div>
 
-      <!-- Fila inferior: Botón del reproductor y botón de foto fijos en su posición con distribución absoluta para que el botón de foto nunca se mueva -->
+      <!-- Fila inferior: Botón del reproductor (solo icono) y botón de foto fijos en su posición -->
       <div class="w-full relative flex items-center justify-between pointer-events-none" style="min-height: 44px;">
-        <!-- Controles del reproductor de SoundCloud (absolutos a la izquierda para no alterar el flex) -->
+        <!-- Controles del reproductor de SoundCloud (absolutos a la izquierda) -->
         <div id="bg-music-controls-group" class="absolute left-0 bottom-0 inline-flex items-center pointer-events-auto">
           <button
             type="button"
             id="bg-music-toggle-btn"
-            class="ios-glass-btn p-2 rounded-2xl inline-flex items-center justify-center shadow-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 touch-manipulation"
+            class="ios-glass-btn p-2.5 rounded-2xl inline-flex items-center justify-center shadow-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 touch-manipulation"
             aria-label="Abrir reproductor"
             title="Reproductor"
           >
@@ -241,12 +241,11 @@
           </button>
         </div>
 
-        <!-- Divisor vacío invisible para equilibrar el espacio si es necesario -->
+        <!-- Divisor vacío invisible para equilibrar el espacio -->
         <div class="invisible pointer-events-none"></div>
 
         <!-- Botón inferior: Agregá una foto de V con menú desplegable, absolutamente fijo a la derecha -->
         <div class="absolute right-0 bottom-0 inline-flex flex-col items-end pointer-events-auto">
-          <!-- Menú desplegable flotante dentro de "Agregá una foto de V" cuando ya hay una foto cargada -->
           <div id="photo-options-menu" class="hidden absolute bottom-full right-0 mb-2 w-48 ios-glass-btn rounded-2xl p-1.5 flex flex-col gap-1 shadow-2xl">
             <label for="photo-upload-input" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-white hover:bg-white/15 cursor-pointer flex items-center gap-2 transition-colors">
               <span>🖼️ Cambiar foto</span>
@@ -804,7 +803,7 @@
     // Referencias DOM principales
     const heroSection = document.getElementById('hero-section');
     const seccionVotaciones = document.getElementById('seccion-votaciones');
-    const seccionPlaylists = document.getElementById('seccion-playlists');
+    const seccionPlayplaylists = document.getElementById('seccion-playlists');
     const enterDashboardBtn = document.getElementById('enter-dashboard-btn');
 
     const votingListEl = document.getElementById('voting-list');
@@ -839,7 +838,7 @@
     function showSection(sectionName) {
       if (heroSection) heroSection.classList.add('hidden');
       if (seccionVotaciones) seccionVotaciones.classList.add('hidden');
-      if (seccionPlaylists) seccionPlaylists.classList.add('hidden');
+      if (seccionPlayplaylists) seccionPlayplaylists.classList.add('hidden');
       if (bgMusicControlsGroup) bgMusicControlsGroup.classList.add('hidden');
 
       if (sectionName === 'home' && heroSection) {
@@ -847,8 +846,8 @@
         if (bgMusicControlsGroup) bgMusicControlsGroup.style.display = isPlayerOpen ? 'none' : 'inline-flex';
       } else if (sectionName === 'votaciones' && seccionVotaciones) {
         seccionVotaciones.classList.remove('hidden');
-      } else if (sectionName === 'playlists' && seccionPlaylists) {
-        seccionPlaylists.classList.remove('hidden');
+      } else if (sectionName === 'playlists' && seccionPlayplaylists) {
+        seccionPlayplaylists.classList.remove('hidden');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1389,12 +1388,17 @@
             scWidget.setVolume(80);
           });
 
+          // Ocultar el reproductor y mostrar el botón del icono tanto al dar PLAY como al dar PAUSE o FINISH
           scWidget.bind(SC.Widget.Events.PLAY, () => {
-            // Cuando se presiona play, ocultar el reproductor y volver a mostrar el botón del icono
+            setPlayerOpen(false);
+          });
+
+          scWidget.bind(SC.Widget.Events.PAUSE, () => {
             setPlayerOpen(false);
           });
 
           scWidget.bind(SC.Widget.Events.FINISH, () => {
+            setPlayerOpen(false);
             if (scWidget) {
               scWidget.next();
             }
