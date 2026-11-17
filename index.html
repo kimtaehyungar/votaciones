@@ -109,9 +109,13 @@
       justify-content: center;
       background-color: #000000;
       z-index: 10;
+      pointer-events: none;
+    }
+    #user-image-container.repositioning {
+      pointer-events: auto;
     }
     #user-uploaded-img {
-      cursor: grab;
+      cursor: default;
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
@@ -124,7 +128,10 @@
       position: relative;
       will-change: transform;
     }
-    #user-uploaded-img:active {
+    #user-image-container.repositioning #user-uploaded-img {
+      cursor: grab;
+    }
+    #user-image-container.repositioning #user-uploaded-img:active {
       cursor: grabbing;
     }
     /* Estilo refinado Liquid Glass para las tarjetas de votación para apreciar la foto de fondo (sin brillo al pasar el mouse) */
@@ -211,31 +218,34 @@
     <div class="fixed bottom-0 left-0 right-0 z-50 w-full flex flex-col items-end justify-end gap-2.5 pb-6 px-4 pointer-events-none" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
       <!-- Botón superior: Ajuste de posición de la foto flotante -->
       <div id="reposition-wrapper" class="w-full flex items-center justify-end pointer-events-none">
-        <div id="reposition-controls" class="hidden flex items-center gap-2 ios-glass-btn px-3.5 py-2 rounded-2xl text-xs text-white touch-manipulation pointer-events-auto">
+        <div id="reposition-controls" class="hidden flex items-center gap-1.5 ios-glass-btn px-2.5 py-1.5 rounded-xl text-[11px] text-white touch-manipulation pointer-events-auto">
           <span id="reposition-status-text" class="font-semibold">🖱️ Arrastrá</span>
           <button type="button" id="reset-position-btn" class="hover:text-purple-300 underline font-bold cursor-pointer transition-colors">Centrar</button>
           <span id="sep-divider" class="text-white/50">|</span>
-          <button type="button" id="lock-position-btn" class="bg-white/20 hover:bg-white/30 border border-white/70 text-white font-extrabold px-3 py-1 rounded-xl transition-all cursor-pointer">✓ Listo</button>
+          <button type="button" id="lock-position-btn" class="bg-white/20 hover:bg-white/30 border border-white/70 text-white font-extrabold px-2.5 py-0.5 rounded-lg transition-all cursor-pointer">✓ Listo</button>
         </div>
       </div>
 
-      <!-- Fila inferior: Botón del reproductor y botón de foto fijos en su posición -->
-      <div class="w-full flex items-center justify-between pointer-events-none">
-        <!-- Controles del reproductor de SoundCloud (solo visible en portada) -->
-        <div id="bg-music-controls-group" class="inline-flex items-center pointer-events-auto">
+      <!-- Fila inferior: Botón del reproductor y botón de foto fijos en su posición con distribución absoluta para que el botón de foto nunca se mueva -->
+      <div class="w-full relative flex items-center justify-between pointer-events-none" style="min-height: 44px;">
+        <!-- Controles del reproductor de SoundCloud (absolutos a la izquierda para no alterar el flex) -->
+        <div id="bg-music-controls-group" class="absolute left-0 bottom-0 inline-flex items-center pointer-events-auto">
           <button
             type="button"
             id="bg-music-toggle-btn"
-            class="ios-glass-btn px-4 py-2.5 rounded-2xl text-xs font-bold text-white inline-flex items-center gap-2 shadow-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 touch-manipulation"
-            aria-label="Mostrar u ocultar reproductor"
+            class="ios-glass-btn p-2 rounded-2xl inline-flex items-center justify-center shadow-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 touch-manipulation"
+            aria-label="Abrir reproductor"
+            title="Reproductor"
           >
-            <span id="bg-music-icon" class="text-sm leading-none">🔽</span>
-            <span id="bg-music-label">Ocultar reproductor</span>
+            <img id="bg-music-icon-img" src="https://res.cloudinary.com/c4jlkgn1/image/upload/f_auto/q_auto/Personaje_coraz%C3%B3n_con_cartel_musical.png" alt="Reproductor" class="w-16 h-16 sm:w-20 sm:h-20 object-contain filter drop-shadow-lg" />
           </button>
         </div>
 
-        <!-- Botón inferior: Agregá una foto de V con menú desplegable que incluye Modificar posición -->
-        <div class="relative inline-flex flex-col items-end pointer-events-auto">
+        <!-- Divisor vacío invisible para equilibrar el espacio si es necesario -->
+        <div class="invisible pointer-events-none"></div>
+
+        <!-- Botón inferior: Agregá una foto de V con menú desplegable, absolutamente fijo a la derecha -->
+        <div class="absolute right-0 bottom-0 inline-flex flex-col items-end pointer-events-auto">
           <!-- Menú desplegable flotante dentro de "Agregá una foto de V" cuando ya hay una foto cargada -->
           <div id="photo-options-menu" class="hidden absolute bottom-full right-0 mb-2 w-48 ios-glass-btn rounded-2xl p-1.5 flex flex-col gap-1 shadow-2xl">
             <label for="photo-upload-input" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-white hover:bg-white/15 cursor-pointer flex items-center gap-2 transition-colors">
@@ -529,7 +539,7 @@
   </div>
 
   <!-- Reproductor de SoundCloud compacto y ocultable sin bloquear el audio del navegador -->
-  <div id="persistent-soundcloud-player" class="fixed bottom-40 left-4 z-40 rounded-2xl overflow-hidden shadow-2xl border border-white/25 bg-black/90 transition-all duration-300 flex flex-col" style="width: 280px;">
+  <div id="persistent-soundcloud-player" class="fixed bottom-40 left-4 z-40 rounded-2xl overflow-hidden shadow-2xl border border-white/25 bg-black/90 transition-all duration-300 flex flex-col hidden" style="width: 280px;">
     <iframe id="sc-widget-iframe" width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A1747321020&color=%23a855f7&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
     <div class="flex items-center justify-between px-3 py-1.5 bg-black/95 border-t border-white/15">
       <button
@@ -576,7 +586,7 @@
       return now.toISOString();
     }
 
-    // Lista inicial de plataformas de votación optimizada con todos los enlaces oficiales solicitados
+    // Lista completa original de plataformas de votación con todas las opciones
     const initialPlatforms = [
       {
         id: 'fanplus-app',
@@ -645,12 +655,12 @@
             deadline: getDefaultDeadlineISO(3, 12, 0)
           },
           {
-            label: 'Mnet Plus App Store (iOS)',
+            label: 'iPhone (App Store)',
             url: 'https://apps.apple.com/app/mnet-plus/id6443405421',
             deadline: getDefaultDeadlineISO(3, 12, 0)
           },
           {
-            label: 'Mnet Plus Google Play (Android)',
+            label: 'Android (Google Play)',
             url: 'https://play.google.com/store/apps/details?id=world.mnetplus',
             deadline: getDefaultDeadlineISO(3, 12, 0)
           }
@@ -690,12 +700,12 @@
             deadline: getDefaultDeadlineISO(5, 18, 0)
           },
           {
-            label: 'Coogoong App Store (iOS)',
+            label: 'iPhone (App Store)',
             url: 'https://apps.apple.com/app/coogoong/id1591109215',
             deadline: getDefaultDeadlineISO(5, 18, 0)
           },
           {
-            label: 'Fancast Google Play (Android)',
+            label: 'Android (Google Play)',
             url: 'https://play.google.com/store/apps/details?id=com.contentsmadang.fancast',
             deadline: getDefaultDeadlineISO(5, 18, 0)
           }
@@ -710,12 +720,12 @@
         description: 'Votación en vivo y The Show en Bigc.',
         links: [
           {
-            label: 'Bigc The Show App Store (iOS)',
+            label: 'iPhone (App Store)',
             url: 'https://apps.apple.com/es/app/bigc-the-show-vote-bias-live/id1575835045',
             deadline: getDefaultDeadlineISO(6, 20, 0)
           },
           {
-            label: 'Bigc The Show Google Play (Android)',
+            label: 'Android (Google Play)',
             url: 'https://play.google.com/store/apps/details?id=im.bigc.lively&hl=es_419',
             deadline: getDefaultDeadlineISO(6, 20, 0)
           }
@@ -771,7 +781,7 @@
           },
           {
             label: 'Most Handsome Man in South Korea 2026',
-            url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-south-korea-2026/results',
+            url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-south-krosa-2026/results',
             deadline: getDefaultDeadlineISO(8, 9, 20)
           }
         ],
@@ -782,7 +792,7 @@
 
     let platforms = [];
     try {
-      const saved = localStorage.getItem('taehyung_voting_platforms_v4');
+      const saved = localStorage.getItem('taehyung_voting_platforms_v5');
       platforms = saved ? JSON.parse(saved) : initialPlatforms;
     } catch (e) {
       platforms = initialPlatforms;
@@ -821,10 +831,8 @@
 
     function savePlatforms() {
       try {
-        localStorage.setItem('taehyung_voting_platforms_v4', JSON.stringify(platforms));
-      } catch (e) {
-        // Ignorar errores de almacenamiento privado
-      }
+        localStorage.setItem('taehyung_voting_platforms_v5', JSON.stringify(platforms));
+      } catch (e) {}
     }
 
     // Navegación entre vistas
@@ -836,7 +844,7 @@
 
       if (sectionName === 'home' && heroSection) {
         heroSection.classList.remove('hidden');
-        if (bgMusicControlsGroup) bgMusicControlsGroup.classList.remove('hidden');
+        if (bgMusicControlsGroup) bgMusicControlsGroup.style.display = isPlayerOpen ? 'none' : 'inline-flex';
       } else if (sectionName === 'votaciones' && seccionVotaciones) {
         seccionVotaciones.classList.remove('hidden');
       } else if (sectionName === 'playlists' && seccionPlaylists) {
@@ -1130,7 +1138,7 @@
       });
     }
 
-    // Referencias y lógica de foto de fondo personalizada y arrastre
+    // Referencias y lógica de foto de fondo personalizada y arrastre seguro
     const photoUploadInput = document.getElementById('photo-upload-input');
     const photoMenuTriggerBtn = document.getElementById('photo-menu-trigger-btn');
     const photoOptionsMenu = document.getElementById('photo-options-menu');
@@ -1144,7 +1152,7 @@
     const lockPositionBtn = document.getElementById('lock-position-btn');
 
     let hasPhotoLoaded = false;
-    let isLocked = false;
+    let isRepositioningMode = false;
     let isDragging = false;
     let startX = 0;
     let startY = 0;
@@ -1160,35 +1168,35 @@
 
     function savePhotoPosition() {
       try {
-        localStorage.setItem('taehyung_custom_bg_pos_v1', JSON.stringify({ x: translateX, y: translateY }));
+        localStorage.setItem('taehyung_custom_bg_pos_v2', JSON.stringify({ x: translateX, y: translateY }));
       } catch (err) {}
     }
 
     function setRepositionMode(active) {
-      isLocked = !active;
+      isRepositioningMode = active;
       if (active) {
         if (photoOptionsMenu) photoOptionsMenu.classList.add('hidden');
         if (repositionControls) repositionControls.classList.remove('hidden');
-        if (userUploadedImg) userUploadedImg.style.cursor = 'grab';
+        if (userImageContainer) userImageContainer.classList.add('repositioning');
       } else {
         isDragging = false;
         if (repositionControls) repositionControls.classList.add('hidden');
-        if (userUploadedImg) userUploadedImg.style.cursor = 'grab';
+        if (userImageContainer) userImageContainer.classList.remove('repositioning');
         savePhotoPosition();
       }
     }
 
     function loadSavedPhoto() {
       try {
-        const savedImg = localStorage.getItem('taehyung_custom_bg_v1');
-        const savedPos = localStorage.getItem('taehyung_custom_bg_pos_v1');
+        const savedImg = localStorage.getItem('taehyung_custom_bg_v2');
+        const savedPos = localStorage.getItem('taehyung_custom_bg_pos_v2');
         if (savedImg && userUploadedImg && userImageContainer) {
           userUploadedImg.src = savedImg;
           if (dashboardBgImg) dashboardBgImg.src = savedImg;
           if (playlistsBgImg) playlistsBgImg.src = savedImg;
           userImageContainer.classList.remove('hidden');
           hasPhotoLoaded = true;
-          isLocked = true;
+          setRepositionMode(false);
           if (savedPos) {
             const parsed = JSON.parse(savedPos);
             translateX = parsed.x || 0;
@@ -1196,9 +1204,7 @@
             applyImageTransform();
           }
         }
-      } catch (e) {
-        // Ignorar errores de lectura
-      }
+      } catch (e) {}
     }
 
     if (photoMenuTriggerBtn) {
@@ -1242,11 +1248,9 @@
           applyImageTransform();
           setRepositionMode(true);
           try {
-            localStorage.setItem('taehyung_custom_bg_v1', dataUrl);
+            localStorage.setItem('taehyung_custom_bg_v2', dataUrl);
             savePhotoPosition();
-          } catch (err) {
-            // Si la imagen es muy pesada para localStorage, igual funciona en sesión
-          }
+          } catch (err) {}
           showToast('💜 Arrastrá la foto para acomodarla');
         };
         reader.readAsDataURL(file);
@@ -1279,17 +1283,14 @@
     }
 
     function startDrag(clientX, clientY) {
-      if (isLocked) {
-        setRepositionMode(true);
-      }
+      if (!isRepositioningMode) return;
       isDragging = true;
       startX = clientX - translateX;
       startY = clientY - translateY;
-      if (userUploadedImg) userUploadedImg.style.cursor = 'grabbing';
     }
 
     function moveDrag(clientX, clientY) {
-      if (!isDragging) return;
+      if (!isDragging || !isRepositioningMode) return;
       translateX = clientX - startX;
       translateY = clientY - startY;
       applyImageTransform();
@@ -1299,11 +1300,11 @@
       if (!isDragging) return;
       isDragging = false;
       savePhotoPosition();
-      if (userUploadedImg) userUploadedImg.style.cursor = 'grab';
     }
 
     if (userImageContainer) {
       userImageContainer.addEventListener('pointerdown', (e) => {
+        if (!isRepositioningMode) return;
         e.preventDefault();
         if (userImageContainer.setPointerCapture) {
           try { userImageContainer.setPointerCapture(e.pointerId); } catch (err) {}
@@ -1312,12 +1313,13 @@
       });
 
       userImageContainer.addEventListener('pointermove', (e) => {
-        if (!isDragging) return;
+        if (!isDragging || !isRepositioningMode) return;
         e.preventDefault();
         moveDrag(e.clientX, e.clientY);
       });
 
       userImageContainer.addEventListener('pointerup', (e) => {
+        if (!isRepositioningMode) return;
         if (userImageContainer.releasePointerCapture) {
           try { userImageContainer.releasePointerCapture(e.pointerId); } catch (err) {}
         }
@@ -1330,21 +1332,27 @@
     }
 
     window.addEventListener('mousemove', (e) => {
-      moveDrag(e.clientX, e.clientY);
+      if (isRepositioningMode) {
+        moveDrag(e.clientX, e.clientY);
+      }
     });
 
     window.addEventListener('mouseup', () => {
-      endDrag();
+      if (isRepositioningMode) {
+        endDrag();
+      }
     });
 
     window.addEventListener('touchmove', (e) => {
-      if (!isDragging || !e.touches[0]) return;
+      if (!isRepositioningMode || !isDragging || !e.touches[0]) return;
       e.preventDefault();
       moveDrag(e.touches[0].clientX, e.touches[0].clientY);
     }, { passive: false });
 
     window.addEventListener('touchend', () => {
-      endDrag();
+      if (isRepositioningMode) {
+        endDrag();
+      }
     });
 
     // Control de música de fondo con SoundCloud Widget API
@@ -1354,90 +1362,80 @@
     const bgMusicToggleBtn = document.getElementById('bg-music-toggle-btn');
     const bgMusicPrevBtn = document.getElementById('bg-music-prev-btn');
     const bgMusicNextBtn = document.getElementById('bg-music-next-btn');
-    const bgMusicIcon = document.getElementById('bg-music-icon');
-    const bgMusicLabel = document.getElementById('bg-music-label');
     let scWidget = null;
-    let isPlayerMinimized = false;
+    let isPlayerOpen = false;
 
-    function updatePlayerVisibilityUI(minimized) {
-      isPlayerMinimized = minimized;
+    function setPlayerOpen(open) {
+      isPlayerOpen = open;
       if (scContainer) {
-        // Movemos suavemente fuera de vista sin destruir ni pausar el audio en curso
-        scContainer.style.transform = minimized ? 'translateX(-120%)' : 'translateX(0)';
-        scContainer.style.opacity = minimized ? '0' : '1';
-        scContainer.style.pointerEvents = minimized ? 'none' : 'auto';
+        if (open) {
+          scContainer.classList.remove('hidden');
+          scContainer.style.display = 'flex';
+        } else {
+          scContainer.classList.add('hidden');
+          scContainer.style.display = 'none';
+        }
       }
-      if (bgMusicIcon) bgMusicIcon.textContent = minimized ? '🎵' : '🔽';
-      if (bgMusicLabel) bgMusicLabel.textContent = minimized ? 'Mostrar reproductor' : 'Ocultar reproductor';
+      if (bgMusicControlsGroup) {
+        bgMusicControlsGroup.style.display = open ? 'none' : 'inline-flex';
+      }
     }
 
     function initSoundCloudWidget() {
-      if (scWidget || !scIframe || typeof SC === 'undefined' || !SC.Widget) return false;
-      scWidget = SC.Widget(scIframe);
-      scWidget.bind(SC.Widget.Events.READY, () => {
-        scWidget.setVolume(100);
-      });
-      scWidget.bind(SC.Widget.Events.PLAY, () => {
-        // Al darle play en SoundCloud, se minimiza automáticamente para no ocupar espacio
-        setTimeout(() => updatePlayerVisibilityUI(true), 600);
-      });
-      scWidget.bind(SC.Widget.Events.FINISH, () => {
-        scWidget.next();
-      });
-      return true;
-    }
+      if (typeof SC !== 'undefined' && scIframe && !scWidget) {
+        try {
+          scWidget = SC.Widget(scIframe);
+          scWidget.bind(SC.Widget.Events.READY, () => {
+            scWidget.setVolume(80);
+          });
 
-    if (!initSoundCloudWidget()) {
-      const scCheckInterval = setInterval(() => {
-        if (initSoundCloudWidget()) {
-          clearInterval(scCheckInterval);
-        }
-      }, 250);
+          scWidget.bind(SC.Widget.Events.PLAY, () => {
+            // Cuando se presiona play, ocultar el reproductor y volver a mostrar el botón del icono
+            setPlayerOpen(false);
+          });
+
+          scWidget.bind(SC.Widget.Events.FINISH, () => {
+            if (scWidget) {
+              scWidget.next();
+            }
+          });
+        } catch (e) {}
+      }
     }
 
     if (bgMusicToggleBtn) {
       bgMusicToggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
-        updatePlayerVisibilityUI(!isPlayerMinimized);
+        initSoundCloudWidget();
+        setPlayerOpen(true);
       });
     }
 
     if (bgMusicPrevBtn) {
       bgMusicPrevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        initSoundCloudWidget();
+        e.preventDefault();
         if (scWidget) {
           scWidget.prev();
-          scWidget.play();
         }
       });
     }
 
     if (bgMusicNextBtn) {
       bgMusicNextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        initSoundCloudWidget();
+        e.preventDefault();
         if (scWidget) {
           scWidget.next();
-          scWidget.play();
         }
       });
     }
 
-    loadSavedPhoto();
-    renderList();
-    setInterval(updateCountdowns, 1000);
-
-    // Hacer que los botones de "Escuchar" se pongan en amarillo con texto negro al hacer clic con sombra ligera
-    document.querySelectorAll('.playlist-listen-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.currentTarget.style.cssText = 'background: #facc15 !important; border: 1px solid #fde047 !important; color: #000000 !important; text-shadow: none !important; box-shadow: 0 2px 8px rgba(250, 204, 21, 0.25);';
-        const span = e.currentTarget.querySelector('span');
-        if (span) {
-          span.textContent = '✓ Escuchado';
-          span.style.textShadow = 'none';
-        }
-      });
+    // Inicialización al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedPhoto();
+      renderList();
+      setInterval(updateCountdowns, 1000);
+      setTimeout(initSoundCloudWidget, 1000);
     });
   </script>
 </body>
