@@ -519,7 +519,7 @@
           class="inline-flex items-center gap-3 px-4 py-3 rounded-2xl tata-card-glass font-extrabold text-sm text-white transition-all hover:bg-blue-600/30 hover:border-blue-400 cursor-pointer shadow-lg"
         >
           <div class="w-10 h-10 flex items-center justify-center shrink-0">
-            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/b7466240-c09d-48b5-af84-4939ec674c22.png" alt="Inicio" class="w-14 h-14 max-w-none object-contain filter drop-shadow" />
+            <img src="https://res.cloudinary.com/c4jlkgn1/image/upload/v1794955009/Tata_Aburrido_en_Casa_de_Ladrillo.png" alt="Inicio" class="w-12 h-12 max-w-none object-contain filter drop-shadow" />
           </div>
           <span class="leading-tight pr-2">Inicio</span>
         </button>
@@ -778,7 +778,7 @@
           },
           {
             label: 'Most Handsome Man in South Korea 2026',
-            url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-south-krosa-2026/results',
+            url: 'https://nubiapage.com/poll/vote-most-handsome-man-in-south-korea-2026/',
             deadline: getDefaultDeadlineISO(8, 9, 20)
           }
         ],
@@ -1362,7 +1362,9 @@
 
     let isPlayerOpen = false;
     let scWidget = null;
-    let lastPlayedTrackId = null;
+    let currentTrackIndex = 0;
+    let totalPlaylistTracks = 0;
+    let isAdvancingTrack = false;
 
     // Restaurar estado guardado de botones de listas de reproducción "Escuchado"
     let playlistListenedState = {};
@@ -1427,12 +1429,44 @@
       if (!scIframe || typeof SC === 'undefined') return;
       scWidget = SC.Widget(scIframe);
 
+      function goToNextDistinctTrack() {
+        if (isAdvancingTrack) return;
+        isAdvancingTrack = true;
+        try {
+          if (totalPlaylistTracks > 1) {
+            currentTrackIndex = (currentTrackIndex + 1) % totalPlaylistTracks;
+            scWidget.skip(currentTrackIndex);
+            setTimeout(() => {
+              try { scWidget.play(); } catch (err) {}
+            }, 350);
+          } else {
+            scWidget.getSounds((sounds) => {
+              totalPlaylistTracks = Array.isArray(sounds) ? sounds.length : 0;
+              if (totalPlaylistTracks > 1) {
+                currentTrackIndex = (currentTrackIndex + 1) % totalPlaylistTracks;
+                scWidget.skip(currentTrackIndex);
+                setTimeout(() => {
+                  try { scWidget.play(); } catch (err) {}
+                }, 350);
+              } else {
+                scWidget.next();
+              }
+            });
+          }
+        } catch (e) {}
+        setTimeout(() => {
+          isAdvancingTrack = false;
+        }, 2500);
+      }
+
       scWidget.bind(SC.Widget.Events.READY, () => {
         try {
           scWidget.setVolume(80);
-          if (typeof scWidget.setLoop === 'function') {
-            scWidget.setLoop(false);
-          }
+          scWidget.getSounds((sounds) => {
+            if (Array.isArray(sounds)) {
+              totalPlaylistTracks = sounds.length;
+            }
+          });
         } catch (e) {}
       });
 
@@ -1446,13 +1480,21 @@
 
       if (bgMusicPrevBtn) {
         bgMusicPrevBtn.addEventListener('click', () => {
-          scWidget.prev();
+          if (isAdvancingTrack) return;
+          isAdvancingTrack = true;
+          if (totalPlaylistTracks > 1) {
+            currentTrackIndex = (currentTrackIndex - 1 + totalPlaylistTracks) % totalPlaylistTracks;
+            scWidget.skip(currentTrackIndex);
+          } else {
+            scWidget.prev();
+          }
+          setTimeout(() => { isAdvancingTrack = false; }, 1200);
         });
       }
 
       if (bgMusicNextBtn) {
         bgMusicNextBtn.addEventListener('click', () => {
-          scWidget.next();
+          goToNextDistinctTrack();
         });
       }
 
@@ -1460,12 +1502,25 @@
       scWidget.bind(SC.Widget.Events.PLAY, () => {
         setPlayerOpen(false);
         try {
-          scWidget.getCurrentSound((sound) => {
-            if (sound && sound.id) {
-              lastPlayedTrackId = sound.id;
+          scWidget.getCurrentSoundIndex((idx) => {
+            if (typeof idx === 'number' && idx >= 0) {
+              currentTrackIndex = idx;
             }
           });
+          if (!totalPlaylistTracks) {
+            scWidget.getSounds((sounds) => {
+              if (Array.isArray(sounds)) {
+                totalPlaylistTracks = sounds.length;
+              }
+            });
+          }
         } catch (e) {}
+      });
+
+      scWidget.bind(SC.Widget.Events.PLAY_PROGRESS, (data) => {
+        if (!isAdvancingTrack && data && typeof data.relativePosition === 'number' && data.relativePosition >= 0.992) {
+          goToNextDistinctTrack();
+        }
       });
 
       scWidget.bind(SC.Widget.Events.PAUSE, () => {
@@ -1474,16 +1529,7 @@
 
       scWidget.bind(SC.Widget.Events.FINISH, () => {
         setPlayerOpen(false);
-        try {
-          scWidget.getSounds((sounds) => {
-            scWidget.getCurrentSoundIndex((idx) => {
-              if (Array.isArray(sounds) && sounds.length > 1) {
-                const nextIndex = (idx + 1) % sounds.length;
-                scWidget.skip(nextIndex);
-              }
-            });
-          });
-        } catch (e) {}
+        goToNextDistinctTrack();
       });
     }
 
